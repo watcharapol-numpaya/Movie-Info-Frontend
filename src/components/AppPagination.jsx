@@ -1,23 +1,20 @@
 import React from "react";
 import { Pagination } from "@mui/material";
-import { makeStyles } from "@mui/material";
 
- 
 const AppPagination = ({ setPage, page, numberOfPage }) => {
-  const handleChange = (page) => {
-    console.log(page)
-    setPage(page);
+  const handleChange = (event, value) => {
+    setPage(value);
   };
 
   return (
     <>
-      <div>
-        <Pagination color="primary"
-          onChange={(e) => handleChange(e.target.textContent)}
-          page={page}
-          count={numberOfPage}
-        />
-      </div>
+    
+      <Pagination
+        color="primary"
+        onChange={handleChange}
+        page={page}
+        count={numberOfPage}
+      />
     </>
   );
 };

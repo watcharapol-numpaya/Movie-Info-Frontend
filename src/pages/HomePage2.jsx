@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import BaseCardMovie from "../components/BaseCardMovie";
 import { useDispatch, useSelector } from "react-redux";
 import {
+  getAllGenre,
   getAllMovies,
   getMovies,
   getPopularMovies,
@@ -12,13 +13,14 @@ import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import Button from "@mui/material/Button";
 import AppPagination from "../components/AppPagination";
+import GenreCard from "../components/GenreCard";
+import GenreButton from "../components/GenreButton";
 
 function HomePage2() {
   const dispatch = useDispatch();
   const { movies } = useSelector((state) => state.movies);
-  const { trendingMovies, popularMovies, allMovie, totalPages } = useSelector(
-    (state) => state.movies
-  );
+  const { trendingMovies, popularMovies, allMovie, totalPages, genres } =
+    useSelector((state) => state.movies);
 
   const [page, setPage] = useState(1);
   const [banner, setBanner] = useState(
@@ -60,9 +62,10 @@ function HomePage2() {
   };
 
   useEffect(() => {
-    dispatch(getTrendingMovies());
-    dispatch(getPopularMovies());
+    // dispatch(getTrendingMovies());
+    // dispatch(getPopularMovies());
     dispatch(getAllMovies(page));
+    dispatch(getAllGenre());
   }, [page]);
 
   return (
@@ -84,9 +87,7 @@ function HomePage2() {
                 <span className="font-semibold text-2xl   uppercase">
                   Trending
                 </span>
-                <button className="font-semibold text-xl  ">
-                  View More
-                </button>
+                <button className="font-semibold text-xl  ">View More</button>
               </div>
               <div className="bg-gray-400  mx-auto">
                 <Carousel
@@ -133,6 +134,13 @@ function HomePage2() {
                   Movies
                 </span>
               </div>
+              <div className=" flex justify-center w-full my-2 ">
+                <AppPagination
+                  setPage={setPage}
+                  page={page}
+                  numberOfPage={totalPages}
+                />
+              </div>
               <div
                 id="item-container"
                 className={`flex  flex-wrap gap-6  sm:justify-start justify-center  `}
@@ -151,15 +159,8 @@ function HomePage2() {
               </div>
             </div>
           </div>
-          <div className="lg:w-1/4 w-full h-96 bg-blue-200">
-            <div className="flex gap-1">
-              <div className="p-2   bg-red-400 rounded-full"> Action</div>
-              <div className="p-2   bg-red-400 rounded-full"> Action</div>
-              <div className="p-2   bg-red-400 rounded-full"> Action</div>
-              <div className="p-2   bg-red-400 rounded-full"> Action</div>
-              <div className="p-2   bg-red-400 rounded-full"> Action</div>
-              <div className="p-2   bg-red-400 rounded-full"> Action</div>
-            </div>
+          <div className="lg:block hidden w-1/4    bg-blue-200 p-2">
+            <GenreCard/>
           </div>
         </div>
       </div>

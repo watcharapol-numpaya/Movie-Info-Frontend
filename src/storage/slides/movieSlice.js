@@ -11,7 +11,8 @@ const initialState = {
   trendingMovies: [],
   popularMovies: [],
   allMovie: [],
-  totalPages:0,
+  genres: [],
+  totalPages: 0,
   isLoading: false,
   isSuccess: false,
   message: false,
@@ -37,9 +38,11 @@ export const getTrendingMovies = createAsyncThunk(
   "movieList/fetchTrendingMovie",
   async (arg, { rejectWithValue }) => {
     try {
-      const res = await instance2.get(
-        `trending/movie/week?api_key=${APIKeyTMDB}`
-      );
+      const res = await instance2.get(`trending/movie/week`, {
+        params: {
+          api_key: APIKeyTMDB,
+        },
+      });
       return [...res.data.results];
     } catch (err) {
       rejectWithValue(err.response.data);
@@ -51,7 +54,11 @@ export const getPopularMovies = createAsyncThunk(
   "movieList/fetchPopularMovie",
   async (arg, { rejectWithValue }) => {
     try {
-      const res = await instance2.get(`movie/popular?api_key=${APIKeyTMDB}`);
+      const res = await instance2.get(`movie/popular`, {
+        params: {
+          api_key: APIKeyTMDB,
+        },
+      });
       return [...res.data.results];
     } catch (err) {
       rejectWithValue(err.response.data);
@@ -61,14 +68,36 @@ export const getPopularMovies = createAsyncThunk(
 
 export const getAllMovies = createAsyncThunk(
   "movieList/fetchAllMovie",
-  async (page=1, { rejectWithValue }) => {
+  async (page = 1, { rejectWithValue }) => {
     try {
-      const res = await instance2.get(`discover/movie?api_key=${APIKeyTMDB}&&page=${page}`);
-      console.log(res)
+      const res = await instance2.get(`discover/movie?page=${page}`, {
+        params: {
+          api_key: APIKeyTMDB,
+        },
+      });
+
       return {
         movies: [...res.data.results],
-        totalPages: res.data.total_pages, 
-      } 
+        totalPages: res.data.total_pages,
+      };
+    } catch (err) {
+      rejectWithValue(err.response.data);
+    }
+  }
+);
+
+export const getAllGenre = createAsyncThunk(
+  "movieList/fetchAllGenre",
+  async (arg, { rejectWithValue }) => {
+    try {
+      const res = await instance2.get(`genre/movie/list`, {
+        params: {
+          api_key: APIKeyTMDB,
+        },
+      });
+      // console.log(res.data.genres
+      //   );
+      return [...res.data.genres];
     } catch (err) {
       rejectWithValue(err.response.data);
     }
@@ -133,6 +162,20 @@ const movieSlice = createSlice({
         state.isSuccess = true;
       })
       .addCase(getAllMovies.rejected, (state, action) => {
+        state.message = action.payload;
+        state.isLoading = false;
+        state.isSuccess = false;
+        // console.log(action);
+      })
+      .addCase(getAllGenre.pending, (state, action) => {
+        state.isLoading = true;
+      })
+      .addCase(getAllGenre.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.genres = action.payload;
+        state.isSuccess = true;
+      })
+      .addCase(getAllGenre.rejected, (state, action) => {
         state.message = action.payload;
         state.isLoading = false;
         state.isSuccess = false;
