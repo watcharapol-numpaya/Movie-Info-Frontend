@@ -65,7 +65,7 @@ function HomePage2() {
     // dispatch(getTrendingMovies());
     // dispatch(getPopularMovies());
     dispatch(getAllMovies(page));
-    dispatch(getAllGenre());
+    // dispatch(getAllGenre());
   }, [page]);
 
   return (
@@ -160,7 +160,7 @@ function HomePage2() {
             </div>
           </div>
           <div className="lg:block hidden w-1/4    bg-blue-200 p-2">
-            <GenreCard/>
+           <GenreCard/>
           </div>
         </div>
       </div>

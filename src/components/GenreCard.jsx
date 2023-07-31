@@ -1,13 +1,20 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import GenreButton from "./GenreButton";
+import { useDispatch, useSelector } from "react-redux";
+import { getAllGenre } from "../storage/slides/movieSlice";
 
 function GenreCard() {
   const [isSelect, setIsSelect] = useState(false);
+  const dispatch = useDispatch();
+  const { genres } = useSelector((state) => state.movies);
+
+  useEffect(() => {
+    dispatch(getAllGenre());
+  }, []);
 
   return (
-    <>
+    <div>
       <span className="  font-bold text-xl">Genres</span>
-
       <div className="flex flex-wrap m-1 mt-4 gap-2 ">
         {genres &&
           genres.map((genre) => <GenreButton key={genre.id} genre={genre} />)}
@@ -40,7 +47,7 @@ function GenreCard() {
           Reset
         </button>
       </div>
-    </>
+    </div>
   );
 }
 
