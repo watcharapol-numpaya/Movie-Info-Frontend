@@ -1,19 +1,20 @@
-import React, { useState } from "react";
+import React from "react";
 
-function GenreButton({ genre }) {
-  const [isSelect, setIsSelect] = useState(false);
+function GenreButton({ genre, onSelect, isSelected }) {
+  const handleCheckboxChange = () => {
+    onSelect(genre.id, !isSelected);
+  };
 
   return (
     <>
       <button
-        onClick={() => {
-          setIsSelect(!isSelect);
-        }}
-        className={`${
-          isSelect ? "bg-red-600" : "bg-yellow-400"
-        } rounded-full  p-1 px-3 cursor-pointer`}
+        onClick={handleCheckboxChange}
+        className={`  rounded-full p-1 px-3 cursor-pointer ${
+          isSelected ? "bg-yellow-400" : "bg-gray-200"
+        }`}
       >
-        <input type="checkbox" /> {genre.name}
+        <input type="checkbox" checked={isSelected} onChange={() => {}} />  {genre.name}
+      
       </button>
     </>
   );
