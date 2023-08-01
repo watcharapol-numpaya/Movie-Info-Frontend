@@ -12,6 +12,7 @@ const initialState = {
   popularMovies: [],
   allMovie: [],
   genres: [],
+  movieByGenre: [],
   totalPages: 0,
   isLoading: false,
   isSuccess: false,
@@ -104,6 +105,33 @@ export const getAllGenre = createAsyncThunk(
   }
 );
 
+export const getMovieByGenre = createAsyncThunk(
+  "movieList/fetchMovieByGenre",
+  async ({ page = 1, genre }, { rejectWithValue }) => {
+    try {
+      let params = {
+        api_key: APIKeyTMDB,
+      };
+
+      if (genre) {
+        params.with_genres = genre;
+      }
+
+      const res = await instance2.get(`discover/movie?page=${page}`, {
+        params,
+      });
+      // console.log(res.data.genres
+      //   );
+      return {
+        movies: [...res.data.results],
+        totalPages: res.data.total_pages,
+      };
+    } catch (err) {
+      rejectWithValue(err.response.data);
+    }
+  }
+);
+
 const movieSlice = createSlice({
   name: "movieList",
   initialState,
@@ -176,6 +204,21 @@ const movieSlice = createSlice({
         state.isSuccess = true;
       })
       .addCase(getAllGenre.rejected, (state, action) => {
+        state.message = action.payload;
+        state.isLoading = false;
+        state.isSuccess = false;
+        // console.log(action);
+      })
+      .addCase(getMovieByGenre.pending, (state, action) => {
+        state.isLoading = true;
+      })
+      .addCase(getMovieByGenre.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.allMovie = action.payload.movies;
+        state.totalPages = action.payload.totalPages;
+        state.isSuccess = true;
+      })
+      .addCase(getMovieByGenre.rejected, (state, action) => {
         state.message = action.payload;
         state.isLoading = false;
         state.isSuccess = false;
