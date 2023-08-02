@@ -18,17 +18,17 @@ const responsive = {
   tablet: {
     breakpoint: { max: 768, min: 572 }, //640
     items: 3,
-    slidesToSlide: 3,
+    slidesToSlide: 1,
   },
   mobile: {
-    breakpoint: { max: 572, min: 384 },
-    items: 2,
-    slidesToSlide: 3,
+    breakpoint: { max: 572, min: 540 },
+    items: 3,
+    slidesToSlide: 1,
   },
   xs: {
-    breakpoint: { max: 384, min: 0 },
+    breakpoint: { max: 540, min: 0 },
     items: 2,
-    slidesToSlide: 3,
+    slidesToSlide: 1,
   },
 };
 
