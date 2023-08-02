@@ -15,6 +15,7 @@ import Button from "@mui/material/Button";
 import AppPagination from "../components/AppPagination";
 import GenreCard from "../features/GenreCard";
 import MovieCarouselCard from "../features/MovieCarouselCard";
+import TuneIcon from "@mui/icons-material/Tune";
 
 function HomePage2() {
   const dispatch = useDispatch();
@@ -101,10 +102,13 @@ function HomePage2() {
             />
 
             <div id="all-movie ">
-              <div className="flex justify-between p-4 bg-red-600  ">
-                <span className="font-semibold text-2xl text-yellow-400 uppercase  ">
+              <div className="flex justify-between items-center p-4 bg-red-600 text-white ">
+                <span className="font-semibold text-2xl  uppercase  ">
                   Movies
                 </span>
+                <button className="lg:hidden block">
+                  <TuneIcon />
+                </button>
               </div>
               <div className=" flex justify-center w-full my-2 ">
                 <AppPagination
