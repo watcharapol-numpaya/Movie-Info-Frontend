@@ -1,12 +1,16 @@
 import React, { useEffect, useState } from "react";
-import GenreButton from "./GenreButton";
+ 
 import { useDispatch, useSelector } from "react-redux";
 import { getAllGenre } from "../storage/slides/movieSlice";
+import { getAllMovies } from "../storage/slides/movieSlice";
+import GenreButton from "../components/GenreButton";
+
 
 function GenreCard() {
   const [selectedGenres, setSelectedGenres] = useState([]);
   const dispatch = useDispatch();
   const { genres } = useSelector((state) => state.movies);
+
 
   useEffect(() => {
     dispatch(getAllGenre());
@@ -19,8 +23,9 @@ function GenreCard() {
   }, [genres]);
 
   const handleFind = () => {
-    // Here, you can use the 'selectedGenres' state to send the selected genre IDs to the API query params.
-    // Replace the 'alert' with your API call or any other logic.
+    let data = {genre:selectedGenres}
+
+    getAllMovies(data)
     alert("Find: " + selectedGenres);
   };
 

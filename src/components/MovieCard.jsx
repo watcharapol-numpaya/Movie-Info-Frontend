@@ -3,7 +3,7 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 
 // import {FavoriteIcon,FavoriteBorderIcon} from '@mui/icons-material'
-function BaseMovieCard({ movie }) {
+function MovieCard({ movie }) {
   const [imageUrl, setImageURL] = useState(
     "https://www.themoviedb.org/t/p/w220_and_h330_face"
   );
@@ -23,4 +23,4 @@ function BaseMovieCard({ movie }) {
   );
 }
 
-export default BaseMovieCard;
+export default MovieCard;

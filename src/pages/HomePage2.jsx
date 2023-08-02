@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import BaseCardMovie from "../components/BaseCardMovie";
+import CardMovie from "../components/CardMovie";
 import { useDispatch, useSelector } from "react-redux";
 import {
   getAllGenre,
@@ -8,13 +8,13 @@ import {
   getPopularMovies,
   getTrendingMovies,
 } from "../storage/slides/movieSlice";
-import BaseMovieCard from "../components/BaseMovieCard";
+import MovieCard from "../components/MovieCard";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import Button from "@mui/material/Button";
 import AppPagination from "../components/AppPagination";
-import GenreCard from "../components/GenreCard";
-import GenreButton from "../components/GenreButton";
+import GenreCard from "../features/GenreCard";
+ 
 
 function HomePage2() {
   const dispatch = useDispatch();
@@ -62,8 +62,8 @@ function HomePage2() {
   };
 
   useEffect(() => {
-    // dispatch(getTrendingMovies());
-    // dispatch(getPopularMovies());
+    dispatch(getTrendingMovies());
+    dispatch(getPopularMovies());
     dispatch(getAllMovies(page));
     // dispatch(getAllGenre());
   }, [page]);
@@ -99,7 +99,7 @@ function HomePage2() {
                 >
                   {trendingMovies &&
                     trendingMovies.map((movie) => (
-                      <BaseMovieCard key={movie.id} movie={movie} />
+                      <MovieCard key={movie.id} movie={movie} />
                     ))}
                 </Carousel>
               </div>
@@ -123,7 +123,7 @@ function HomePage2() {
                 >
                   {popularMovies &&
                     popularMovies.map((movie) => (
-                      <BaseMovieCard key={movie.id} movie={movie} />
+                      <MovieCard key={movie.id} movie={movie} />
                     ))}
                 </Carousel>
               </div>
@@ -147,7 +147,7 @@ function HomePage2() {
               >
                 {allMovie &&
                   allMovie.map((movie) => (
-                    <BaseMovieCard key={movie.id} movie={movie} />
+                    <MovieCard key={movie.id} movie={movie} />
                   ))}
                 <div className=" flex justify-center w-full">
                   <AppPagination

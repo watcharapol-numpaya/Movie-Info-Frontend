@@ -1,6 +1,6 @@
 import React from "react";
 
-function BaseCardMovie({ data, limit }) {
+function CardMovie({ data, limit }) {
   if (!data || data.length === 0 || limit <= 0) {
     return null; // Render nothing if the data is empty or the limit is invalid
   }
@@ -19,4 +19,4 @@ function BaseCardMovie({ data, limit }) {
   );
 }
 
-export default BaseCardMovie;
+export default CardMovie;
