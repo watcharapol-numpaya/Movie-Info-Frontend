@@ -59,8 +59,8 @@ function HomePage2() {
   };
 
   useEffect(() => {
-    // dispatch(getTrendingMovies());
-    // dispatch(getPopularMovies());
+    dispatch(getTrendingMovies());
+    dispatch(getPopularMovies());
     handleGetMovie();
     // dispatch(getAllGenre());
   }, [page]);
@@ -77,7 +77,7 @@ function HomePage2() {
 
   return (
     <>
-      <div className=" lg:container  mx-auto  ">
+      <div className=" xl:container  mx-auto  ">
         <div className="w-full sm:h-96 h-56 lg:w-5/6 relative">
           <div className=" absolute inset-y-0 left-0  sm:w-1/4 w-1/12 bg-gradient-to-l from-transparent to-black"></div>
           <div className=" absolute inset-y-0 right-0 sm:w-1/4 w-1/12 bg-gradient-to-r from-transparent to-black"></div>
@@ -115,7 +115,7 @@ function HomePage2() {
               </div>
               <div
                 id="item-container"
-                className={`flex  flex-wrap gap-6  sm:justify-start justify-center  `}
+                className={`flex  flex-wrap xl:gap-6 gap-4   justify-center  `}
               >
                 {allMovie &&
                   allMovie.map((movie) => (

@@ -10,7 +10,8 @@ function MovieCard({ movie }) {
 
   return (
     <>
-      <div className="flex flex-col bg-blue-400  xsm:w-52 w-44 xsm:h-96 h-80 sm:hover:scale-105 p-2 relative border-sky-100 border-b ">
+      <div className="flex flex-col xsm:bg-green-400 sm:bg-red-400  bg-orange-400  h-72 w-40 xsm:h-80 xsm:w-44 sm:h-96 sm:w-52   sm:hover:scale-105 p-2 relative border-sky-100 border-b ">
+ 
         <img className=" " alt="poster" src={imageUrl + movie.poster_path} />
         <FavoriteIcon className="absolute top-2 right-3 m-1 text-yellow-300" />
         <FavoriteBorderIcon className="absolute top-2 right-3 m-1 text-yellow-300" />
