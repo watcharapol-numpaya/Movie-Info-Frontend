@@ -14,7 +14,7 @@ import "react-multi-carousel/lib/styles.css";
 import Button from "@mui/material/Button";
 import AppPagination from "../components/AppPagination";
 import GenreCard from "../features/GenreCard";
- 
+import MovieCarouselCard from "../features/MovieCarouselCard";
 
 function HomePage2() {
   const dispatch = useDispatch();
@@ -26,10 +26,7 @@ function HomePage2() {
   const [banner, setBanner] = useState(
     "https://images7.alphacoders.com/112/1129455.jpg"
   );
-
-  const [item, setItem] = useState(["1", "2", "3", "4", "5", "6"]);
-
-  const colors = ["green-400", "green-700", "red-400"];
+ 
   const numberOfElements = 10;
 
   const responsive = {
@@ -64,7 +61,7 @@ function HomePage2() {
   useEffect(() => {
     dispatch(getTrendingMovies());
     dispatch(getPopularMovies());
-    dispatch(getAllMovies(page));
+    // dispatch(getAllMovies(page));
     // dispatch(getAllGenre());
   }, [page]);
 
@@ -82,53 +79,10 @@ function HomePage2() {
         </div>
         <div className="flex lg:flex-row flex-col w-full h-full bg-white  flex-wrap   ">
           <div className=" lg:w-3/4 w-full ">
-            <div id="trending-section">
-              <div className="flex justify-between p-4 bg-gradient-to-r from-red-600 to-black text-white  ">
-                <span className="font-semibold text-2xl   uppercase">
-                  Trending
-                </span>
-                <button className="font-semibold text-xl  ">View More</button>
-              </div>
-              <div className="bg-gray-400  mx-auto">
-                <Carousel
-                  responsive={responsive}
-                  autoPlaySpeed={500}
-                  containerClass="carousel-container"
-                  removeArrowOnDeviceType={["tablet", "mobile"]}
-                  dotListClass="custom-dot-list-style"
-                >
-                  {trendingMovies &&
-                    trendingMovies.map((movie) => (
-                      <MovieCard key={movie.id} movie={movie} />
-                    ))}
-                </Carousel>
-              </div>
-            </div>
-            <div id="popular-section">
-              <div className="flex justify-between p-4   ">
-                <span className="font-semibold text-2xl text-yellow-400 uppercase">
-                  Popular
-                </span>
-                <button className="font-semibold text-xl text-yellow-400">
-                  View More
-                </button>
-              </div>
-              <div className="bg-gray-400  mx-auto">
-                <Carousel
-                  responsive={responsive}
-                  autoPlaySpeed={1000}
-                  containerClass="carousel-container"
-                  removeArrowOnDeviceType={["tablet", "mobile"]}
-                  dotListClass="custom-dot-list-style"
-                >
-                  {popularMovies &&
-                    popularMovies.map((movie) => (
-                      <MovieCard key={movie.id} movie={movie} />
-                    ))}
-                </Carousel>
-              </div>
-            </div>
-            <div id="all-movie   ">
+            <MovieCarouselCard title={"trending"} movies={trendingMovies} link={'#'}/>
+            <MovieCarouselCard title={"popular"} movies={popularMovies} link={'#'}/>
+       
+            <div id="all-movie ">
               <div className="flex justify-between p-4 bg-red-600  ">
                 <span className="font-semibold text-2xl text-yellow-400 uppercase  ">
                   Movies
@@ -160,7 +114,7 @@ function HomePage2() {
             </div>
           </div>
           <div className="lg:block hidden w-1/4    bg-blue-200 p-2">
-           <GenreCard/>
+            <GenreCard />
           </div>
         </div>
       </div>
