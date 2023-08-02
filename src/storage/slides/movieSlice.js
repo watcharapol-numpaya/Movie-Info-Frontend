@@ -69,12 +69,19 @@ export const getPopularMovies = createAsyncThunk(
 
 export const getAllMovies = createAsyncThunk(
   "movieList/fetchAllMovie",
-  async (page = 1, { rejectWithValue }) => {
+  async (data, { rejectWithValue }) => {
     try {
-      const res = await instance2.get(`discover/movie?page=${page}`, {
-        params: {
-          api_key: APIKeyTMDB,
-        },
+      let params = {
+        api_key: APIKeyTMDB,
+        page: data.page ? data.page : 1,
+      };
+
+      if (data.genre) {
+        params.with_genres = data.genre.join(',');
+      }
+      console.log(params);
+      const res = await instance2.get(`discover/movie`, {
+        params,
       });
 
       return {

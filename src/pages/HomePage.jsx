@@ -26,7 +26,7 @@ function HomePage2() {
   const [banner, setBanner] = useState(
     "https://images7.alphacoders.com/112/1129455.jpg"
   );
- 
+
   const numberOfElements = 10;
 
   const responsive = {
@@ -59,11 +59,21 @@ function HomePage2() {
   };
 
   useEffect(() => {
-    dispatch(getTrendingMovies());
-    dispatch(getPopularMovies());
-    // dispatch(getAllMovies(page));
+    // dispatch(getTrendingMovies());
+    // dispatch(getPopularMovies());
+    handleGetMovie();
     // dispatch(getAllGenre());
   }, [page]);
+
+  const handleGetMovie = (genre) => {
+    let data = { page: page };
+
+    if (genre) {
+      data.genre = genre;
+    }
+
+    dispatch(getAllMovies(data));
+  };
 
   return (
     <>
@@ -79,9 +89,17 @@ function HomePage2() {
         </div>
         <div className="flex lg:flex-row flex-col w-full h-full bg-white  flex-wrap   ">
           <div className=" lg:w-3/4 w-full ">
-            <MovieCarouselCard title={"trending"} movies={trendingMovies} link={'#'}/>
-            <MovieCarouselCard title={"popular"} movies={popularMovies} link={'#'}/>
-       
+            <MovieCarouselCard
+              title={"trending"}
+              movies={trendingMovies}
+              link={"#"}
+            />
+            <MovieCarouselCard
+              title={"popular"}
+              movies={popularMovies}
+              link={"#"}
+            />
+
             <div id="all-movie ">
               <div className="flex justify-between p-4 bg-red-600  ">
                 <span className="font-semibold text-2xl text-yellow-400 uppercase  ">
@@ -114,7 +132,7 @@ function HomePage2() {
             </div>
           </div>
           <div className="lg:block hidden w-1/4    bg-blue-200 p-2">
-            <GenreCard />
+            <GenreCard onSelectGenre={handleGetMovie} />
           </div>
         </div>
       </div>

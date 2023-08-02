@@ -6,7 +6,7 @@ import { getAllMovies } from "../storage/slides/movieSlice";
 import GenreButton from "../components/GenreButton";
 
 
-function GenreCard() {
+function GenreCard({onSelectGenre}) {
   const [selectedGenres, setSelectedGenres] = useState([]);
   const dispatch = useDispatch();
   const { genres } = useSelector((state) => state.movies);
@@ -23,10 +23,8 @@ function GenreCard() {
   }, [genres]);
 
   const handleFind = () => {
-    let data = {genre:selectedGenres}
-
-    getAllMovies(data)
-    alert("Find: " + selectedGenres);
+    onSelectGenre(selectedGenres)
+    // alert("Find: " + selectedGenres);
   };
 
   const handleSelectAll = () => {
