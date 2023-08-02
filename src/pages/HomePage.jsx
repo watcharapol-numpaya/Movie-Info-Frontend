@@ -1,148 +1,166 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import CardMovie from "../components/CardMovie";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  getAllGenre,
+  getAllMovies,
+  getMovies,
+  getPopularMovies,
+  getTrendingMovies,
+} from "../storage/slides/movieSlice";
+import MovieCard from "../components/MovieCard";
+import Carousel from "react-multi-carousel";
+import "react-multi-carousel/lib/styles.css";
+import Button from "@mui/material/Button";
+import AppPagination from "../components/AppPagination";
+import GenreCard from "../features/GenreCard";
+ 
 
-function HomePage() {
+function HomePage2() {
+  const dispatch = useDispatch();
+  const { movies } = useSelector((state) => state.movies);
+  const { trendingMovies, popularMovies, allMovie, totalPages, genres } =
+    useSelector((state) => state.movies);
+
+  const [page, setPage] = useState(1);
   const [banner, setBanner] = useState(
     "https://images7.alphacoders.com/112/1129455.jpg"
   );
 
-  const [item, setItem] = useState([10]);
+  const [item, setItem] = useState(["1", "2", "3", "4", "5", "6"]);
 
   const colors = ["green-400", "green-700", "red-400"];
   const numberOfElements = 10;
-  const items = [
-    {
-      title: "Title 1",
-      availableTickets: "10",
-      distance: "5 Km",
-      bgColor: "purple-400",
-      innerBgColor: "pink-400",
+
+  const responsive = {
+    superLargeDesktop: {
+      // the naming can be any, depends on you.
+      breakpoint: { max: 4000, min: 1280 },
+      items: 5,
+      slidesToSlide: 3,
     },
-    {
-      title: "Title 2",
-      availableTickets: "20",
-      distance: "15 Km",
-      bgColor: "purple-400",
-      innerBgColor: "pink-400",
+    desktop: {
+      breakpoint: { max: 1280, min: 768 },
+      items: 4,
+      slidesToSlide: 3,
     },
-    {
-      title: "Title 3",
-      availableTickets: "15",
-      distance: "8 Km",
-      bgColor: "purple-400",
-      innerBgColor: "pink-400",
+    tablet: {
+      breakpoint: { max: 768, min: 572 }, //640
+      items: 3,
+      slidesToSlide: 3,
     },
-    {
-      title: "Title 4",
-      availableTickets: "7",
-      distance: "12 Km",
-      bgColor: "purple-400",
-      innerBgColor: "pink-400",
+    mobile: {
+      breakpoint: { max: 572, min: 384 },
+      items: 2,
+      slidesToSlide: 3,
     },
-    {
-      title: "Title 5",
-      availableTickets: "18",
-      distance: "20 Km",
-      bgColor: "purple-400",
-      innerBgColor: "pink-400",
+    xs: {
+      breakpoint: { max: 384, min: 0 },
+      items: 2,
+      slidesToSlide: 3,
     },
-  ];
-  const renderNewRelease = () => {
-    return (
-      <>
-        <div className="w-70% bg-green-600 ">
-          <div className="flex bg-orange-500 justify-between py-4 pr-9">
-            <h1 className="font-bold text-2xl">New Release</h1>
-            <h1 className="font-bold">View More</h1>
-          </div>
-          <div className="grid grid-cols-5 bg-red-700  gap-4  ">
-            {[...Array(numberOfElements)].map((_, index) => {
-              const colorIndex = index % colors.length;
-              const colorClass = colors[colorIndex];
-              return (
-                <div
-                  key={index}
-                  className={`h-40 w-40 rounded-2xl bg-${colorClass}`}
-                />
-              );
-            })}
-          </div>
-        </div>
-      </>
-    );
   };
+
+  useEffect(() => {
+    dispatch(getTrendingMovies());
+    dispatch(getPopularMovies());
+    dispatch(getAllMovies(page));
+    // dispatch(getAllGenre());
+  }, [page]);
 
   return (
     <>
-      <div className="h-full w-full bg-gray-400 flex justify-center items-center flex-col">
-        <div className="flex h-full w-full justify-center items-center">
-          <div className="h-96 w-5/6 bg-blue-300">
-            <img className="h-full w-full object-cover " src={banner}></img>
-          </div>
+      <div className=" lg:container  mx-auto  ">
+        <div className="w-full sm:h-96 h-56 lg:w-5/6 relative">
+          <div className=" absolute inset-y-0 left-0  sm:w-1/4 w-1/12 bg-gradient-to-l from-transparent to-black"></div>
+          <div className=" absolute inset-y-0 right-0 sm:w-1/4 w-1/12 bg-gradient-to-r from-transparent to-black"></div>
+          <img
+            className="w-full h-full object-cover"
+            src={banner}
+            alt="Banner Image"
+          ></img>
         </div>
-
-        <div className="h-full w-5/6 flex  bg-red-500">
-          {/* New Release */}
-          <div className="  w-70% bg-green-600 ">
-            <div>
-              <div className="flex bg-orange-500 justify-between py-4 pr-9">
-                <h1 className="font-bold text-2xl">New Release</h1>
-                <h1 className="font-bold">View More</h1>
+        <div className="flex lg:flex-row flex-col w-full h-full bg-white  flex-wrap   ">
+          <div className=" lg:w-3/4 w-full ">
+            <div id="trending-section">
+              <div className="flex justify-between p-4 bg-gradient-to-r from-red-600 to-black text-white  ">
+                <span className="font-semibold text-2xl   uppercase">
+                  Trending
+                </span>
+                <button className="font-semibold text-xl  ">View More</button>
               </div>
-              <div className="grid grid-cols-5 bg-red-700  gap-4  ">
-                {[...Array(numberOfElements)].map((_, index) => {
-                  const colorIndex = index % colors.length;
-                  const colorClass = colors[colorIndex];
-                  return (
-                    <div
-                      key={index}
-                      className={`h-40 w-40 rounded-2xl bg-${colorClass}`}
-                    />
-                  );
-                })}
+              <div className="bg-gray-400  mx-auto">
+                <Carousel
+                  responsive={responsive}
+                  autoPlaySpeed={500}
+                  containerClass="carousel-container"
+                  removeArrowOnDeviceType={["tablet", "mobile"]}
+                  dotListClass="custom-dot-list-style"
+                >
+                  {trendingMovies &&
+                    trendingMovies.map((movie) => (
+                      <MovieCard key={movie.id} movie={movie} />
+                    ))}
+                </Carousel>
               </div>
             </div>
-            <div>
-              <div className="flex bg-orange-500 justify-between py-4 pr-9">
-                <h1 className="font-bold text-2xl">New Release</h1>
-                <h1 className="font-bold">View More</h1>
+            <div id="popular-section">
+              <div className="flex justify-between p-4   ">
+                <span className="font-semibold text-2xl text-yellow-400 uppercase">
+                  Popular
+                </span>
+                <button className="font-semibold text-xl text-yellow-400">
+                  View More
+                </button>
               </div>
-              <div className="grid grid-cols-5 bg-red-700  gap-4  ">
-                {[...Array(numberOfElements)].map((_, index) => {
-                  const colorIndex = index % colors.length;
-                  const colorClass = colors[colorIndex];
-                  return (
-                    <div
-                      key={index}
-                      className={`h-40 w-40 rounded-2xl bg-${colorClass}`}
-                    />
-                  );
-                })}
+              <div className="bg-gray-400  mx-auto">
+                <Carousel
+                  responsive={responsive}
+                  autoPlaySpeed={1000}
+                  containerClass="carousel-container"
+                  removeArrowOnDeviceType={["tablet", "mobile"]}
+                  dotListClass="custom-dot-list-style"
+                >
+                  {popularMovies &&
+                    popularMovies.map((movie) => (
+                      <MovieCard key={movie.id} movie={movie} />
+                    ))}
+                </Carousel>
+              </div>
+            </div>
+            <div id="all-movie   ">
+              <div className="flex justify-between p-4 bg-red-600  ">
+                <span className="font-semibold text-2xl text-yellow-400 uppercase  ">
+                  Movies
+                </span>
+              </div>
+              <div className=" flex justify-center w-full my-2 ">
+                <AppPagination
+                  setPage={setPage}
+                  page={page}
+                  numberOfPage={totalPages}
+                />
+              </div>
+              <div
+                id="item-container"
+                className={`flex  flex-wrap gap-6  sm:justify-start justify-center  `}
+              >
+                {allMovie &&
+                  allMovie.map((movie) => (
+                    <MovieCard key={movie.id} movie={movie} />
+                  ))}
+                <div className=" flex justify-center w-full">
+                  <AppPagination
+                    setPage={setPage}
+                    page={page}
+                    numberOfPage={totalPages}
+                  />
+                </div>
               </div>
             </div>
           </div>
-
-          <div className="w-30% bg-green-300 pl-8">
-            <div className="flex bg-orange-500  mt-16  ">
-              <h1 className="font-bold text-xl text-yellow-400">
-                CINEMAS NEAR YOU
-              </h1>
-            </div>
-
-            {/* cinemas card */}
-            <div className="space-y-4 my-8 pr-4 h-128 overflow-hidden hover:overflow-auto">
-              {items.map((item, index) => (
-                <div key={index} className={`bg-${item.bgColor} flex`}>
-                  <div
-                    className={`h-28 w-28 rounded-2xl bg-${item.innerBgColor}`}
-                  ></div>
-                  <div className="m-2 font-semibold">
-                    <h1 className="font-bold">{item.title}</h1>
-                    <p>{`Available Tickets: ${item.availableTickets}`}</p>
-                    <p>{`${item.distance} Distance`}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
+          <div className="lg:block hidden w-1/4    bg-blue-200 p-2">
+           <GenreCard/>
           </div>
         </div>
       </div>
@@ -150,25 +168,4 @@ function HomePage() {
   );
 }
 
-export default HomePage;
-
-{
-  /* <div className="grid grid-cols-5 w-2/3">
-<div className=" h-40 w-40 bg-green-400"></div>
-<div className=" h-40 w-40 bg-green-700"></div>
-<div className=" h-40 w-40 bg-green-400"></div>
-<div className=" h-40 w-40 bg-green-700"></div>
-<div className=" h-40 w-40 bg-green-400"></div>
-<div className=" h-40 w-40 bg-green-700"></div>
-<div className=" h-40 w-40 bg-green-400"></div>
-<div className=" h-40 w-40 bg-green-700"></div>
-<div className=" h-40 w-40 bg-green-400"></div>
-<div className=" h-40 w-40 bg-green-700"></div>
-<div className=" h-40 w-40 bg-green-400"></div>
-<div className=" h-40 w-40 bg-green-700"></div>
-<div className=" h-40 w-40 bg-green-400"></div>
-<div className=" h-40 w-40 bg-green-700"></div>
-<div className=" h-40 w-40 bg-green-400"></div>
-<div className=" h-40 w-40 bg-green-700"></div>
-</div> */
-}
+export default HomePage2;
