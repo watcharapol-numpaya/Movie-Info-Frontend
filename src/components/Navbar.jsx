@@ -6,8 +6,9 @@ function Navbar() {
       <>
         <div className="flex h-full w-full justify-between items-center text-yellow-400">
           <div className="flex items-center  cursor-pointer">
-            <i className="material-icons text-4xl mr-4">menu</i>
-            <span className="tracking-widest0.25 font-semibold">MOVIEBOT</span>
+            {/* <i className="material-icons text-4xl mr-4">menu</i> */}
+            <span className="tracking-widest0.25 font-bold text-lg">MOVIEINFO</span>
+        
           </div>
 
           <div
