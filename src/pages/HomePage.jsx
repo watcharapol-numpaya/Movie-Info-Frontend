@@ -16,7 +16,7 @@ import AppPagination from "../components/AppPagination";
 import GenreCard from "../features/GenreCard";
 import MovieCarouselCard from "../features/MovieCarouselCard";
 import TuneIcon from "@mui/icons-material/Tune";
-
+import useMediaQuery from "@mui/material/useMediaQuery";
 function HomePage2() {
   const dispatch = useDispatch();
   const { movies } = useSelector((state) => state.movies);
@@ -27,37 +27,8 @@ function HomePage2() {
   const [banner, setBanner] = useState(
     "https://images7.alphacoders.com/112/1129455.jpg"
   );
-
-  const numberOfElements = 10;
-
-  const responsive = {
-    superLargeDesktop: {
-      // the naming can be any, depends on you.
-      breakpoint: { max: 4000, min: 1280 },
-      items: 5,
-      slidesToSlide: 3,
-    },
-    desktop: {
-      breakpoint: { max: 1280, min: 768 },
-      items: 4,
-      slidesToSlide: 3,
-    },
-    tablet: {
-      breakpoint: { max: 768, min: 572 }, //640
-      items: 3,
-      slidesToSlide: 3,
-    },
-    mobile: {
-      breakpoint: { max: 572, min: 384 },
-      items: 2,
-      slidesToSlide: 3,
-    },
-    xs: {
-      breakpoint: { max: 384, min: 0 },
-      items: 2,
-      slidesToSlide: 3,
-    },
-  };
+  const [isShowGenreCard, setIsShowGenreCard] = useState(false);
+  const isLgScreen = useMediaQuery("(min-width:1024px)");
 
   useEffect(() => {
     dispatch(getTrendingMovies());
@@ -101,14 +72,28 @@ function HomePage2() {
               link={"#"}
             />
 
-            <div id="all-movie ">
-              <div className="flex justify-between items-center p-4 bg-red-600 text-white ">
+            <div id="all-movie" className=" ">
+              <div className="flex justify-between items-center p-4 bg-red-600 text-white relative ">
                 <span className="font-semibold text-2xl  uppercase  ">
                   Movies
                 </span>
-                <button className="lg:hidden block">
+    {/* Genre card mobile */}
+                <button
+                  className="lg:hidden block"
+                  onClick={() => {
+                    setIsShowGenreCard(!isShowGenreCard);
+                  }}
+                >
                   <TuneIcon />
                 </button>
+             
+                <div
+                  className={`absolute bg-white shadow-xl p-2 rounded-xl w-64 right-4 top-14 z-10 ${
+                    isLgScreen<=1024 ? "block" : "hidden"
+                  } ${isShowGenreCard ? "block" : "hidden"}`}
+                >
+                  <GenreCard onSelectGenre={handleGetMovie} />
+                </div>
               </div>
               <div className=" flex justify-center w-full my-2 ">
                 <AppPagination

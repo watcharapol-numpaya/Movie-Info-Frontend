@@ -44,7 +44,7 @@ function GenreCard({onSelectGenre}) {
   };
 
   return (
-    <div>
+    <div className="text-black">
       <span className="font-bold text-xl">Genres</span>
       <div className="flex flex-wrap m-1 mt-4 gap-2">
         {genres &&
