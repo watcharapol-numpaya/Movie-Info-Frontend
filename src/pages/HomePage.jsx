@@ -41,9 +41,9 @@ function HomePage2() {
  
 
   useEffect(() => {
-    dispatch(getTrendingMovies());
-    dispatch(getPopularMovies());
-    handleGetMovie();
+    // dispatch(getTrendingMovies());
+    // dispatch(getPopularMovies());
+    // handleGetMovie();
     // dispatch(getAllGenre());
   }, [page]);
 

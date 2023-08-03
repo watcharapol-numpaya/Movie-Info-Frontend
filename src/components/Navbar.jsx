@@ -1,4 +1,5 @@
 import React from "react";
+import SearchMovieCard from "../features/SearchMovieCard";
 
 function Navbar() {
   const renderNavbarDesktop = () => {
@@ -7,13 +8,14 @@ function Navbar() {
         <div className="flex h-full w-full justify-between items-center text-yellow-400">
           <div className="flex items-center  cursor-pointer">
             {/* <i className="material-icons text-4xl mr-4">menu</i> */}
-            <span className="tracking-widest0.25 font-bold text-lg">MOVIEINFO</span>
-        
+            <span className="tracking-widest0.25 font-bold text-lg">
+              MOVIEINFO
+            </span>
           </div>
 
           <div
             id="searchBox"
-            className="md:flex hidden  h-full items-center w-96 pl-4"
+            className="md:flex hidden  h-full items-center w-96 pl-4 relative"
           >
             <div className="relative  h-full w-full flex items-center justify-center    ">
               <div className="absolute flex items-center justify-center bg-yellow-400 rounded-full h-12 w-12 left-3 cursor-pointer ">
@@ -23,9 +25,12 @@ function Navbar() {
               </div>
               <input
                 placeholder="Search movie"
-                className="outline-none  sm:w-72 w-56  py-1 text-xl px-1 pl-5 rounded-r-lg border-2 border-yellow-400"
+                className="outline-none text-black  sm:w-72 w-56  py-1 text-xl px-1 pl-5 rounded-r-lg border-2 border-yellow-400"
                 type="text"
               />
+            </div>
+            <div id="search-card" className="absolute z-10 top-14 left-8  ">
+              <SearchMovieCard/>
             </div>
           </div>
 
