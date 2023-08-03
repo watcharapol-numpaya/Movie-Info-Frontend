@@ -17,6 +17,7 @@ import GenreCard from "../features/GenreCard";
 import MovieCarouselCard from "../features/MovieCarouselCard";
 import TuneIcon from "@mui/icons-material/Tune";
 import useMediaQuery from "@mui/material/useMediaQuery";
+
 function HomePage2() {
   const dispatch = useDispatch();
   const { movies } = useSelector((state) => state.movies);
@@ -29,6 +30,15 @@ function HomePage2() {
   );
   const [isShowGenreCard, setIsShowGenreCard] = useState(false);
   const isLgScreen = useMediaQuery("(min-width:1024px)");
+ 
+
+  useEffect(() => {
+    // Hide the genre card automatically when the screen size is greater than "lg"
+    if (!isLgScreen) {
+      setIsShowGenreCard(false);
+    }
+  }, [isLgScreen]);
+ 
 
   useEffect(() => {
     dispatch(getTrendingMovies());
@@ -77,7 +87,7 @@ function HomePage2() {
                 <span className="font-semibold text-2xl  uppercase  ">
                   Movies
                 </span>
-    {/* Genre card mobile */}
+                {/* Genre card mobile */}
                 <button
                   className="lg:hidden block"
                   onClick={() => {
@@ -86,11 +96,11 @@ function HomePage2() {
                 >
                   <TuneIcon />
                 </button>
-             
+
                 <div
                   className={`absolute bg-white shadow-xl p-2 rounded-xl w-64 right-4 top-14 z-10 ${
-                    isLgScreen<=1024 ? "block" : "hidden"
-                  } ${isShowGenreCard ? "block" : "hidden"}`}
+                    isLgScreen ? "hidden" : isShowGenreCard ? "block" : "hidden"
+                  }`}
                 >
                   <GenreCard onSelectGenre={handleGetMovie} />
                 </div>

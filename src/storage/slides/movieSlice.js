@@ -77,7 +77,7 @@ export const getAllMovies = createAsyncThunk(
       };
 
       if (data.genre) {
-        params.with_genres = data.genre.join(',');
+        params.with_genres = data.genre.join('|');
       }
       console.log(params);
       const res = await instance2.get(`discover/movie`, {
