@@ -13,6 +13,7 @@ const initialState = {
   allMovie: [],
   genres: [],
   movieByGenre: [],
+  searchList: [],
   totalPages: 0,
   isLoading: false,
   isSuccess: false,
@@ -77,7 +78,7 @@ export const getAllMovies = createAsyncThunk(
       };
 
       if (data.genre) {
-        params.with_genres = data.genre.join('|');
+        params.with_genres = data.genre.join("|");
       }
       console.log(params);
       const res = await instance2.get(`discover/movie`, {
@@ -112,29 +113,20 @@ export const getAllGenre = createAsyncThunk(
   }
 );
 
-export const getMovieByGenre = createAsyncThunk(
-  "movieList/fetchMovieByGenre",
-  async ({ page = 1, genre }, { rejectWithValue }) => {
+export const getMovieByKeyword = createAsyncThunk(
+  "movieList/fetchMovieByKeyword",
+  async (keyword, { rejectWithValue }) => {
     try {
-      let params = {
-        api_key: APIKeyTMDB,
-      };
-
-      if (genre) {
-        params.with_genres = genre;
-      }
-
-      const res = await instance2.get(`discover/movie?page=${page}`, {
-        params,
+      const res = await instance2.get(`search/movie`, {
+        params: {
+          api_key: APIKeyTMDB,
+          query: keyword,
+        },
       });
-      // console.log(res.data.genres
-      //   );
-      return {
-        movies: [...res.data.results],
-        totalPages: res.data.total_pages,
-      };
+   
+      return [...res.data.results];
     } catch (err) {
-      rejectWithValue(err.response.data);
+      rejectWithValue(res.response.data);
     }
   }
 );
@@ -216,16 +208,15 @@ const movieSlice = createSlice({
         state.isSuccess = false;
         // console.log(action);
       })
-      .addCase(getMovieByGenre.pending, (state, action) => {
+      .addCase(getMovieByKeyword.pending, (state, action) => {
         state.isLoading = true;
       })
-      .addCase(getMovieByGenre.fulfilled, (state, action) => {
+      .addCase(getMovieByKeyword.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.allMovie = action.payload.movies;
-        state.totalPages = action.payload.totalPages;
+        state.searchList = action.payload;
         state.isSuccess = true;
       })
-      .addCase(getMovieByGenre.rejected, (state, action) => {
+      .addCase(getMovieByKeyword.rejected, (state, action) => {
         state.message = action.payload;
         state.isLoading = false;
         state.isSuccess = false;

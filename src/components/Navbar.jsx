@@ -1,10 +1,22 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import SearchMovieCard from "../features/SearchMovieCard";
+import { useDispatch, useSelector } from "react-redux";
+import { getMovieByKeyword } from "../storage/slides/movieSlice";
 
 function Navbar() {
-  const renderNavbarDesktop = () => {
+  const [keyword, setKeyword] = useState("");
+  const dispatch = useDispatch();
+  const { searchList } = useSelector((state) => state.movies);
+
+  const handleSearch = (e) => {
+    setKeyword(e.target.value.trim());
+    dispatch(getMovieByKeyword(e.target.value.trim()));
+  };
+
+  const renderNavbar = () => {
     return (
       <>
+        {console.log(searchList)}
         <div className="flex h-full w-full justify-between items-center text-yellow-400">
           <div className="flex items-center  cursor-pointer">
             {/* <i className="material-icons text-4xl mr-4">menu</i> */}
@@ -24,13 +36,14 @@ function Navbar() {
                 </span>
               </div>
               <input
+                onChange={handleSearch}
                 placeholder="Search movie"
                 className="outline-none text-black  sm:w-72 w-56  py-1 text-xl px-1 pl-5 rounded-r-lg border-2 border-yellow-400"
                 type="text"
               />
             </div>
             <div id="search-card" className="absolute z-10 top-14 left-8  ">
-              <SearchMovieCard/>
+              <SearchMovieCard movies={searchList} keyword={keyword} />
             </div>
           </div>
 
@@ -59,62 +72,9 @@ function Navbar() {
     );
   };
 
-  const renderNavbarMobile = () => {
-    return (
-      <>
-        <div className="text-yellow-400 flex items-center">
-          <span className="material-icons text-4xl mr-4">menu</span>
-          <div className="w-auto text-yellow-400 sm:block hidden">
-            <h1 className="font-bold ">M O V I E B O T</h1>
-          </div>
-        </div>
-
-        <div className="w-auto text-yellow-400 sm:hidden block  ">
-          <h1 className="font-bold ">M O V I E B O T</h1>
-        </div>
-
-        <div className="sm:block hidden h-full  w-96   ">
-          <div className="flex items-center  h-full relative ml-7 ">
-            <div className="absolute -left-7 flex items-center justify-center w-11 rounded-full p-1 bg-yellow-400">
-              <span className="material-icons -scale-x-90 text-black text-3xl">
-                search
-              </span>
-            </div>
-            <div className="  ">
-              <input
-                placeholder="Search movie"
-                className="outline-none   w-72  py-1 text-xl px-1 pl-5 rounded-r-lg border-2 border-yellow-400"
-                type="text"
-              />
-            </div>
-          </div>
-        </div>
-
-        <ul className="flex  h-full  items-center justify-end space-x-2">
-          <li className="sm:flex hidden h-12 w-12 bg-yellow-400  rounded-full  items-center justify-center">
-            <span class="material-icons text-3xl">translate</span>
-          </li>
-          <li className="sm:flex hidden  h-12 w-12 bg-yellow-400  rounded-full  items-center justify-center">
-            <span class="material-icons text-3xl">shopping_cart</span>
-          </li>
-          <li className="h-12 w-12 bg-yellow-400  rounded-full flex items-center justify-center">
-            <img
-              className="h-12 w-12 rounded-full"
-              alt=""
-              src="https://hips.hearstapps.com/hmg-prod/images/dog-puppy-on-garden-royalty-free-image-1586966191.jpg?crop=0.752xw:1.00xh;0.175xw,0&resize=1200:*"
-            />
-          </li>
-        </ul>
-      </>
-    );
-  };
-
   return (
     <>
-      <div className="    mx-auto h-20 bg-black   p-4">
-        {/* {renderNavbarMobile()} */}
-        {renderNavbarDesktop()}
-      </div>
+      <div className="mx-auto h-20 bg-black   p-4">{renderNavbar()}</div>
     </>
   );
 }
