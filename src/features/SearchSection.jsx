@@ -35,7 +35,6 @@ function SearchSection() {
 
   return (
     <>
-      {console.log(limitedData)}
       <div className="   h-full items-center  w-full pl-4 relative  ">
         <div className="relative  h-full w-full flex items-center justify-center    ">
           <div className="absolute flex items-center justify-center bg-yellow-400 rounded-full h-12 w-12 left-3 cursor-pointer ">
