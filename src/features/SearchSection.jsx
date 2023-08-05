@@ -34,7 +34,7 @@ function SearchSection() {
     //input.current เก็บค่าของ ref ใช้ tag input
     //e.target เก็บค่า element ที่ได้กดจากตรงก็ตามผ่าน handleClickOutsideInput
     //inputRef.current.contains(e.target) เช็คว่า ค่าใน input.current กับ inputRef.current.contains(e.target) ตรงกันไหม
-     
+
     if (inputRef.current && !inputRef.current.contains(e.target)) {
       setShowSearchCard(false);
     }
@@ -62,8 +62,8 @@ function SearchSection() {
     );
   };
 
-  return (
-    <>
+  const renderSearchCardDesktop = () => {
+    return (
       <div className="h-full items-center w-full pl-4 relative">
         <div className="relative h-full w-full flex items-center justify-center">
           <div className="absolute flex items-center justify-center bg-yellow-400 rounded-full h-12 w-12 left-3 cursor-pointer">
@@ -75,7 +75,6 @@ function SearchSection() {
             ref={inputRef}
             onClick={handleInputClick}
             onChange={handleSearch}
- 
             placeholder="Search movie"
             className="outline-none text-black sm:w-72 w-56 py-1 text-xl px-1 pl-5 rounded-r-lg border-2 border-yellow-400"
             type="text"
@@ -90,6 +89,40 @@ function SearchSection() {
           </div>
         )}
       </div>
+    );
+  };
+
+  const renderSearchCardMobile = () => {
+    return (
+      <div className="md:hidden flex items-center w-full pl-4">
+        <div
+          onClick={() => setShowSearchCard(!showSearchCard)}
+          className="h-12 w-12 bg-yellow-400 rounded-full flex items-center justify-center cursor-pointer"
+        >
+          <i className="material-icons -scale-x-90 text-black text-3xl">
+            search
+          </i>
+        </div>
+        {showSearchCard && (
+          <div className="w-full flex justify-center mt-4">
+            <input
+              ref={inputRef}
+              onChange={handleSearch}
+              placeholder="Search movie"
+              className="outline-none text-black w-64 py-1 text-xl px-2 rounded-lg border-2 border-yellow-400"
+              type="text"
+            />
+          </div>
+        )}
+      </div>
+    );
+  };
+
+  return (
+    <>
+      {/* Use the appropriate search box based on screen size */}
+      {renderSearchCardDesktop()}
+      {renderSearchCardMobile()}
     </>
   );
 }
