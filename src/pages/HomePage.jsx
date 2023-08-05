@@ -30,7 +30,6 @@ function HomePage2() {
   );
   const [isShowGenreCard, setIsShowGenreCard] = useState(false);
   const isLgScreen = useMediaQuery("(min-width:1024px)");
- 
 
   useEffect(() => {
     // Hide the genre card automatically when the screen size is greater than "lg"
@@ -38,7 +37,6 @@ function HomePage2() {
       setIsShowGenreCard(false);
     }
   }, [isLgScreen]);
- 
 
   useEffect(() => {
     dispatch(getTrendingMovies());
@@ -69,8 +67,9 @@ function HomePage2() {
             alt="Banner Image"
           ></img>
         </div>
-        <div className="flex lg:flex-row flex-col w-full h-full bg-white  flex-wrap   ">
-          <div className=" lg:w-3/4 w-full ">
+
+        <div className="flex lg:flex-row flex-col w-full h-full bg-white  flex-wrap mx-auto   ">
+          <div className="w-full ">
             <MovieCarouselCard
               title={"trending"}
               movies={trendingMovies}
@@ -81,8 +80,7 @@ function HomePage2() {
               movies={popularMovies}
               link={"#"}
             />
-
-            <div id="all-movie" className=" ">
+            <div>
               <div className="flex justify-between items-center p-4 bg-red-600 text-white relative ">
                 <span className="font-semibold text-2xl  uppercase  ">
                   Movies
@@ -105,33 +103,40 @@ function HomePage2() {
                   <GenreCard onSelectGenre={handleGetMovie} />
                 </div>
               </div>
-              <div className=" flex justify-center w-full my-2 ">
-                <AppPagination
-                  setPage={setPage}
-                  page={page}
-                  numberOfPage={totalPages}
-                />
-              </div>
-              <div
-                id="item-container"
-                className={`flex  flex-wrap xl:gap-6 gap-4   justify-center  `}
-              >
-                {allMovie &&
-                  allMovie.map((movie) => (
-                    <MovieCard key={movie.id} movie={movie} />
-                  ))}
-                <div className=" flex justify-center w-full">
-                  <AppPagination
-                    setPage={setPage}
-                    page={page}
-                    numberOfPage={totalPages}
-                  />
+              <div className="flex">
+                <div id="all-movie" className="lg:w-3/4 w-full ">
+                  <div className=" flex justify-center w-full my-2 ">
+                    <AppPagination
+                      setPage={setPage}
+                      page={page}
+                      numberOfPage={totalPages}
+                    />
+                  </div>
+                  <div
+                    id="item-container"
+                    className={`flex  flex-wrap xl:gap-6 gap-4   justify-center  `}
+                  >
+                    {allMovie &&
+                      allMovie.map((movie) => (
+                        <MovieCard key={movie.id} movie={movie} />
+                      ))}
+                    <div className=" flex justify-center w-full mb-4">
+                      <AppPagination
+                        setPage={setPage}
+                        page={page}
+                        numberOfPage={totalPages}
+                      />
+                    </div>
+                  </div>
+                </div>
+                <div
+                  id="genre-card"
+                  className="lg:block hidden w-1/4 bg-blue-200 p-2"
+                >
+                  <GenreCard onSelectGenre={handleGetMovie} />
                 </div>
               </div>
             </div>
-          </div>
-          <div className="lg:block hidden w-1/4    bg-blue-200 p-2">
-            <GenreCard onSelectGenre={handleGetMovie} />
           </div>
         </div>
       </div>
