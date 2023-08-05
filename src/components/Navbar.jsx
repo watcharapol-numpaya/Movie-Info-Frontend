@@ -2,7 +2,7 @@ import React from "react";
 import SearchSection from "../features/SearchSection";
 
 function Navbar() {
-  const renderNavbarDesktop = () => {
+  const renderNavbar = () => {
     return (
       <>
         <div className="flex h-full w-full justify-between items-center text-yellow-400  ">
@@ -45,9 +45,9 @@ function Navbar() {
  
   return (
     <>
-      <div className="    mx-auto h-20 bg-black   p-4">
-        {/* {renderNavbarMobile()} */}
-        {renderNavbarDesktop()}
+      <div className=" mx-auto h-20 bg-black   p-4">
+ 
+        {renderNavbar()}
       </div>
     </>
   );
