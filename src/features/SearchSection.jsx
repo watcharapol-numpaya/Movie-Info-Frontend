@@ -25,6 +25,16 @@ function SearchSection() {
   };
 
   const handleClickOutsideInput = (e) => {
+    // console.log("1 : ----------------- "); console.log(inputRef.current)
+    // console.log("1 --------------------")
+    // console.log("2 : "+inputRef.current.contains(e.target))
+    // console.log("3 : -----------------");console.log(e.target)
+    // console.log("3 --------------------")
+
+    //input.current เก็บค่าของ ref ใช้ tag input
+    //e.target เก็บค่า element ที่ได้กดจากตรงก็ตามผ่าน handleClickOutsideInput
+    //inputRef.current.contains(e.target) เช็คว่า ค่าใน input.current กับ inputRef.current.contains(e.target) ตรงกันไหม
+     
     if (inputRef.current && !inputRef.current.contains(e.target)) {
       setShowSearchCard(false);
     }
