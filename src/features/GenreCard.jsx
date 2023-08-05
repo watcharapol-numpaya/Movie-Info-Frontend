@@ -13,7 +13,7 @@ function GenreCard({onSelectGenre}) {
 
 
   useEffect(() => {
-    dispatch(getAllGenre());
+    // dispatch(getAllGenre());
   }, []);
 
   useEffect(() => {
