@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getMovieByKeyword } from "../storage/slides/movieSlice";
 import SearchCard from "../components/SearchCard";
+import DoDisturbOnIcon from "@mui/icons-material/DoDisturbOn";
 
 function SearchSectionMobile() {
   const [keyword, setKeyword] = useState("");
@@ -43,7 +44,7 @@ function SearchSectionMobile() {
 
   const handleScroll = () => {
     if (onType.current) {
-        onType.current.blur();
+      onType.current.blur();
     }
   };
 
@@ -60,11 +61,15 @@ function SearchSectionMobile() {
 
   const renderSearchMovieCard = () => {
     return (
-      <div className="bg-white text-black w-80 rounded-lg overflow-hidden shadow-2xl">
-        {limitedData &&
-          limitedData.map((movie) => (
-            <SearchCard key={movie.id} movie={movie} />
-          ))}
+      <div className="bg-white text-black w-80 h-96 rounded-lg overflow-hidden shadow-2xl ">
+        <div className="h-full overflow-y-scroll">
+
+          {limitedData &&
+            limitedData.map((movie) => (
+              <SearchCard key={movie.id} movie={movie} />
+            ))}
+        </div>
+
         <div className="text-center py-1 cursor-pointer">
           <p>View all results</p>
         </div>
@@ -74,31 +79,35 @@ function SearchSectionMobile() {
 
   return (
     <>
-      <div className="absolute top-0 z-20 w-full h-full p-2 backdrop-blur-sm  bg-gray-500 flex justify-center ">
-        <div className="bg-blue-200 w-full h-full flex justify-center">
-          <div className="  w-full h-full   bg-red-200  flex flex-col items-center  ">
-            <div className="relative flex justify-center bg-green-400">
-              <div className="  flex items-center justify-center bg-yellow-400 rounded-l-full h-12 w-12   cursor-pointer">
-                <span className="material-icons -scale-x-90 text-black text-3xl">
-                  search
-                </span>
-              </div>
-              <input
-                ref={onType}
-                onClick={handleInputClick}
-                onChange={handleSearch}
-                placeholder="Search movie"
-                className="outline-none text-black  w-full py-1 text-xl px-1   border-2 border-yellow-400"
-                type="text"
-              />
+      <div className="absolute top-0 z-20 w-full h-full p-2 backdrop-blur-sm bg-black flex justify-center ">
+        <div className="   flex flex-col items-center  ">
+          <div className="  flex justify-center bg-yellow-400   rounded-full  overflow-hidden   ">
+            <div className="  flex items-center justify-center bg-yellow-400   h-12 w-12 pl-2  cursor-pointer">
+              <span className="material-icons -scale-x-90 text-black text-3xl">
+                search
+              </span>
             </div>
+            <input
+              ref={onType}
+              onClick={handleInputClick}
+              onChange={handleSearch}
+              placeholder="Search movie"
+              className="outline-none text-black  w-full py-1 text-xl   px-3  border-2 border-yellow-400 rounded-full "
+              type="text"
+            />
 
-            {showSearchCard && (
-              <div id="search-card" className="bg-yellow-200   ">
-                {handleIsShowSearchMovieCard() ? renderSearchMovieCard() : ""}
-              </div>
-            )}
+            <div className="  flex items-center justify-center bg-yellow-400   h-12 w-12  pr-2 cursor-pointer">
+              <span className="material-icons -scale-x-90 text-black  ">
+                cancel
+              </span>
+            </div>
           </div>
+
+          {showSearchCard && (
+            <div id="search-card" className="   ">
+              {handleIsShowSearchMovieCard() ? renderSearchMovieCard() : ""}
+            </div>
+          )}
         </div>
       </div>
     </>
