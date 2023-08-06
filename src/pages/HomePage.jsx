@@ -39,9 +39,11 @@ function HomePage2() {
   }, [isLgScreen]);
 
   useEffect(() => {
-    // dispatch(getTrendingMovies());
-    // dispatch(getPopularMovies());
-    // handleGetMovie();
+    dispatch(getTrendingMovies());
+    dispatch(getPopularMovies());
+    handleGetMovie();
+
+    
     // dispatch(getAllGenre());
   }, [page]);
 
