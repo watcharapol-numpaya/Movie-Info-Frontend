@@ -6,14 +6,14 @@ import HomePage from "./pages/HomePage";
 import SamplePage from "./pages/SamplePage";
 import TestPage from "./pages/TestPage";
 import { Route, Routes } from "react-router-dom";
+import MobileSearchPage from "./pages/MobileSearchPage";
 
 function App() {
-  const [count, setCount] = useState(0);
-
+ 
   return (
     <Routes>
       <Route path="/" element={<HomePage />} />
-      
+      <Route path="/mobileSearchPage" element={<MobileSearchPage />} />
     </Routes>
   );
 }

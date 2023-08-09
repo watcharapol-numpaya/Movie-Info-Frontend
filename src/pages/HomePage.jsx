@@ -60,7 +60,6 @@ function HomePage() {
   const renderHomePage = () => {
     return (
       <>
-        {" "}
         <div className="w-full sm:h-96 h-56 lg:w-5/6 relative">
           <div className=" absolute inset-y-0 left-0  sm:w-1/4 w-1/12 bg-gradient-to-l from-transparent to-black"></div>
           <div className=" absolute inset-y-0 right-0 sm:w-1/4 w-1/12 bg-gradient-to-r from-transparent to-black"></div>

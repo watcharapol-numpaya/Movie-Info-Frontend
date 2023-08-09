@@ -6,7 +6,7 @@ import SearchCard from "../components/SearchCard";
 function SearchSection() {
   const [keyword, setKeyword] = useState("");
   const [showSearchCard, setShowSearchCard] = useState(false);
-  const inputRef = useRef(null);
+  const onTyping = useRef(null);
   const dispatch = useDispatch();
   const { searchList } = useSelector((state) => state.movies);
   const limitedData = searchList.slice(0, 5);
@@ -25,22 +25,23 @@ function SearchSection() {
   };
 
   const handleClickOutsideInput = (e) => {
-    // console.log("1 : ----------------- "); console.log(inputRef.current)
+    // console.log("1 : ----------------- "); console.log(onTyping.current)
     // console.log("1 --------------------")
-    // console.log("2 : "+inputRef.current.contains(e.target))
+    // console.log("2 : "+onTyping.current.contains(e.target))
     // console.log("3 : -----------------");console.log(e.target)
     // console.log("3 --------------------")
 
     //input.current เก็บค่าของ ref ใช้ tag input
     //e.target เก็บค่า element ที่ได้กดจากตรงก็ตามผ่าน handleClickOutsideInput
-    //inputRef.current.contains(e.target) เช็คว่า ค่าใน input.current กับ inputRef.current.contains(e.target) ตรงกันไหม
+    //onTyping.current.contains(e.target) เช็คว่า ค่าใน input.current กับ onTyping.current.contains(e.target) ตรงกันไหม
      
-    if (inputRef.current && !inputRef.current.contains(e.target)) {
+    if (onTyping.current && !onTyping.current.contains(e.target)) {
       setShowSearchCard(false);
     }
   };
 
   useEffect(() => {
+
     document.addEventListener("click", handleClickOutsideInput);
 
     return () => {
@@ -72,12 +73,12 @@ function SearchSection() {
             </span>
           </div>
           <input
-            ref={inputRef}
+            ref={onTyping}
             onClick={handleInputClick}
             onChange={handleSearch}
  
             placeholder="Search movie"
-            className="outline-none text-black sm:w-72 w-56 py-1 text-xl px-1 pl-5 rounded-r-lg border-2 border-yellow-400"
+            className="outline-none text-black sm:w-72 w-56 py-1 text-xl px-1 pl-5 rounded-r-full border-2 border-yellow-400"
             type="text"
           />
         </div>

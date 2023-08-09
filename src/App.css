@@ -1,10 +1,10 @@
 /* หน้าจอเล็กสุดก็ยังแสดงผลได้ปกติ สีเต็มจอ */
-@media only screen and (max-width: 358px) {
+/* @media only screen and (max-width: 358px) {
   body {
     width:min-content;
    
   }
-}
+} */
 
 
   /* #root {
