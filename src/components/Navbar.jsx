@@ -1,5 +1,6 @@
 import React from "react";
 import SearchSection from "../features/SearchSection";
+import { Link } from "react-router-dom";
 
 function Navbar() {
   const renderNavbar = () => {
@@ -13,15 +14,17 @@ function Navbar() {
             </span>
           </div>
 
-          <div   id="searchBox" className="md:block hidden h-full w-96  ">
+          <div id="searchBox" className="md:block hidden h-full w-96  ">
             <SearchSection />
           </div>
 
           <ul className="flex  h-full  items-center justify-end space-x-2 text-black">
             <li className="md:hidden flex  h-12 w-12 bg-yellow-400  rounded-full  items-center justify-center  cursor-pointer ">
-              <i className="material-icons -scale-x-90 text-black text-3xl">
-                search
-              </i>
+              <Link to="/mobileSearchPage">
+                <i className="material-icons -scale-x-90 text-black text-3xl">
+                  search
+                </i>
+              </Link>
             </li>
             <li className="mobile:flex hidden  h-12 w-12 bg-yellow-400  rounded-full  items-center justify-center  cursor-pointer">
               <i className="material-icons text-3xl">translate</i>
@@ -42,13 +45,9 @@ function Navbar() {
     );
   };
 
- 
   return (
     <>
-      <div className=" mx-auto h-20 bg-black   p-4">
- 
-        {renderNavbar()}
-      </div>
+      <div className=" mx-auto h-20 bg-black   p-4">{renderNavbar()}</div>
     </>
   );
 }
