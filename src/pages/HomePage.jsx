@@ -17,8 +17,10 @@ import GenreCard from "../features/GenreCard";
 import MovieCarouselCard from "../features/MovieCarouselCard";
 import TuneIcon from "@mui/icons-material/Tune";
 import useMediaQuery from "@mui/material/useMediaQuery";
+import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
 
-function HomePage2() {
+function HomePage() {
   const dispatch = useDispatch();
   const { movies } = useSelector((state) => state.movies);
   const { trendingMovies, popularMovies, allMovie, totalPages, genres } =
@@ -55,9 +57,10 @@ function HomePage2() {
     dispatch(getAllMovies(data));
   };
 
-  return (
-    <>
-      <div className=" xl:container  mx-auto  ">
+  const renderHomePage = () => {
+    return (
+      <>
+        {" "}
         <div className="w-full sm:h-96 h-56 lg:w-5/6 relative">
           <div className=" absolute inset-y-0 left-0  sm:w-1/4 w-1/12 bg-gradient-to-l from-transparent to-black"></div>
           <div className=" absolute inset-y-0 right-0 sm:w-1/4 w-1/12 bg-gradient-to-r from-transparent to-black"></div>
@@ -67,7 +70,6 @@ function HomePage2() {
             alt="Banner Image"
           ></img>
         </div>
-
         <div className="flex lg:flex-row flex-col w-full h-full bg-white  flex-wrap mx-auto   ">
           <div className="w-full ">
             <MovieCarouselCard
@@ -139,9 +141,17 @@ function HomePage2() {
             </div>
           </div>
         </div>
-      </div>
-    </>
+      </>
+    );
+  };
+
+  return (
+    <div className=" h-full bg-black">
+      <Navbar/>
+      <div className=" xl:container  mx-auto  ">{renderHomePage()}</div>
+      {/* <Footer/> */}
+    </div>
   );
 }
 
-export default HomePage2;
+export default HomePage;
