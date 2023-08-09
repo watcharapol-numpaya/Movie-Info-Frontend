@@ -43,7 +43,7 @@ function HomePage() {
   useEffect(() => {
     // dispatch(getTrendingMovies());
     // dispatch(getPopularMovies());
-    // handleGetMovie();
+    handleGetMovie();
     // dispatch(getAllGenre());
   }, [page]);
 
