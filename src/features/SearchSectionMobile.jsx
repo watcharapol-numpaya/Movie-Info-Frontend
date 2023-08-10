@@ -30,6 +30,7 @@ function SearchSectionMobile() {
   const handleClearText = () => {
     setKeyword("");
     dispatch(getMovieByKeyword(""));
+    onType.current.focus();
   };
 
   const handleClickOutsideInput = (e) => {
