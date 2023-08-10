@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 // import {FavoriteIcon,FavoriteBorderIcon} from '@mui/icons-material'
 function MovieCard({ movie }) {
   const [imageUrl, setImageURL] = useState(
-    "https://www.themoviedb.org/t/p/w220_and_h330_face"
+    "https://www.themoviedb.org/t/p/w780"
   );
 
   return (

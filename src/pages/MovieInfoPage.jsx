@@ -1,31 +1,31 @@
 import React, { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useParams } from "react-router-dom";
-function MovieInfoPage({}) {
+import { getMovieByID } from "../storage/slides/movieSlice";
+
+const MovieInfoPage = ({}) => {
   const location = useLocation();
-  const movie = location.state?.movie;
+  // const movie = location.state?.movie;
+  const { movieInfo } = useSelector((state) => state.movies);
   const { id } = useParams();
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (!movie) {
-      console.log("NOOOOOOOOOOOOOOOOOOOOOOOOOO")
-    }else{
-      dispatch(get)
-    }
-  }, []);
+    dispatch(getMovieByID(id));
+   
+
+    // if (!movie) {
+    //   console.log("NOOOOOOOOOOOOOOOOOOOOOOOOOO");
+    // } else {
+    //   dispatch(getMovieByID(id));
+    // }
+  }, [id]);
 
   return (
-    <>
-      <div>
-        MovieInformationPage : {id}
-        {console.log(movie)}
-        {/* {movie.title} */}
-        <div>--------------</div>
-        {/* {console.log(movie.movie.title)} */}
-      </div>
+    <>{  console.log(movieInfo)}
+      <div>MovieInformationPage : {id}</div>
     </>
   );
-}
+};
 
 export default MovieInfoPage;

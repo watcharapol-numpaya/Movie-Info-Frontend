@@ -14,6 +14,7 @@ const initialState = {
   genres: [],
   movieByGenre: [],
   searchList: [],
+  movieInfo: [],
   totalPages: 0,
   isLoading: false,
   isSuccess: false,
@@ -123,10 +124,26 @@ export const getMovieByKeyword = createAsyncThunk(
           query: keyword,
         },
       });
-   console.log(res)
+      console.log(res);
       return [...res.data.results];
     } catch (err) {
-      rejectWithValue(res.response.data);
+      rejectWithValue(err.response.data);
+    }
+  }
+);
+
+export const getMovieByID = createAsyncThunk(
+  "movieList/fetchMovieByID",
+  async (id, { rejectWithValue }) => {
+    try {
+      const res = await instance2.get(`movie/${id}`, {
+        params: {
+          api_key: APIKeyTMDB,
+        },
+      });
+      return res.data;
+    } catch (err) {
+      rejectWithValue(err.response.data);
     }
   }
 );
@@ -149,7 +166,6 @@ const movieSlice = createSlice({
         state.message = action.payload;
         state.isLoading = false;
         state.isSuccess = false;
-        // console.log(action);
       })
       .addCase(getTrendingMovies.pending, (state, action) => {
         state.isLoading = true;
@@ -162,8 +178,6 @@ const movieSlice = createSlice({
       .addCase(getTrendingMovies.rejected, (state, action) => {
         state.message = action.payload;
         state.isLoading = false;
-        state.isSuccess = false;
-        // console.log(action);
       })
       .addCase(getPopularMovies.pending, (state, action) => {
         state.isLoading = true;
@@ -177,7 +191,6 @@ const movieSlice = createSlice({
         state.message = action.payload;
         state.isLoading = false;
         state.isSuccess = false;
-        // console.log(action);
       })
       .addCase(getAllMovies.pending, (state, action) => {
         state.isLoading = true;
@@ -192,7 +205,6 @@ const movieSlice = createSlice({
         state.message = action.payload;
         state.isLoading = false;
         state.isSuccess = false;
-        // console.log(action);
       })
       .addCase(getAllGenre.pending, (state, action) => {
         state.isLoading = true;
@@ -206,7 +218,6 @@ const movieSlice = createSlice({
         state.message = action.payload;
         state.isLoading = false;
         state.isSuccess = false;
-        // console.log(action);
       })
       .addCase(getMovieByKeyword.pending, (state, action) => {
         state.isLoading = true;
@@ -220,7 +231,19 @@ const movieSlice = createSlice({
         state.message = action.payload;
         state.isLoading = false;
         state.isSuccess = false;
-        // console.log(action);
+      })
+      .addCase(getMovieByID.pending, (state, action) => {
+        state.isLoading = true;
+      })
+      .addCase(getMovieByID.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.movieInfo = action.payload;
+        state.isSuccess = true;
+      })
+      .addCase(getMovieByID.rejected, (state, action) => {
+        state.message = action.payload;
+        state.isLoading = false;
+        state.isSuccess = false;
       });
   },
 });
