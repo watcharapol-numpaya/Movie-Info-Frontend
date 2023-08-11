@@ -5,8 +5,7 @@ import { getMovieByID } from "../storage/slides/movieSlice";
 import OnLoadingScreen from "../components/OnLoadingScreen";
 
 const MovieInfoPage = ({}) => {
-  const location = useLocation();
-  // const movie = location.state?.movie;
+
   const { movieInfo } = useSelector((state) => state.movies);
   const { id } = useParams();
   const [isLoading, setIsLoading] = useState(true);
@@ -18,12 +17,7 @@ const MovieInfoPage = ({}) => {
     dispatch(getMovieByID(id)).then(() => {
       setIsLoading(false);
     });
-
-    // if (!movie) {
-    //   console.log("NOOOOOOOOOOOOOOOOOOOOOOOOOO");
-    // } else {
-    //   dispatch(getMovieByID(id));
-    // }
+ 
   }, [id]);
 
   const renderMovieInfo = () => {

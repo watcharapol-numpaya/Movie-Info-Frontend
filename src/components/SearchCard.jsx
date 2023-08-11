@@ -8,7 +8,7 @@ function SearchCard({ movie }) {
   );
 
   return (
-    <Link to={`/movieInfo/${movie.id}`} state={{movie:movie}}>
+    <Link to={`/movieInfo/${movie.id}`}  >
       <div className="flex gap-1 border-b hover:bg-slate-200 w-full p-1 px-2 cursor-pointer">
         <div className="w-1/6">
           <div className="flex items-center  justify-center h-20">
