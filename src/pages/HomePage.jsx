@@ -146,7 +146,6 @@ function HomePage() {
 
   return (
     <div className=" h-full bg-black">
-      <Navbar/>
       <div className=" xl:container  mx-auto  ">{renderHomePage()}</div>
       {/* <Footer/> */}
     </div>
