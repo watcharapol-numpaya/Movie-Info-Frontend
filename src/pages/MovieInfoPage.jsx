@@ -22,9 +22,9 @@ const MovieInfoPage = ({}) => {
     return (
       <>
         <div className=" h-full w-full ">
-          <div id="banner-section" className="h-128 w-full bg-gray-400">
+          <div id="banner-section" className="h-128 w-full  bg-black ">
             <div className="xl:container mx-auto  w-full flex justify-center ">
-              <div className="relative  bg-blue-400 h-128 w-full   ">
+              <div className="relative    h-128 w-full   ">
                 <div id="image-background" className="h-128 w-full opacity-40">
                   <img
                     className="w-full h-full object-cover"
@@ -32,24 +32,30 @@ const MovieInfoPage = ({}) => {
                     alt="Banner Image"
                   />
                 </div>
-                <div className="absolute top-0 h-full w-full bg-fuchsia-300 flex ">
-                  <div className=" bg-red-200 h-full w-2/6">
-                    <div className="w-full h-full flex justify-center items-center">
+                <div className="absolute top-0 h-full w-full   flex ">
+                  <div className="  h-full w-2/6">
+                    <div className="w-full h-full flex justify-center items-center   ">
                       <img
-                        className="h-112 "
+                        className="lg:h-112 md:h-96 sm:h-80 h-72  shadow-xl rounded-xl border-4 border-white"
                         src={`${imageUrl}/${movieInfo.poster_path}`}
                       />
                     </div>
                   </div>
-                  <div className=" bg-red-400 h-full w-4/6">
-                    <div className=" p-8 bg-blue-200">
+                  <div className="pl-4 pr-2 lg:pt-10 md:pt-16 sm:pt-24 pt-28  h-full w-4/6   ">
+                    <div className="   ">
                       <p className="text-white text-3xl font-semibold">
                         {movieInfo.title}
                       </p>
                     </div>
-                    <div className="px-8 text-white">
-                      <p className="text-xl font-bold">Overview</p>
-                      <p className=" text-lg font-normal">
+                    <div className=" text-white  ">
+                      <p className=" text-2xl font-bold py-2">Overview</p>
+                      <p
+                        className={`${
+                          movieInfo.overview.length >= 1380
+                            ? "overflow-y-scroll"
+                            : ""
+                        } lg:h-86 md:h-80 sm:h-72 h-64 bg-red2  text-lg font-medium   `}
+                      >
                         {movieInfo.overview}
                       </p>
                     </div>
@@ -62,7 +68,7 @@ const MovieInfoPage = ({}) => {
       </>
     );
   };
-
+   
   const renderMovieInfoMobile = () => {
     return (
       <>
@@ -71,13 +77,13 @@ const MovieInfoPage = ({}) => {
             <div className=" relative h-full w-full flex justify-center  ">
               <div id="background-image" className="opacity-70">
                 <img
-                  className=" "
+                  className="  "
                   src={`${imageUrl}/${movieInfo.backdrop_path}`}
                 />
               </div>
 
               <div className="absolute w-full h-full flex items-center">
-                <div className="pl-2">
+                <div className="pl-2 ">
                   <img
                     className=" w-32 "
                     src={`${imageUrl}/${movieInfo.poster_path}`}
