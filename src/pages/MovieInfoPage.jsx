@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useParams } from "react-router-dom";
 import { getMovieByID } from "../storage/slides/movieSlice";
 import OnLoadingScreen from "../components/OnLoadingScreen";
+import useMediaQuery from "@mui/material/useMediaQuery";
 
 const MovieInfoPage = ({}) => {
   const { movieInfo } = useSelector((state) => state.movies);
@@ -10,8 +11,10 @@ const MovieInfoPage = ({}) => {
   const [isLoading, setIsLoading] = useState(true);
   const dispatch = useDispatch();
   const [imageUrl, setImageURL] = useState(
-    "https://www.themoviedb.org/t/p/w780"
+    "https://www.themoviedb.org/t/p/original"
   );
+  const isSMScreen = useMediaQuery("(min-width:1024px)");
+
   useEffect(() => {
     dispatch(getMovieByID(id)).then(() => {
       setIsLoading(false);
@@ -43,18 +46,31 @@ const MovieInfoPage = ({}) => {
                   </div>
                   <div className="pl-4 pr-2 lg:pt-10 md:pt-16 sm:pt-24 pt-28  h-full w-4/6   ">
                     <div className="   ">
-                      <p className="text-white text-3xl font-semibold">
+                      <p className="text-white md:text-4xl sm:text-3xl text-2xl font-semibold">
                         {movieInfo.title}
                       </p>
                     </div>
-                    <div className=" text-white  ">
-                      <p className=" text-2xl font-bold py-2">Overview</p>
+                    <hr className="border my-2 mt-4" />
+                    <div className="text-white">
+                      <span className="font-semibold">Genres :</span>
+                      {movieInfo.genres.map((genre, index) => (
+                        <span className="pl-1" key={genre.id}>
+                          {genre.name}
+                          {index !== movieInfo.genres.length - 1 && ","}
+                        </span>
+                      ))}
+                    </div>
+
+                    <div id="overview" className=" text-white  ">
+                      <p className=" md:text-2xl sm:text-xl text-lg font-bold py-2">
+                        Overview
+                      </p>
                       <p
                         className={`${
                           movieInfo.overview.length >= 1380
-                            ? "overflow-y-scroll"
+                            ? "overflow-y-scroll "
                             : ""
-                        } lg:h-86 md:h-80 sm:h-72 h-64 bg-red2  text-lg font-medium   `}
+                        } lg:h-86 md:h-80 sm:h-72 h-64 bg-red2 md:text-lg sm:text-base text-sm font-normal   `}
                       >
                         {movieInfo.overview}
                       </p>
@@ -68,7 +84,7 @@ const MovieInfoPage = ({}) => {
       </>
     );
   };
-   
+
   const renderMovieInfoMobile = () => {
     return (
       <>
