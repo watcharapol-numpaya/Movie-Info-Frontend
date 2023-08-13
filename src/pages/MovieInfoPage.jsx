@@ -4,6 +4,7 @@ import { useLocation, useParams } from "react-router-dom";
 import { getMovieByID } from "../storage/slides/movieSlice";
 import OnLoadingScreen from "../components/OnLoadingScreen";
 import useMediaQuery from "@mui/material/useMediaQuery";
+import CircularProgressBar from "../components/CircularProgressBar";
 
 const MovieInfoPage = ({}) => {
   const { movieInfo } = useSelector((state) => state.movies);
@@ -14,6 +15,7 @@ const MovieInfoPage = ({}) => {
     "https://www.themoviedb.org/t/p/original"
   );
   const isSmScreen = useMediaQuery("(min-width:640px)");
+  const voteAvgInPercentage = Math.round(movieInfo.vote_average * 10);
 
   useEffect(() => {
     dispatch(getMovieByID(id)).then(() => {
@@ -65,6 +67,9 @@ const MovieInfoPage = ({}) => {
                           {/* {index !== movieInfo.genres.length - 1 && ","} */}
                         </span>
                       ))}
+                    </div>
+                    <div className="w-full pt-2">
+                      <CircularProgressBar percentage={voteAvgInPercentage} />
                     </div>
 
                     <div id="overview" className=" text-white  ">
