@@ -139,6 +139,7 @@ export const getMovieByID = createAsyncThunk(
       const res = await instance2.get(`movie/${id}`, {
         params: {
           api_key: APIKeyTMDB,
+          append_to_response: 'videos'
         },
       });
       return res.data;
