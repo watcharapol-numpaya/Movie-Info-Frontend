@@ -51,7 +51,7 @@ const MovieInfoPage = ({}) => {
                     className="pl-4 pr-2 lg:pt-10 md:pt-16 sm:pt-24 pt-28  h-full w-4/6   "
                   >
                     <div className="   ">
-                      <p className="text-white md:text-4xl sm:text-3xl text-2xl font-semibold">
+                      <p className="text-white md:text-4xl sm:text-3xl text-2xl font-semibold  ">
                         {movieInfo.title}
                       </p>
                     </div>
@@ -68,12 +68,15 @@ const MovieInfoPage = ({}) => {
                         </span>
                       ))}
                     </div>
-                    <div className="w-full pt-2">
+                    <div className="w-full pt-2  ">
                       <CircularProgressBar percentage={voteAvgInPercentage} />
                     </div>
 
-                    <div id="overview" className=" text-white  ">
-                      <p className=" md:text-2xl sm:text-xl text-lg font-bold py-2">
+                    <div
+                      id="overview"
+                      className=" text-white    "
+                    >
+                      <p className=" md:text-2xl sm:text-xl text-lg font-bold py-2   ">
                         Overview
                       </p>
                       <p
@@ -81,9 +84,9 @@ const MovieInfoPage = ({}) => {
                           movieInfo.overview.length >= 1380
                             ? "overflow-y-scroll "
                             : ""
-                        } lg:h-86 md:h-80 sm:h-72 h-64 bg-red2 md:text-lg sm:text-base text-sm font-normal overflow-auto `}
+                        } lg:h-64 md:h-48 h-40 bg-red2 md:text-lg sm:text-base text-sm font-normal overflow-auto    `}
                       >
-                        {movieInfo.overview}
+                        {movieInfo.overview}  
                       </p>
                     </div>
                   </div>
