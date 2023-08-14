@@ -162,17 +162,17 @@ const MovieInfoPage = ({}) => {
   const renderTitleAndBannerSectionMobile = () => {
     return (
       <>
-          <div className="xl:container mx-auto  w-full flex justify-center ">
-          <div className="relative   h-128 w-full   bg-black ">
+        <div className="xl:container mx-auto h-full  w-full flex justify-center ">
+          <div className="relative h-176  w-full   bg-black ">
             <div id="image-background" className="h-128 w-full opacity-40 ">
               <img
-                className="w-full h-full object-cover"
+                className="w-full  h-176 object-cover"
                 src={`${imageUrl}/${movieInfo.backdrop_path}`}
                 alt="Banner Image"
               />
             </div>
-            <div className="absolute top-0 h-full w-full  flex  ">
-              <div id="poster" className="  h-full w-2/6">
+            <div className="absolute top-0 h-full w-full  flex flex-col ">
+              <div id="poster" className=" pt-2">
                 <div className="w-full h-full flex justify-center items-center   ">
                   <img
                     className="lg:h-112 md:h-96 sm:h-80 h-72 lg:w-76 md:w-64 sm:w-56 w-48 shadow-xl rounded-xl border-4 border-white bg-gray-200"
@@ -180,10 +180,7 @@ const MovieInfoPage = ({}) => {
                   />
                 </div>
               </div>
-              <div
-                id="content"
-                className="pl-4 pr-2 lg:pt-10 md:pt-16 sm:pt-24 pt-28  h-full w-4/6   "
-              >
+              <div id="content" className="px-2 pt-2  h-full    ">
                 <div className="   ">
                   <p className="text-white md:text-4xl sm:text-3xl text-2xl font-semibold  ">
                     {movieInfo.title}
