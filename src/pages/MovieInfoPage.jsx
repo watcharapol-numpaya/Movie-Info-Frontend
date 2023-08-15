@@ -6,7 +6,8 @@ import OnLoadingScreen from "../components/OnLoadingScreen";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import CircularProgressBar from "../components/CircularProgressBar";
 import Youtube from "react-youtube";
-
+import ThumbUpIcon from "@mui/icons-material/ThumbUp";
+import BlockIcon from "@mui/icons-material/Block";
 const MovieInfoPage = ({}) => {
   const { movieInfo } = useSelector((state) => state.movies);
   const { id } = useParams();
@@ -24,8 +25,6 @@ const MovieInfoPage = ({}) => {
     });
   }, [id]);
 
-
-  
   const renderMovieInfo = () => {
     return (
       <>
@@ -41,7 +40,7 @@ const MovieInfoPage = ({}) => {
       </>
     );
   };
- 
+
   const renderTitleAndBannerSection = () => {
     return (
       <>
@@ -87,7 +86,10 @@ const MovieInfoPage = ({}) => {
                 </div>
                 <div className="w-full mt-2 flex items-center">
                   <CircularProgressBar percentage={voteAvgInPercentage} />
-    
+                  <div className="text-white flex ml-2">
+                    <ThumbUpIcon />
+                    <p className=" "> {movieInfo.vote_count} Vote</p>
+                  </div>
                 </div>
 
                 <div id="overview" className=" text-white    ">
@@ -101,7 +103,7 @@ const MovieInfoPage = ({}) => {
                         : ""
                     } lg:h-64 md:h-48 sm:h-40 h-36   md:text-lg sm:text-base text-sm font-normal overflow-auto    `}
                   >
-                    {movieInfo.overview}{movieInfo.overview}
+                    {movieInfo.overview}
                   </p>
                 </div>
               </div>
@@ -111,18 +113,53 @@ const MovieInfoPage = ({}) => {
       </>
     );
   };
- 
+
   const renderSecondSection = () => {
     return (
       <>
-        <div className="xl:container mx-auto bg-red-200 w-full h-full  ">
-          <div className="flex  sm:flex-row flex-col-reverse ">
-            <div className="w-full bg-green-200 ">
-              <p className="text-lg font-semibold">details</p>
-              <p>123</p>
-              <p>123</p>
+        <div className="xl:container mx-auto bg-black w-full h-full  ">
+          <div className="flex  sm:flex-row  flex-col-reverse ">
+            <div id="details " className="w-full  p-2 ">
+              <div className="w-full text-base text-white">
+                <p className="text-xl font-bold">Details</p>
+                <hr className="my-2" />
+                <div className=" ">
+                  <div>
+                    <span className="font-semibold  ">Original Title : </span>
+                    <span>{movieInfo.original_title}</span>
+                  </div>
+                  <div>
+                    <span className="font-semibold ">Status : </span>
+                    <span className=" ">{movieInfo.status}</span>
+                  </div>
+                  <div>
+                    <span className="font-semibold ">Release date : </span>
+                    <span>{movieInfo.release_date}</span>
+                  </div>
+                  <div>
+                    <span className="font-semibold ">Original Language : </span>
+                    <span>{movieInfo.original_language}</span>
+                  </div>
+                  <div>
+                    <span className="font-semibold ">Time Duration : </span>
+                    <span>
+                      {movieInfo.runtime ? movieInfo.runtime + " Minutes" : "-"}{" "}
+                    </span>
+                  </div>
+                  <div>
+                    <span className="font-semibold">Budget : </span>
+                    <span> ${movieInfo.budget.toLocaleString("en-US")}</span>
+                  </div>
+                  <div>
+                    <span className="font-semibold">Revenue : </span>
+                    <span> ${movieInfo.revenue.toLocaleString("en-US")}</span>
+                  </div>
+                </div>
+              </div>
             </div>
-            <div className="w-full "> {renderTrailerSection()}</div>
+            <div id="trailer" className="w-full ">
+              {renderTrailerSection()}
+            </div>
           </div>
         </div>
       </>
@@ -141,14 +178,25 @@ const MovieInfoPage = ({}) => {
     return (
       <>
         <div className=" ">
-          <div className="  w-full h-full flex justify-center items-center    ">
+          <div className="  w-full h-full flex justify-center items-center  p-2  ">
             {trailer && (
-              <div className="h-full w-full   p-2 ">
+              <div className="h-full w-full     ">
                 <Youtube
                   className=" sm:h-112 h-52  w-full "
                   videoId={trailer.key}
                   opts={{ height: "100%", width: "100%" }}
                 />
+              </div>
+            )}
+
+            {!trailer && (
+              <div className=" sm:block hidden   sm:h-112 h-52  w-full p-4  ">
+                <div className="bg-gray-400 h-full w-full flex justify-center items-center text-white rounded-lg">
+                  <BlockIcon />
+                  <p className=" text-lg font-semibold pl-1">
+                    No media
+                  </p>
+                </div>
               </div>
             )}
           </div>
@@ -157,7 +205,6 @@ const MovieInfoPage = ({}) => {
     );
   };
 
-  
   return (
     <>
       {console.log(movieInfo)}
