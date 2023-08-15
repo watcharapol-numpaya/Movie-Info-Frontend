@@ -8,13 +8,15 @@ import CircularProgressBar from "../components/CircularProgressBar";
 import Youtube from "react-youtube";
 import ThumbUpIcon from "@mui/icons-material/ThumbUp";
 import BlockIcon from "@mui/icons-material/Block";
+import HideImageOutlinedIcon from "@mui/icons-material/HideImageOutlined";
+
 const MovieInfoPage = ({}) => {
   const { movieInfo } = useSelector((state) => state.movies);
   const { id } = useParams();
   const [isLoading, setIsLoading] = useState(true);
   const dispatch = useDispatch();
   const [imageUrl, setImageURL] = useState(
-    "https://www.themoviedb.org/t/p/original"
+    "https://www.themoviedb.org/t/p/w1280"
   );
   const isMobileScreen = useMediaQuery("(max-width:560px)");
   const voteAvgInPercentage = Math.round(movieInfo.vote_average * 10);
@@ -46,22 +48,35 @@ const MovieInfoPage = ({}) => {
       <>
         <div className="xl:container mx-auto h-full  w-full flex justify-center ">
           <div className="relative sm:h-128 h-176  w-full   bg-black ">
-            <div id="image-background" className="h-128 w-full opacity-40 ">
-              <img
-                className="w-full sm:h-full h-176 object-cover"
-                src={`${imageUrl}/${movieInfo.backdrop_path}`}
-                alt="Banner Image"
-              />
+            <div id="image-background" className="h-128 w-full opacity-40 bg-gray-200 ">
+              {movieInfo.backdrop_path ? (
+                <img
+                  className="w-full sm:h-full h-176 object-cover"
+                  src={`${imageUrl}/${movieInfo.backdrop_path}`}
+                  alt="Banner Image"
+                />
+              ) : (
+             ""
+              )}
             </div>
             <div className="absolute top-0 h-full w-full  flex sm:flex-row flex-col   ">
-              <div id="poster" className="  sm:pt-0 pt-2  sm:w-2/6 w-full">
+              <div id="poster" className="  sm:pt-0 pt-2  sm:w-2/6 w-full ">
                 <div className="w-full h-full flex justify-center items-center   ">
-                  <img
-                    className="lg:h-112 md:h-96 sm:h-80 h-72 lg:w-76 md:w-64 sm:w-56 w-48 shadow-xl rounded-xl border-4 border-white bg-gray-200"
-                    src={`${imageUrl}/${movieInfo.poster_path}`}
-                  />
+                  <div className="lg:h-112 md:h-96 sm:h-80 h-72 lg:w-76 md:w-64 sm:w-56 w-48 border-white bg-gray-200  rounded-xl ">
+                    {movieInfo.poster_path ? (
+                      <img
+                        className="lg:h-112 md:h-96 sm:h-80 h-72 lg:w-76 md:w-64 sm:w-56 w-48 shadow-xl rounded-xl border-4 border-white bg-gray-200"
+                        src={`${imageUrl}/${movieInfo.poster_path}`}
+                      />
+                    ) : (
+                      <div className="w-full h-full bg-gray-300 flex justify-center items-center rounded-lg shadow-xl">
+                        <HideImageOutlinedIcon fontSize="large" />
+                      </div>
+                    )}
+                  </div>
                 </div>
               </div>
+
               <div
                 id="content"
                 className="px-2 lg:pt-10 md:pt-16  pt-2  h-full sm:w-4/6 w-full   "
@@ -191,11 +206,9 @@ const MovieInfoPage = ({}) => {
 
             {!trailer && (
               <div className=" sm:block hidden   sm:h-112 h-52  w-full p-4  ">
-                <div className="bg-gray-400 h-full w-full flex justify-center items-center text-white rounded-lg">
+                <div className="bg-gray-300 h-full w-full flex justify-center items-center text-black rounded-lg ">
                   <BlockIcon />
-                  <p className=" text-lg font-semibold pl-1">
-                    No media
-                  </p>
+                  <p className=" text-lg font-semibold pl-1">No media</p>
                 </div>
               </div>
             )}
