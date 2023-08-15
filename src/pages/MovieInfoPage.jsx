@@ -15,7 +15,7 @@ const MovieInfoPage = ({}) => {
   const [imageUrl, setImageURL] = useState(
     "https://www.themoviedb.org/t/p/original"
   );
-  const isSmScreen = useMediaQuery("(min-width:640px)");
+  const isMobileScreen = useMediaQuery("(max-width:560px)");
   const voteAvgInPercentage = Math.round(movieInfo.vote_average * 10);
 
   useEffect(() => {
@@ -24,12 +24,16 @@ const MovieInfoPage = ({}) => {
     });
   }, [id]);
 
+
+  
   const renderMovieInfo = () => {
     return (
       <>
         <div className=" h-full w-full ">
           <div id="banner-section" className="h-full w-full   ">
-            {renderTitleAndBannerSectionMobile()}
+            {isMobileScreen
+              ? renderTitleAndBannerSectionMobile()
+              : renderTitleAndBannerSection()}
           </div>
 
           <div id="details" className=" ">
@@ -44,7 +48,7 @@ const MovieInfoPage = ({}) => {
     return (
       <>
         <div className="xl:container mx-auto  w-full flex justify-center ">
-          <div className="relative   h-128 w-full   bg-black ">
+          <div className="relative h-128 w-full   bg-black ">
             <div id="image-background" className="h-128 w-full opacity-40 ">
               <img
                 className="w-full h-full object-cover"
