@@ -1,7 +1,6 @@
 import {
   createSlice,
   createAsyncThunk,
-  isRejectedWithValue,
 } from "@reduxjs/toolkit";
 import { APIKeyTMDB } from "../../services/MovieApiKey";
 import { instance } from "../../services/MovieApi";
@@ -18,7 +17,7 @@ const initialState = {
   totalPages: 0,
   isLoading: false,
   isSuccess: false,
-  message: false,
+  message: "",
 };
 
 export const getTrendingMovies = createAsyncThunk(
@@ -126,6 +125,7 @@ export const getMovieByID = createAsyncThunk(
           append_to_response: "videos",
         },
       });
+      console.log(res.data)
       return res.data;
     } catch (err) {
       rejectWithValue(err.response.data);

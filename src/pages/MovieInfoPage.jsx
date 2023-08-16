@@ -9,6 +9,7 @@ import Youtube from "react-youtube";
 import ThumbUpIcon from "@mui/icons-material/ThumbUp";
 import BlockIcon from "@mui/icons-material/Block";
 import HideImageOutlinedIcon from "@mui/icons-material/HideImageOutlined";
+import { getActors } from "../storage/slides/actorSlice";
 
 const MovieInfoPage = ({}) => {
   const { movieInfo } = useSelector((state) => state.movies);
@@ -25,6 +26,7 @@ const MovieInfoPage = ({}) => {
     dispatch(getMovieByID(id)).then(() => {
       setIsLoading(false);
     });
+    dispatch(getActors(id));
   }, [id]);
 
   const renderMovieInfo = () => {
@@ -212,7 +214,14 @@ const MovieInfoPage = ({}) => {
                 <Youtube
                   className=" sm:h-112 h-52  w-full "
                   videoId={trailer.key}
-                  opts={{ height: "100%", width: "100%" }}
+                  opts={{
+                    height: "100%",
+                    width: "100%",
+                    playerVars: {
+                      autoplay: 0,
+                      origin: "http://localhost:5173/",
+                    },
+                  }}
                 />
               </div>
             )}
@@ -234,14 +243,14 @@ const MovieInfoPage = ({}) => {
   const renderActorSection = () => {
     return (
       <>
-        <div></div> 
+        <div></div>
       </>
     );
   };
 
   return (
     <>
-      {console.log(movieInfo)}
+ 
       <div className="  w-full h-full ">
         {isLoading ? <OnLoadingScreen /> : renderMovieInfo()}
       </div>
