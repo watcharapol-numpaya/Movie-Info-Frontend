@@ -10,6 +10,7 @@ import ThumbUpIcon from "@mui/icons-material/ThumbUp";
 import BlockIcon from "@mui/icons-material/Block";
 import HideImageOutlinedIcon from "@mui/icons-material/HideImageOutlined";
 import { getActors } from "../storage/slides/actorSlice";
+import OpenInNewIcon from "@mui/icons-material/OpenInNew";
 
 const MovieInfoPage = ({}) => {
   const { movieInfo } = useSelector((state) => state.movies);
@@ -36,9 +37,11 @@ const MovieInfoPage = ({}) => {
           <div id="banner-section" className="h-full w-full   ">
             {renderTitleAndBannerSection()}
           </div>
-
-          <div id="details" className=" ">
+          <div id="details-section" className="h-full w-full  ">
             {renderSubInfoSection()}
+          </div>
+          <div id="actor-section" className="h-full w-full ">
+            {renderActorSection()}
           </div>
         </div>
       </>
@@ -140,55 +143,10 @@ const MovieInfoPage = ({}) => {
         <div className="xl:container mx-auto bg-black w-full h-full  ">
           <div className="flex  sm:flex-row  flex-col-reverse ">
             <div id="details " className="w-full  p-2 ">
-              <div className="w-full text-base text-white">
-                <p className="text-xl font-bold">Details</p>
-                <hr className="my-2" />
-                <div className=" ">
-                  <div>
-                    <span className="font-semibold  ">Original Title : </span>
-                    <span>{movieInfo.original_title}</span>
-                  </div>
-                  <div>
-                    <span className="font-semibold ">Status : </span>
-                    <span className=" ">{movieInfo.status}</span>
-                  </div>
-                  <div>
-                    <span className="font-semibold ">Release date : </span>
-                    <span>{movieInfo.release_date}</span>
-                  </div>
-                  <div>
-                    <span className="font-semibold ">Original Language : </span>
-                    <span>{movieInfo.original_language}</span>
-                  </div>
-                  <div>
-                    <span className="font-semibold ">Time Duration : </span>
-                    <span>
-                      {movieInfo.runtime ? movieInfo.runtime + " Minutes" : "-"}{" "}
-                    </span>
-                  </div>
-                  <div>
-                    <span className="font-semibold">Budget : </span>
-                    <span> ${movieInfo.budget.toLocaleString("en-US")}</span>
-                  </div>
-                  <div>
-                    <span className="font-semibold">Revenue : </span>
-                    <span> ${movieInfo.revenue.toLocaleString("en-US")}</span>
-                  </div>
-                  <div>
-                    <span className="font-semibold ">Website : </span>
-                    <a
-                      className="underline"
-                      href={movieInfo.homepage}
-                      target="_blank"
-                    >
-                      {movieInfo.homepage ? movieInfo.homepage : "-"}{" "}
-                    </a>
-                  </div>
-                </div>
-              </div>
+              {renderDetail()}
             </div>
             <div id="trailer" className="w-full ">
-              {renderTrailerSection()}
+              {renderTrailer()}
             </div>
           </div>
         </div>
@@ -196,7 +154,61 @@ const MovieInfoPage = ({}) => {
     );
   };
 
-  const renderTrailerSection = () => {
+  const renderDetail = () => {
+    return (
+      <>
+        <div className="w-full text-base text-white">
+          <p className="text-xl font-bold">Details</p>
+          <hr className="my-2" />
+          <div className=" ">
+            <div>
+              <span className="font-semibold  ">Original Title : </span>
+              <span>{movieInfo.original_title}</span>
+            </div>
+            <div>
+              <span className="font-semibold ">Status : </span>
+              <span className=" ">{movieInfo.status}</span>
+            </div>
+            <div>
+              <span className="font-semibold ">Release date : </span>
+              <span>{movieInfo.release_date}</span>
+            </div>
+            <div>
+              <span className="font-semibold ">Original Language : </span>
+              <span>{movieInfo.original_language}</span>
+            </div>
+            <div>
+              <span className="font-semibold ">Time Duration : </span>
+              <span>
+                {movieInfo.runtime ? movieInfo.runtime + " Minutes" : "-"}{" "}
+              </span>
+            </div>
+            <div>
+              <span className="font-semibold">Budget : </span>
+              <span> ${movieInfo.budget.toLocaleString("en-US")}</span>
+            </div>
+            <div>
+              <span className="font-semibold">Revenue : </span>
+              <span> ${movieInfo.revenue.toLocaleString("en-US")}</span>
+            </div>
+            <div>
+              <span className="font-semibold ">Website : </span>
+              <a
+                className="underline"
+                href={movieInfo.homepage}
+                target="_blank"
+              >
+                {movieInfo.homepage ? movieInfo.homepage : "-"}
+                <OpenInNewIcon className="text-yellow-400" fontSize="medium" />
+              </a>
+            </div>
+          </div>
+        </div>
+      </>
+    );
+  };
+
+  const renderTrailer = () => {
     const trailer = movieInfo.videos.results.find(
       (vid) =>
         vid.name === "Official Trailer" ||
@@ -250,7 +262,6 @@ const MovieInfoPage = ({}) => {
 
   return (
     <>
- 
       <div className="  w-full h-full ">
         {isLoading ? <OnLoadingScreen /> : renderMovieInfo()}
       </div>
