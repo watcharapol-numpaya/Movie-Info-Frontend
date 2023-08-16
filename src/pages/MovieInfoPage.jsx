@@ -167,44 +167,72 @@ const MovieInfoPage = ({}) => {
           <div className=" ">
             <div>
               <span className="font-semibold  ">Original Title : </span>
-              <span>{movieInfo.original_title}</span>
+              <span>
+                {movieInfo.original_title ? movieInfo.original_title : "-"}
+              </span>
             </div>
             <div>
               <span className="font-semibold ">Status : </span>
-              <span className=" ">{movieInfo.status}</span>
+              <span className=" ">
+                {movieInfo.status ? movieInfo.status : "-"}
+              </span>
             </div>
             <div>
               <span className="font-semibold ">Release date : </span>
-              <span>{movieInfo.release_date}</span>
+              <span>
+                {movieInfo.release_date ? movieInfo.release_date : "-"}
+              </span>
             </div>
             <div>
               <span className="font-semibold ">Original Language : </span>
-              <span>{movieInfo.original_language}</span>
+              <span>
+                {movieInfo.original_language
+                  ? movieInfo.original_language
+                  : "-"}
+              </span>
             </div>
             <div>
               <span className="font-semibold ">Time Duration : </span>
               <span>
-                {movieInfo.runtime ? movieInfo.runtime + " Minutes" : "-"}{" "}
+                {movieInfo.runtime ? movieInfo.runtime + " Minutes" : "-"}
               </span>
             </div>
             <div>
               <span className="font-semibold">Budget : </span>
-              <span> ${movieInfo.budget.toLocaleString("en-US")}</span>
+              <span>
+                $
+                {movieInfo.budget
+                  ? movieInfo.budget.toLocaleString("en-US")
+                  : "-"}
+              </span>
             </div>
             <div>
               <span className="font-semibold">Revenue : </span>
-              <span> ${movieInfo.revenue.toLocaleString("en-US")}</span>
+              <span>
+                {" "}
+                $
+                {movieInfo.budget
+                  ? movieInfo.revenue.toLocaleString("en-US")
+                  : "-"}
+              </span>
             </div>
             <div>
               <span className="font-semibold ">Website : </span>
-              <a
-                className="underline"
-                href={movieInfo.homepage}
-                target="_blank"
-              >
-                {movieInfo.homepage ? movieInfo.homepage : "-"}
-                <OpenInNewIcon className="text-yellow-400" fontSize="medium" />
-              </a>
+              {movieInfo.homepage ? (
+                <a
+                  className="underline"
+                  href={movieInfo.homepage}
+                  target="_blank"
+                >
+                  {movieInfo.homepage}
+                  <OpenInNewIcon
+                    className="text-yellow-400"
+                    fontSize="medium"
+                  />
+                </a>
+              ) : (
+                "-"
+              )}
             </div>
           </div>
         </div>
