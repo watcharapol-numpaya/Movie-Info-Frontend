@@ -36,7 +36,7 @@ const MovieInfoPage = ({}) => {
           </div>
 
           <div id="details" className=" ">
-            {renderSecondSection()}
+            {renderSubInfoSection()}
           </div>
         </div>
       </>
@@ -48,7 +48,10 @@ const MovieInfoPage = ({}) => {
       <>
         <div className="xl:container mx-auto h-full  w-full flex justify-center ">
           <div className="relative sm:h-128 h-176  w-full   bg-black ">
-            <div id="image-background" className="h-128 w-full opacity-40 bg-gray-200 ">
+            <div
+              id="image-background"
+              className="h-128 w-full opacity-40 bg-gray-200 "
+            >
               {movieInfo.backdrop_path ? (
                 <img
                   className="w-full sm:h-full h-176 object-cover"
@@ -56,7 +59,7 @@ const MovieInfoPage = ({}) => {
                   alt="Banner Image"
                 />
               ) : (
-             ""
+                ""
               )}
             </div>
             <div className="absolute top-0 h-full w-full  flex sm:flex-row flex-col   ">
@@ -129,7 +132,7 @@ const MovieInfoPage = ({}) => {
     );
   };
 
-  const renderSecondSection = () => {
+  const renderSubInfoSection = () => {
     return (
       <>
         <div className="xl:container mx-auto bg-black w-full h-full  ">
@@ -168,6 +171,12 @@ const MovieInfoPage = ({}) => {
                   <div>
                     <span className="font-semibold">Revenue : </span>
                     <span> ${movieInfo.revenue.toLocaleString("en-US")}</span>
+                  </div>
+                  <div>
+                    <span className="font-semibold ">Website : </span>
+                    <a className="underline" href={movieInfo.homepage} target="_blank">
+                      {movieInfo.homepage ? movieInfo.homepage : "-"}{" "}
+                    </a>
                   </div>
                 </div>
               </div>
