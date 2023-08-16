@@ -3,8 +3,8 @@ import {
   createAsyncThunk,
   isRejectedWithValue,
 } from "@reduxjs/toolkit";
-import { APIKey, APIKeyTMDB } from "../../services/MovieApiKey";
-import { instance1, instance2 } from "../../services/MovieApi";
+import { APIKeyTMDB } from "../../services/MovieApiKey";
+import { instance } from "../../services/MovieApi";
 
 const initialState = {
   movies: [],
@@ -21,27 +21,11 @@ const initialState = {
   message: false,
 };
 
-export const getMovies = createAsyncThunk(
-  "movieList/fetchMovie",
-  async (arg, { rejectWithValue }) => {
-    try {
-      const searchKey = arg ? arg : "Thor";
-      const res = await instance1.get(
-        `?apikey=${APIKey}&s=${searchKey}&type=movie`
-      );
-      // console.log(res)
-      return [...res.data.Search];
-    } catch (err) {
-      rejectWithValue(err.response.data);
-    }
-  }
-);
-
 export const getTrendingMovies = createAsyncThunk(
   "movieList/fetchTrendingMovie",
   async (arg, { rejectWithValue }) => {
     try {
-      const res = await instance2.get(`trending/movie/week`, {
+      const res = await instance.get(`trending/movie/week`, {
         params: {
           api_key: APIKeyTMDB,
         },
@@ -57,7 +41,7 @@ export const getPopularMovies = createAsyncThunk(
   "movieList/fetchPopularMovie",
   async (arg, { rejectWithValue }) => {
     try {
-      const res = await instance2.get(`movie/popular`, {
+      const res = await instance.get(`movie/popular`, {
         params: {
           api_key: APIKeyTMDB,
         },
@@ -82,7 +66,7 @@ export const getAllMovies = createAsyncThunk(
         params.with_genres = data.genre.join("|");
       }
       console.log(params);
-      const res = await instance2.get(`discover/movie`, {
+      const res = await instance.get(`discover/movie`, {
         params,
       });
 
@@ -100,7 +84,7 @@ export const getAllGenre = createAsyncThunk(
   "movieList/fetchAllGenre",
   async (arg, { rejectWithValue }) => {
     try {
-      const res = await instance2.get(`genre/movie/list`, {
+      const res = await instance.get(`genre/movie/list`, {
         params: {
           api_key: APIKeyTMDB,
         },
@@ -118,7 +102,7 @@ export const getMovieByKeyword = createAsyncThunk(
   "movieList/fetchMovieByKeyword",
   async (keyword, { rejectWithValue }) => {
     try {
-      const res = await instance2.get(`search/movie`, {
+      const res = await instance.get(`search/movie`, {
         params: {
           api_key: APIKeyTMDB,
           query: keyword,
@@ -136,10 +120,10 @@ export const getMovieByID = createAsyncThunk(
   "movieList/fetchMovieByID",
   async (id, { rejectWithValue }) => {
     try {
-      const res = await instance2.get(`movie/${id}`, {
+      const res = await instance.get(`movie/${id}`, {
         params: {
           api_key: APIKeyTMDB,
-          append_to_response: 'videos'
+          append_to_response: "videos",
         },
       });
       return res.data;
@@ -155,31 +139,6 @@ const movieSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(getMovies.pending, (state, action) => {
-        state.isLoading = true;
-      })
-      .addCase(getMovies.fulfilled, (state, action) => {
-        state.isLoading = false;
-        state.movies = action.payload;
-        state.isSuccess = true;
-      })
-      .addCase(getMovies.rejected, (state, action) => {
-        state.message = action.payload;
-        state.isLoading = false;
-        state.isSuccess = false;
-      })
-      .addCase(getTrendingMovies.pending, (state, action) => {
-        state.isLoading = true;
-      })
-      .addCase(getTrendingMovies.fulfilled, (state, action) => {
-        state.isLoading = false;
-        state.trendingMovies = action.payload;
-        state.isSuccess = true;
-      })
-      .addCase(getTrendingMovies.rejected, (state, action) => {
-        state.message = action.payload;
-        state.isLoading = false;
-      })
       .addCase(getPopularMovies.pending, (state, action) => {
         state.isLoading = true;
       })

@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   getAllGenre,
   getAllMovies,
-  getMovies,
   getPopularMovies,
   getTrendingMovies,
 } from "../storage/slides/movieSlice";

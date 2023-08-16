@@ -174,7 +174,11 @@ const MovieInfoPage = ({}) => {
                   </div>
                   <div>
                     <span className="font-semibold ">Website : </span>
-                    <a className="underline" href={movieInfo.homepage} target="_blank">
+                    <a
+                      className="underline"
+                      href={movieInfo.homepage}
+                      target="_blank"
+                    >
                       {movieInfo.homepage ? movieInfo.homepage : "-"}{" "}
                     </a>
                   </div>
@@ -223,6 +227,14 @@ const MovieInfoPage = ({}) => {
             )}
           </div>
         </div>
+      </>
+    );
+  };
+
+  const renderActorSection = () => {
+    return (
+      <>
+        <div></div> 
       </>
     );
   };
