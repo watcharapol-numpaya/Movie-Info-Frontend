@@ -11,6 +11,7 @@ import BlockIcon from "@mui/icons-material/Block";
 import HideImageOutlinedIcon from "@mui/icons-material/HideImageOutlined";
 import { getActors } from "../storage/slides/actorSlice";
 import OpenInNewIcon from "@mui/icons-material/OpenInNew";
+import ActorSlide from "../features/ActorSlide";
 
 const MovieInfoPage = ({}) => {
   const { movieInfo } = useSelector((state) => state.movies);
@@ -24,11 +25,14 @@ const MovieInfoPage = ({}) => {
   const voteAvgInPercentage = Math.round(movieInfo.vote_average * 10);
 
   useEffect(() => {
-    dispatch(getMovieByID(id)).then(() => {
-      setIsLoading(false);
-    });
-    dispatch(getActors(id));
-  }, [id]);
+    Promise.all([dispatch(getMovieByID(id)), dispatch(getActors(id))])
+      .then(() => {
+        setIsLoading(false);
+      })
+      .catch((error) => {
+        console.error("Error fetching data:", error);
+      });
+  }, [dispatch, id]);
 
   const renderMovieInfo = () => {
     return (
@@ -255,7 +259,9 @@ const MovieInfoPage = ({}) => {
   const renderActorSection = () => {
     return (
       <>
-        <div></div>
+        <div className="xl:container mx-auto bg-red-200 w-full h-full">
+          <ActorSlide />
+        </div>
       </>
     );
   };

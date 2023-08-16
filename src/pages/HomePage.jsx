@@ -31,6 +31,7 @@ function HomePage() {
   );
   const [isShowGenreCard, setIsShowGenreCard] = useState(false);
   const isLgScreen = useMediaQuery("(min-width:1024px)");
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     // Hide the genre card automatically when the screen size is greater than "lg"
@@ -40,10 +41,17 @@ function HomePage() {
   }, [isLgScreen]);
 
   useEffect(() => {
-    // dispatch(getTrendingMovies());
-    // dispatch(getPopularMovies());
-    handleGetMovie();
-    // dispatch(getAllGenre());
+    Promise.all([
+      // dispatch(getTrendingMovies()),
+      // dispatch(getPopularMovies()),
+      handleGetMovie(),
+    ])
+      .then(() => {
+        setIsLoading(flase);
+      })
+      .catch((error) => {
+        console.error("Error fetching data:", error);
+      })
   }, [page]);
 
   const handleGetMovie = (genre) => {
