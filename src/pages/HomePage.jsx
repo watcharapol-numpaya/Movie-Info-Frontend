@@ -18,6 +18,7 @@ import TuneIcon from "@mui/icons-material/Tune";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
+import OnLoadingScreen from "../components/OnLoadingScreen";
 
 function HomePage() {
   const dispatch = useDispatch();
@@ -47,11 +48,11 @@ function HomePage() {
       handleGetMovie(),
     ])
       .then(() => {
-        setIsLoading(flase);
+        setIsLoading(false);
       })
       .catch((error) => {
         console.error("Error fetching data:", error);
-      })
+      });
   }, [page]);
 
   const handleGetMovie = (genre) => {
@@ -153,7 +154,9 @@ function HomePage() {
 
   return (
     <div className=" h-full bg-black">
-      <div className=" xl:container  mx-auto  ">{renderHomePage()}</div>
+      <div className=" xl:container  mx-auto  ">
+        {isLoading ? <OnLoadingScreen /> : renderHomePage()}
+      </div>
       {/* <Footer/> */}
     </div>
   );
