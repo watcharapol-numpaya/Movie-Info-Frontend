@@ -48,7 +48,7 @@ function ActorSection() {
             onClick={showLessActors}
             className="text-yellow-500  cursor-pointer font-semibold text-lg p-2 "
           >
-           <a href="#title"> See less</a>
+           <a href="#title"> See Less</a>
           </button>
         </div>
       )}
