@@ -15,6 +15,7 @@ import ActorSlide from "../features/ActorSlide";
 
 const MovieInfoPage = ({}) => {
   const { movieInfo } = useSelector((state) => state.movies);
+  const { actors } = useSelector((state) => state.actors);
   const { id } = useParams();
   const [isLoading, setIsLoading] = useState(true);
   const dispatch = useDispatch();
@@ -288,7 +289,7 @@ const MovieInfoPage = ({}) => {
     return (
       <>
         <div className="xl:container mx-auto bg-red-200 w-full h-full">
-          <ActorSlide />
+          <ActorSlide actors={actors} />
         </div>
       </>
     );

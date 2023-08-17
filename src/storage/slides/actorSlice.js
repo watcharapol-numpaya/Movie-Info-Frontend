@@ -22,7 +22,7 @@ export const getActors = createAsyncThunk(
           api_key: APIKeyTMDB,
         },
       });
-      console.log(res.data.cast);
+      // console.log(res.data.cast);
       return res.data.cast;
     } catch (err) {
       rejectWithValue(err.response.data);
