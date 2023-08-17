@@ -43,8 +43,8 @@ function HomePage() {
 
   useEffect(() => {
     Promise.all([
-      // dispatch(getTrendingMovies()),
-      // dispatch(getPopularMovies()),
+      dispatch(getTrendingMovies()),
+      dispatch(getPopularMovies()),
       handleGetMovie(),
     ])
       .then(() => {

@@ -8,7 +8,6 @@ const AppPagination = ({ setPage, page, numberOfPage }) => {
 
   return (
     <>
-    
       <Pagination
         color="primary"
         onChange={handleChange}

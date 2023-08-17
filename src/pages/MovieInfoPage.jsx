@@ -288,8 +288,8 @@ const MovieInfoPage = ({}) => {
   const renderActorSection = () => {
     return (
       <>
-        <div className="xl:container mx-auto bg-red-200 w-full h-full">
-          <ActorSlide actors={actors} />
+        <div className="xl:container mx-auto  w-full h-full">
+          <ActorSlide  />
         </div>
       </>
     );
