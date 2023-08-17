@@ -11,7 +11,7 @@ import BlockIcon from "@mui/icons-material/Block";
 import HideImageOutlinedIcon from "@mui/icons-material/HideImageOutlined";
 import { getActors } from "../storage/slides/actorSlice";
 import OpenInNewIcon from "@mui/icons-material/OpenInNew";
-import ActorSlide from "../features/ActorSlide";
+import ActorSection from "../features/ActorSection.jsx";
 
 const MovieInfoPage = ({}) => {
   const { movieInfo } = useSelector((state) => state.movies);
@@ -289,7 +289,7 @@ const MovieInfoPage = ({}) => {
     return (
       <>
         <div className="xl:container mx-auto  w-full h-full">
-          <ActorSlide  />
+          <ActorSection  />
         </div>
       </>
     );

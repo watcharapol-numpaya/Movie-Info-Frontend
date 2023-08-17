@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import HideImageOutlinedIcon from "@mui/icons-material/HideImageOutlined";
+import ActorCard from "../components/ActorCard";
 
-function ActorSlide() {
+function ActorSection() {
   const [isLoading, setIsLoading] = useState(true);
   const [displayedActors, setDisplayedActors] = useState(8); // Number of initially displayed actors
   const imageUrl = "https://www.themoviedb.org/t/p/w1280";
@@ -24,29 +25,8 @@ function ActorSlide() {
       <div className="w-full flex justify-center flex-wrap pt-4 gap-2">
         {actors &&
           limitActor.map((actor) => (
-            <div
-              key={actor.id}
-              className="w-44 h-80 bg-white px-2.5 pt-3 rounded-xl"
-            >
-              <div className="w-full  flex justify-center   ">
-                {actor.profile_path ? (
-                  <img
-                    className=" w-40 h-52 rounded-lg "
-                    src={`${imageUrl}/${actor.profile_path}`}
-                    alt={actor.name}
-                    loading="lazy"
-                  />
-                ) : (
-                  <div className=" w-36 h-52 bg-gray-300 flex justify-center items-center ">
-                    <HideImageOutlinedIcon fontSize="large" />
-                  </div>
-                )}
-              </div>
-              <div className="    ">
-                <p className="font-semibold text-base">{actor.name}</p>
-                <p className="font-thin text-xs  ">{actor.character}</p>
-              </div>
-            </div>
+            <ActorCard   key={actor.id} actor={actor}/>
+          
           ))}
       </div>
       {displayedActors < actors.length && (
@@ -76,4 +56,4 @@ function ActorSlide() {
   );
 }
 
-export default ActorSlide;
+export default ActorSection;
