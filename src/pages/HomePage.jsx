@@ -27,8 +27,8 @@ function HomePage() {
     useSelector((state) => state.movies);
 
   const [page, setPage] = useState(1);
-  const [banner, setBanner] = useState(
-    "https://images7.alphacoders.com/112/1129455.jpg"
+  const [bannerUrl, setBannerUrl] = useState(
+    "https://www.themoviedb.org/t/p/w780"
   );
   const [isShowGenreCard, setIsShowGenreCard] = useState(false);
   const isLgScreen = useMediaQuery("(min-width:1024px)");
@@ -69,13 +69,16 @@ function HomePage() {
     return (
       <>
         <div className="w-full sm:h-96 h-56 lg:w-5/6 relative">
+          {console.log(trendingMovies)}
           <div className=" absolute inset-y-0 left-0  sm:w-1/4 w-1/12 bg-gradient-to-l from-transparent to-black"></div>
           <div className=" absolute inset-y-0 right-0 sm:w-1/4 w-1/12 bg-gradient-to-r from-transparent to-black"></div>
-          <img
-            className="w-full h-full object-cover"
-            src={banner}
-            alt="Banner Image"
-          ></img>
+          {popularMovies && (
+            <img
+              className="w-full h-full object-cover"
+              src={``}
+              alt="Banner Image"
+            ></img>
+          )}
         </div>
         <div className="flex lg:flex-row flex-col w-full h-full bg-white  flex-wrap mx-auto   ">
           <div className="w-full ">

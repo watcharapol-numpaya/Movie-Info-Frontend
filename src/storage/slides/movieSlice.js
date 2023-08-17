@@ -1,7 +1,4 @@
-import {
-  createSlice,
-  createAsyncThunk,
-} from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { APIKeyTMDB } from "../../services/MovieApiKey";
 import { instance } from "../../services/MovieApi";
 
@@ -125,7 +122,7 @@ export const getMovieByID = createAsyncThunk(
           append_to_response: "videos",
         },
       });
-      console.log(res.data)
+      console.log(res.data);
       return res.data;
     } catch (err) {
       rejectWithValue(err.response.data);
@@ -139,6 +136,20 @@ const movieSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
+      .addCase(getTrendingMovies.pending, (state, action) => {
+        state.isLoading = true;
+      })
+      .addCase(getTrendingMovies.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.trendingMovies = action.payload;
+        state.isSuccess = true;
+      })
+      .addCase(getTrendingMovies.rejected, (state, action) => {
+        state.message = action.payload;
+        state.isLoading = false;
+        state.isSuccess = false;
+        // console.log(action);
+      })
       .addCase(getPopularMovies.pending, (state, action) => {
         state.isLoading = true;
       })
