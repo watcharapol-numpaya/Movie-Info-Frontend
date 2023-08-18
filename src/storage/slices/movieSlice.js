@@ -112,7 +112,7 @@ export const getMovieByKeyword = createAsyncThunk(
   }
 );
 
-export const getMovieByID = createAsyncThunk(
+export const getMovieDetailByID = createAsyncThunk(
   "movieList/fetchMovieByID",
   async (id, { rejectWithValue }) => {
     try {
@@ -203,15 +203,15 @@ const movieSlice = createSlice({
         state.isLoading = false;
         state.isSuccess = false;
       })
-      .addCase(getMovieByID.pending, (state, action) => {
+      .addCase(getMovieDetailByID.pending, (state, action) => {
         state.isLoading = true;
       })
-      .addCase(getMovieByID.fulfilled, (state, action) => {
+      .addCase(getMovieDetailByID.fulfilled, (state, action) => {
         state.isLoading = false;
         state.movieInfo = action.payload;
         state.isSuccess = true;
       })
-      .addCase(getMovieByID.rejected, (state, action) => {
+      .addCase(getMovieDetailByID.rejected, (state, action) => {
         state.message = action.payload;
         state.isLoading = false;
         state.isSuccess = false;

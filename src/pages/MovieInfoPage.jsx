@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useParams } from "react-router-dom";
-import { getMovieByID } from "../storage/slices/movieSlice";
+import { getMovieDetailByID } from "../storage/slices/movieSlice";
 import OnLoadingScreen from "../components/OnLoadingScreen";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import CircularProgressBar from "../components/CircularProgressBar";
@@ -26,7 +26,7 @@ const MovieInfoPage = ({}) => {
   const voteAvgInPercentage = Math.round(movieInfo.vote_average * 10);
 
   useEffect(() => {
-    Promise.all([dispatch(getMovieByID(id)), dispatch(getCast(id))])
+    Promise.all([dispatch(getMovieDetailByID(id)), dispatch(getCast(id))])
       .then(() => {
         setIsLoading(false);
       })
