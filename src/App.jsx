@@ -17,7 +17,7 @@ function App() {
         <Route path="/home" element={<HomePage />} />
         <Route path="/mobileSearchPage" element={<MobileSearchPage />} />
         <Route path="/movieInfo/:id" element={<MovieInfoPage />} />
-        <Route path="/castInfo/:name" element={<CastInfo />} />
+        <Route path="/castInfo/:id" element={<CastInfo />} />
         <Route path="*" element={<ErrorPage />} />
       </Routes>
     </>

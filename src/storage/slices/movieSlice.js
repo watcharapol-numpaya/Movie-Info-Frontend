@@ -61,7 +61,7 @@ export const getAllMovies = createAsyncThunk(
       if (data.genre) {
         params.with_genres = data.genre.join("|");
       }
-      console.log(params);
+
       const res = await instance.get(`discover/movie`, {
         params,
       });
@@ -104,7 +104,7 @@ export const getMovieByKeyword = createAsyncThunk(
           query: keyword,
         },
       });
-      console.log(res);
+      
       return [...res.data.results];
     } catch (err) {
       rejectWithValue(err.response.data);
@@ -122,7 +122,7 @@ export const getMovieDetailByID = createAsyncThunk(
           append_to_response: "videos",
         },
       });
-      console.log(res.data);
+  
       return res.data;
     } catch (err) {
       rejectWithValue(err.response.data);

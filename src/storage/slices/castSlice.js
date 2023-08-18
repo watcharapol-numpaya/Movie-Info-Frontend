@@ -8,6 +8,7 @@ import { instance } from "../../services/MovieApi";
 
 const initialState = {
   allCast: [],
+  castInfo: [],
   movies: [],
   isLoading: false,
   isSuccess: false,
@@ -24,7 +25,24 @@ export const getCast = createAsyncThunk(
         },
       });
       // console.log(res.data.cast);
-      return res.data.cast;
+      return [...res.data.cast];
+    } catch (err) {
+      rejectWithValue(err.response.data);
+    }
+  }
+);
+
+export const getCastInfo = createAsyncThunk(
+  "castList/fetchCastInfo",
+  async (id, { rejectWithValue }) => {
+    try {
+      const res = await instance.get(`person/${id}`, {
+        params: {
+          api_key: APIKeyTMDB,
+        },
+      });
+    
+      return res.data
     } catch (err) {
       rejectWithValue(err.response.data);
     }
@@ -77,6 +95,19 @@ const castSlice = createSlice({
         state.isSuccess = true;
       })
       .addCase(getMovieRelateToCast.rejected, (state, action) => {
+        state.message = action.payload;
+        state.isLoading = false;
+        state.isSuccess = false;
+      })
+      .addCase(getCastInfo.pending, (state, action) => {
+        state.isLoading = true;
+      })
+      .addCase(getCastInfo.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.castInfo = action.payload;
+        state.isSuccess = true;
+      })
+      .addCase(getCastInfo.rejected, (state, action) => {
         state.message = action.payload;
         state.isLoading = false;
         state.isSuccess = false;

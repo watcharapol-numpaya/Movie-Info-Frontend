@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useLocation, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { getMovieDetailByID } from "../storage/slices/movieSlice";
 import OnLoadingScreen from "../components/OnLoadingScreen";
 import useMediaQuery from "@mui/material/useMediaQuery";
@@ -8,10 +8,10 @@ import CircularProgressBar from "../components/CircularProgressBar";
 import Youtube from "react-youtube";
 import ThumbUpIcon from "@mui/icons-material/ThumbUp";
 import BlockIcon from "@mui/icons-material/Block";
-import HideImageOutlinedIcon from "@mui/icons-material/HideImageOutlined";
 import { getCast } from "../storage/slices/castSlice";
 import OpenInNewIcon from "@mui/icons-material/OpenInNew";
-import CastSection from './../features/CastSection';
+import CastSection from "./../features/CastSection";
+import ImageNotFound from "../components/ImageNotFound";
 
 const MovieInfoPage = ({}) => {
   const { movieInfo } = useSelector((state) => state.movies);
@@ -75,16 +75,14 @@ const MovieInfoPage = ({}) => {
             <div className="absolute top-0 h-full w-full  flex sm:flex-row flex-col   ">
               <div id="poster" className="  sm:pt-0 pt-2  sm:w-2/6 w-full ">
                 <div className="w-full h-full flex justify-center items-center   ">
-                  <div className="lg:h-112 md:h-96 sm:h-80 h-72 lg:w-76 md:w-64 sm:w-56 w-48 border-white bg-gray-200  rounded-xl ">
+                  <div className="lg:h-112 md:h-96 sm:h-80 h-72 lg:w-76 md:w-64 sm:w-56 w-48 border-white bg-gray-200  rounded-xl overflow-hidden shadow-lg">
                     {movieInfo.poster_path ? (
                       <img
                         className="lg:h-112 md:h-96 sm:h-80 h-72 lg:w-76 md:w-64 sm:w-56 w-48 shadow-xl rounded-xl border-4 border-white bg-gray-200"
                         src={`${imageUrl}/${movieInfo.poster_path}`}
                       />
                     ) : (
-                      <div className="w-full h-full bg-gray-300 flex justify-center items-center rounded-lg shadow-xl">
-                        <HideImageOutlinedIcon fontSize="large" />
-                      </div>
+                      <ImageNotFound />
                     )}
                   </div>
                 </div>
@@ -289,7 +287,7 @@ const MovieInfoPage = ({}) => {
     return (
       <>
         <div className="xl:container mx-auto  w-full h-full">
-          <CastSection  />
+          <CastSection />
         </div>
       </>
     );
