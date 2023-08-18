@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
  
 import { useDispatch, useSelector } from "react-redux";
-import { getAllGenre } from "../storage/slides/movieSlice";
-import { getAllMovies } from "../storage/slides/movieSlice";
+import { getAllGenre } from "../storage/slices/movieSlice";
+import { getAllMovies } from "../storage/slices/movieSlice";
 import GenreButton from "../components/GenreButton";
 
 

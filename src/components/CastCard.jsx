@@ -1,7 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import HideImageOutlinedIcon from "@mui/icons-material/HideImageOutlined";
-function ActorCard({ actor }) {
+function CastCard({ cast }) {
   const [imageUrl, setImageURL] = useState(
     "https://www.themoviedb.org/t/p/w780"
   );
@@ -10,11 +10,11 @@ function ActorCard({ actor }) {
     <>
       <div className="w-44 h-80 bg-white px-2.5 pt-3 rounded-xl">
         <div className="w-full  flex justify-center   ">
-          {actor.profile_path ? (
+          {cast.profile_path ? (
             <img
               className=" w-40 h-52 rounded-lg "
-              src={`${imageUrl}/${actor.profile_path}`}
-              alt={actor.name}
+              src={`${imageUrl}/${cast.profile_path}`}
+              alt={cast.name}
               loading="lazy"
             />
           ) : (
@@ -24,12 +24,12 @@ function ActorCard({ actor }) {
           )}
         </div>
         <div className="    ">
-          <p className="font-semibold text-base">{actor.name}</p>
-          <p className="font-thin text-xs  ">{actor.character}</p>
+          <p className="font-semibold text-base">{cast.name}</p>
+          <p className="font-thin text-xs  ">{cast.character}</p>
         </div>
       </div>
     </>
   );
 }
 
-export default ActorCard;
+export default CastCard;

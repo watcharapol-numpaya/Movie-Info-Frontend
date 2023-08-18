@@ -6,7 +6,7 @@ import {
   getAllMovies,
   getPopularMovies,
   getTrendingMovies,
-} from "../storage/slides/movieSlice";
+} from "../storage/slices/movieSlice";
 import MovieCard from "../components/MovieCard";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
@@ -28,7 +28,7 @@ function HomePage() {
 
   const [page, setPage] = useState(1);
   const [bannerUrl, setBannerUrl] = useState(
-    "https://www.themoviedb.org/t/p/original"
+    "https://www.themoviedb.org/t/p/w1280"
   );
   const [isShowGenreCard, setIsShowGenreCard] = useState(false);
   const isLgScreen = useMediaQuery("(min-width:1024px)");

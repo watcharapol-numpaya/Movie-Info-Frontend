@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useParams } from "react-router-dom";
-import { getMovieByID } from "../storage/slides/movieSlice";
+import { getMovieByID } from "../storage/slices/movieSlice";
 import OnLoadingScreen from "../components/OnLoadingScreen";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import CircularProgressBar from "../components/CircularProgressBar";
@@ -9,13 +9,13 @@ import Youtube from "react-youtube";
 import ThumbUpIcon from "@mui/icons-material/ThumbUp";
 import BlockIcon from "@mui/icons-material/Block";
 import HideImageOutlinedIcon from "@mui/icons-material/HideImageOutlined";
-import { getActors } from "../storage/slides/actorSlice";
+import { getCast } from "../storage/slices/castSlice";
 import OpenInNewIcon from "@mui/icons-material/OpenInNew";
-import ActorSection from "../features/ActorSection.jsx";
+import CastSection from './../features/CastSection';
 
 const MovieInfoPage = ({}) => {
   const { movieInfo } = useSelector((state) => state.movies);
-  const { actors } = useSelector((state) => state.actors);
+  const { allCast } = useSelector((state) => state.cast);
   const { id } = useParams();
   const [isLoading, setIsLoading] = useState(true);
   const dispatch = useDispatch();
@@ -26,7 +26,7 @@ const MovieInfoPage = ({}) => {
   const voteAvgInPercentage = Math.round(movieInfo.vote_average * 10);
 
   useEffect(() => {
-    Promise.all([dispatch(getMovieByID(id)), dispatch(getActors(id))])
+    Promise.all([dispatch(getMovieByID(id)), dispatch(getCast(id))])
       .then(() => {
         setIsLoading(false);
       })
@@ -45,8 +45,8 @@ const MovieInfoPage = ({}) => {
           <div id="details-section" className="h-full w-full  ">
             {renderSubInfoSection()}
           </div>
-          <div id="actor-section" className="h-full w-full ">
-            {renderActorSection()}
+          <div id="cast-section" className="h-full w-full ">
+            {renderCastSection()}
           </div>
         </div>
       </>
@@ -285,11 +285,11 @@ const MovieInfoPage = ({}) => {
     );
   };
 
-  const renderActorSection = () => {
+  const renderCastSection = () => {
     return (
       <>
         <div className="xl:container mx-auto  w-full h-full">
-          <ActorSection  />
+          <CastSection  />
         </div>
       </>
     );

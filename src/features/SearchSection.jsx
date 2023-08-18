@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getMovieByKeyword } from "../storage/slides/movieSlice";
+import { getMovieByKeyword } from "../storage/slices/movieSlice";
 import SearchCard from "../components/SearchCard";
 
 function SearchSection() {
