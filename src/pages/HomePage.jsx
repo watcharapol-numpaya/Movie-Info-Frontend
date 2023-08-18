@@ -4,10 +4,9 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   getAllGenre,
   getAllMovies,
-  getMovies,
   getPopularMovies,
   getTrendingMovies,
-} from "../storage/slides/movieSlice";
+} from "../storage/slices/movieSlice";
 import MovieCard from "../components/MovieCard";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
@@ -19,6 +18,7 @@ import TuneIcon from "@mui/icons-material/Tune";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
+import OnLoadingScreen from "../components/OnLoadingScreen";
 
 function HomePage() {
   const dispatch = useDispatch();
@@ -27,11 +27,13 @@ function HomePage() {
     useSelector((state) => state.movies);
 
   const [page, setPage] = useState(1);
-  const [banner, setBanner] = useState(
-    "https://images7.alphacoders.com/112/1129455.jpg"
+  const [bannerUrl, setBannerUrl] = useState(
+    "https://www.themoviedb.org/t/p/w1280"
   );
   const [isShowGenreCard, setIsShowGenreCard] = useState(false);
   const isLgScreen = useMediaQuery("(min-width:1024px)");
+  const [isLoading, setIsLoading] = useState(true);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   useEffect(() => {
     // Hide the genre card automatically when the screen size is greater than "lg"
@@ -41,11 +43,31 @@ function HomePage() {
   }, [isLgScreen]);
 
   useEffect(() => {
-    // dispatch(getTrendingMovies());
-    // dispatch(getPopularMovies());
-    // handleGetMovie();
-    // dispatch(getAllGenre());
+    Promise.all([
+      dispatch(getTrendingMovies()),
+      dispatch(getPopularMovies()),
+      handleGetMovie(),
+    ])
+      .then(() => {
+        setIsLoading(false);
+      })
+      .catch((error) => {
+        console.error("Error fetching data:", error);
+      });
   }, [page]);
+
+  // Random backdrop image
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentImageIndex(() =>
+        Math.floor(Math.random() * trendingMovies.length)
+      );
+    }, 10000);
+
+    return () => {
+      clearInterval(interval);
+    };
+  }, [trendingMovies]);
 
   const handleGetMovie = (genre) => {
     let data = { page: page };
@@ -60,14 +82,23 @@ function HomePage() {
   const renderHomePage = () => {
     return (
       <>
-        <div className="w-full sm:h-96 h-56 lg:w-5/6 relative">
+        <div className="w-full sm:h-112 h-56  relative">
           <div className=" absolute inset-y-0 left-0  sm:w-1/4 w-1/12 bg-gradient-to-l from-transparent to-black"></div>
           <div className=" absolute inset-y-0 right-0 sm:w-1/4 w-1/12 bg-gradient-to-r from-transparent to-black"></div>
-          <img
-            className="w-full h-full object-cover"
-            src={banner}
-            alt="Banner Image"
-          ></img>
+ 
+          <div className="absolute sm:bottom-12 bottom-6 sm:pl-6 pl-3">
+            <p style={{ textShadow: "3px 3px black" }} className="text-white cursor-pointer font-semibold sm:text-4xl  md:text-5xl text-xl drop-shadow-2xl  ">
+              {trendingMovies[currentImageIndex].title}
+            </p>
+          </div>
+
+          {popularMovies && (
+            <img
+              className="w-full h-full object-cover   "
+              src={`${bannerUrl}/${trendingMovies[currentImageIndex].backdrop_path}`}
+              alt="Banner Image"
+            ></img>
+          )}
         </div>
         <div className="flex lg:flex-row flex-col w-full h-full bg-white  flex-wrap mx-auto   ">
           <div className="w-full ">
@@ -146,8 +177,9 @@ function HomePage() {
 
   return (
     <div className=" h-full bg-black">
-      <Navbar/>
-      <div className=" xl:container  mx-auto  ">{renderHomePage()}</div>
+      <div className=" xl:container  mx-auto  ">
+        {isLoading ? <OnLoadingScreen /> : renderHomePage()}
+      </div>
       {/* <Footer/> */}
     </div>
   );
