@@ -6,6 +6,7 @@ import MobileSearchPage from "./pages/MobileSearchPage";
 import MovieInfoPage from "./pages/MovieInfoPage";
 import ErrorPage from "./pages/ErrorPage";
 import Navbar from "./components/Navbar";
+import CastInfo from "./pages/CastInfo";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <Route path="/home" element={<HomePage />} />
         <Route path="/mobileSearchPage" element={<MobileSearchPage />} />
         <Route path="/movieInfo/:id" element={<MovieInfoPage />} />
+        <Route path="/castInfo/:name" element={<CastInfo />} />
         <Route path="*" element={<ErrorPage />} />
       </Routes>
     </>
