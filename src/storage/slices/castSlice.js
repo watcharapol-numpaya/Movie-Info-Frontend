@@ -10,6 +10,7 @@ const initialState = {
   allCast: [],
   castInfo: [],
   movies: [],
+  moviesHaveContribute: [],
   isLoading: false,
   isSuccess: false,
   message: "",
@@ -27,7 +28,7 @@ export const getCast = createAsyncThunk(
       // console.log(res.data.cast);
       return [...res.data.cast];
     } catch (err) {
-      return  rejectWithValue(err.response.data);
+      return rejectWithValue(err.response.data);
     }
   }
 );
@@ -51,23 +52,23 @@ export const getCastInfo = createAsyncThunk(
 
 export const getMovieRelateToCast = createAsyncThunk(
   "castList/getMovieRelateToCast",
-  async (name, { rejectWithValue }) => {
+  async (id, { rejectWithValue }) => {
     try {
-      const res = await instance.get(`search/person`, {
+      const res = await instance.get(`person/${id}/movie_credits`, {
         params: {
           api_key: APIKeyTMDB,
-          query: name,
         },
       });
-      // console.log(res.data.cast);
-      return [...res.data.results];
+     
+      return {
+        movies: [...res.data.cast],
+        moviesHaveContribute: [...res.data.crew],
+      };
     } catch (err) {
-      rejectWithValue(err.response.data);
+      return rejectWithValue(err.response.data);
     }
   }
 );
-
-// export const getMovieCredits =createAsyncThunk("castList/getMovieCredits")
 
 const castSlice = createSlice({
   name: "castList",
@@ -93,7 +94,8 @@ const castSlice = createSlice({
       })
       .addCase(getMovieRelateToCast.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.movies = action.payload;
+        state.movies = action.payload.movies;
+        state.moviesHaveContribute = action.payload.moviesHaveContribute;
         state.isSuccess = true;
       })
       .addCase(getMovieRelateToCast.rejected, (state, action) => {

@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { getCastInfo, getMovieRelateToCast } from "../storage/slices/castSlice";
 import ImageNotFound from "../components/ImageNotFound";
+import MovieCard from "../components/MovieCard";
+import OnLoadingScreen from "./../components/OnLoadingScreen";
 const CastInfo = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
@@ -10,9 +12,11 @@ const CastInfo = () => {
     "https://www.themoviedb.org/t/p/w780"
   );
   const [isLoading, setIsLoading] = useState(true);
-  const { castInfo } = useSelector((state) => state.cast);
+  const { castInfo, movies, moviesHaveContribute } = useSelector(
+    (state) => state.cast
+  );
   useEffect(() => {
-    Promise.all([dispatch(getCastInfo(id))])
+    Promise.all([dispatch(getCastInfo(id)), dispatch(getMovieRelateToCast(id))])
       .then(() => {
         setIsLoading(false);
       })
@@ -52,15 +56,28 @@ const CastInfo = () => {
     }
   };
 
-const renderKnownForMovie = ()=>{
- return <div></div> 
-}
+  const renderKnownForMovie = () => {
+    return (
+      <div>
+        Performance
+        <div>
+          {console.log(moviesHaveContribute)}
+
+          {/* {movies &&
+            movies.map((movie) => (
+              <MovieCard key={movie.id} movie={movie}></MovieCard>
+            ))} */}
+        </div>
+      </div>
+    );
+  };
+  const renderParticipateForMovie = () => {
+    return <div>Participate in the creation of a movie </div>;
+  };
 
   const renderCastSection = () => {
     return (
       <div className="xl:container mx-auto   ">
-        {console.log(castInfo)}
-
         <div className="flex sm:flex-row flex-col ">
           <div
             id="cast-image"
@@ -132,7 +149,7 @@ const renderKnownForMovie = ()=>{
                     {castInfo.biography ? castInfo.biography : "-"}
                   </p>
                 </div>
-                {/* <div>{renderKnownForMovie()}</div> */}
+                <div>{renderKnownForMovie()}</div>
               </div>
             </div>
           </div>
@@ -141,7 +158,11 @@ const renderKnownForMovie = ()=>{
     );
   };
 
-  return <div className="w-full h-full bg-white">{renderCastSection()}</div>;
+  return (
+    <div className="w-full h-full bg-white">
+      {isLoading ? <OnLoadingScreen /> : renderCastSection()}
+    </div>
+  );
 };
 
 export default CastInfo;

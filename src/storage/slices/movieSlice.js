@@ -28,7 +28,7 @@ export const getTrendingMovies = createAsyncThunk(
       });
       return [...res.data.results];
     } catch (err) {
-      rejectWithValue(err.response.data);
+      return rejectWithValue(err.response.data);
     }
   }
 );
@@ -44,7 +44,7 @@ export const getPopularMovies = createAsyncThunk(
       });
       return [...res.data.results];
     } catch (err) {
-      rejectWithValue(err.response.data);
+      return  rejectWithValue(err.response.data);
     }
   }
 );
@@ -71,7 +71,7 @@ export const getAllMovies = createAsyncThunk(
         totalPages: res.data.total_pages,
       };
     } catch (err) {
-      rejectWithValue(err.response.data);
+      return rejectWithValue(err.response.data);
     }
   }
 );
@@ -89,7 +89,7 @@ export const getAllGenre = createAsyncThunk(
       //   );
       return [...res.data.genres];
     } catch (err) {
-      rejectWithValue(err.response.data);
+      return rejectWithValue(err.response.data);
     }
   }
 );
@@ -107,7 +107,7 @@ export const getMovieByKeyword = createAsyncThunk(
       
       return [...res.data.results];
     } catch (err) {
-      rejectWithValue(err.response.data);
+      return rejectWithValue(err.response.data);
     }
   }
 );
@@ -125,7 +125,7 @@ export const getMovieDetailByID = createAsyncThunk(
   
       return res.data;
     } catch (err) {
-      rejectWithValue(err.response.data);
+      return rejectWithValue(err.response.data);
     }
   }
 );
