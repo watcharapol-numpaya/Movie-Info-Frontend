@@ -27,13 +27,13 @@ export const getCast = createAsyncThunk(
       // console.log(res.data.cast);
       return [...res.data.cast];
     } catch (err) {
-      rejectWithValue(err.response.data);
+      return  rejectWithValue(err.response.data);
     }
   }
 );
 
 export const getCastInfo = createAsyncThunk(
-  "castList/fetchCastInfo",
+  "castList/getCastInfo",
   async (id, { rejectWithValue }) => {
     try {
       const res = await instance.get(`person/${id}`, {
@@ -41,16 +41,16 @@ export const getCastInfo = createAsyncThunk(
           api_key: APIKeyTMDB,
         },
       });
-    
-      return res.data
+
+      return res.data;
     } catch (err) {
-      rejectWithValue(err.response.data);
+      return rejectWithValue(err.response.data);
     }
   }
 );
 
 export const getMovieRelateToCast = createAsyncThunk(
-  "castList/fetchMovieRelateToCast",
+  "castList/getMovieRelateToCast",
   async (name, { rejectWithValue }) => {
     try {
       const res = await instance.get(`search/person`, {
@@ -66,6 +66,8 @@ export const getMovieRelateToCast = createAsyncThunk(
     }
   }
 );
+
+// export const getMovieCredits =createAsyncThunk("castList/getMovieCredits")
 
 const castSlice = createSlice({
   name: "castList",

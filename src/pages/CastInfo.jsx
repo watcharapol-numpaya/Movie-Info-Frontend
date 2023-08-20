@@ -21,15 +21,17 @@ const CastInfo = () => {
       });
   }, [id, dispatch]);
 
-  // const renderKnowAs = () => {
-  //   return (
-  //     <>
-  //       {castInfo.also_known_as.map((item) => (
-  //         <p>{item}</p>
-  //       ))}
-  //     </>
-  //   );
-  // };
+  const renderKnowAs = () => {
+    if (!castInfo || !castInfo.also_known_as) {
+      return null; // Return some fallback or loading indicator if desired
+    }
+
+    return castInfo.also_known_as.map((item) => (
+      <p className="pl-2" key={item}>
+        {item}
+      </p>
+    ));
+  };
 
   const checkGender = () => {
     const gender = castInfo.gender;
@@ -47,68 +49,99 @@ const CastInfo = () => {
         return "Non-binary";
         break;
       default:
-      // code block
     }
   };
 
+const renderKnownForMovie = ()=>{
+ return <div></div> 
+}
+
   const renderCastSection = () => {
     return (
-      <>
-        <div className="xl:container mx-auto   ">
-          {console.log(castInfo)}
+      <div className="xl:container mx-auto   ">
+        {console.log(castInfo)}
 
-          <div className="flex sm:flex-row flex-col ">
-            <div
-              id="cast-image"
-              className="bg-blue-400 lg:w-160 md:w-144 sm:w-128 w-full h-full"
-            >
-              <div className="flex justify-center mt-4">
-                <div className="  rounded-2xl bg-white lg:w-86 lg:h-128  md:w-76 md:h-112 sm:w-64 sm:h-96 w-56 h-80 shadow-md overflow-hidden">
-                  {castInfo.profile_path ? (
-                    <img
-                      className="lg:w-86 lg:h-128  md:w-76 md:h-112 sm:w-64 sm:h-96 w-56 h-80  "
-                      src={`${imageUrl}/${castInfo.profile_path}`}
-                    ></img>
-                  ) : (
-                    <ImageNotFound />
-                  )}
-                </div>
-              </div>
-              <div className="w-full flex justify-center pt-2">
-                <p className="font-semibold text-2xl">{castInfo.name}</p>
-              </div>
-              <div>
-                <div>
-                  <p className="font-semibold">Gender</p>
-                  <p>{checkGender()}</p>
-                </div>
+        <div className="flex sm:flex-row flex-col ">
+          <div
+            id="cast-image"
+            className="bg-blue-400 lg:w-160 md:w-144 sm:w-128 w-full h-full"
+          >
+            <div className="flex justify-center mt-4">
+              <div className="  rounded-2xl bg-white lg:w-86 lg:h-128  md:w-76 md:h-112 sm:w-64 sm:h-96 w-56 h-80 shadow-md overflow-hidden">
+                {castInfo.profile_path ? (
+                  <img
+                    className="lg:w-86 lg:h-128  md:w-76 md:h-112 sm:w-64 sm:h-96 w-56 h-80  "
+                    src={`${imageUrl}/${castInfo.profile_path}`}
+                  ></img>
+                ) : (
+                  <ImageNotFound />
+                )}
               </div>
             </div>
+            <div className=" bg-white ">
+              <div className="w-full flex justify-center pt-3 px-2">
+                <p className="font-bold text-3xl">{castInfo.name}</p>
+              </div>
+              <hr className="my-2 border-gray-300 mx-1"></hr>
 
-            <div id="details" className="bg-yellow-600   w-full h-screen">
-              <div className="pl-2">
-                <p className="text-2xl font-bold">Personal info</p>
-                <div>
-                  <p className="font-semibold">Also Known As</p>
-                  {/* {castInfo && renderKnowAs()} */}
-                </div>
-                <div>
-                  <p className="font-semibold">Known For</p>
-                  <p>{castInfo.known_for_department}</p>
+              <div className="w-full     ">
+                <div className="pl-2 space-y-3 text-base font-normal">
+                  <p className="text-xl font-bold  ">Personal info</p>
+                  <div id="gender">
+                    <p className="font-semibold">Gender</p>
+                    <p className="pl-2">{checkGender()}</p>
+                  </div>
+                  <div id="birthday">
+                    <p className="font-semibold">Birthday</p>
+                    <p className="pl-2">
+                      {castInfo.birthday ? castInfo.birthday : "-"}
+                    </p>
+                  </div>
+                  <div id="deathday">
+                    <p className="font-semibold">Deathday</p>
+                    <p className="pl-2">
+                      {castInfo.deathday ? castInfo.deathday : "-"}
+                    </p>
+                  </div>
+                  <div id="place-of-birth">
+                    <p className="font-semibold">Place of Birth</p>
+                    <p className="pl-2">
+                      {castInfo.place_of_birth ? castInfo.place_of_birth : "-"}
+                    </p>
+                  </div>
+                  <div id="known-for">
+                    <p className="font-semibold ">Known For</p>
+                    <p className="pl-2">{castInfo.known_for_department}</p>
+                  </div>
+                  <div id="known-as">
+                    <p className="font-semibold  ">Also Known As</p>
+                    {renderKnowAs()}
+                  </div>
                 </div>
               </div>
             </div>
           </div>
+          <hr className="sm:hidden block   my-2 mx-1 border-gray-300 "></hr>
+          <div id="details" className="  w-full  h-auto   ">
+            <div className="w-full  ">
+              <div className="px-2  sm:pt-3">
+                <div id="biography" className=" ">
+                  <p className="text-xl font-bold  ">Biography</p>
+
+                  <p className="pl-2">
+                    {castInfo.biography ? castInfo.biography : "-"}
+                  </p>
+                </div>
+                {/* <div>{renderKnownForMovie()}</div> */}
+              </div>
+            </div>
+          </div>
         </div>
-      </>
+      </div>
     );
   };
 
-  return (
-    <>
-      <div className="w-full h-full bg-white">{renderCastSection()}</div>
-    </>
-  );
+  return <div className="w-full h-full bg-white">{renderCastSection()}</div>;
 };
 
 export default CastInfo;

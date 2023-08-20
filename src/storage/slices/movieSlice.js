@@ -18,7 +18,7 @@ const initialState = {
 };
 
 export const getTrendingMovies = createAsyncThunk(
-  "movieList/fetchTrendingMovie",
+  "movieList/getTrendingMovie",
   async (arg, { rejectWithValue }) => {
     try {
       const res = await instance.get(`trending/movie/week`, {
@@ -34,7 +34,7 @@ export const getTrendingMovies = createAsyncThunk(
 );
 
 export const getPopularMovies = createAsyncThunk(
-  "movieList/fetchPopularMovie",
+  "movieList/getPopularMovie",
   async (arg, { rejectWithValue }) => {
     try {
       const res = await instance.get(`movie/popular`, {
@@ -50,7 +50,7 @@ export const getPopularMovies = createAsyncThunk(
 );
 
 export const getAllMovies = createAsyncThunk(
-  "movieList/fetchAllMovie",
+  "movieList/getAllMovie",
   async (data, { rejectWithValue }) => {
     try {
       let params = {
@@ -77,7 +77,7 @@ export const getAllMovies = createAsyncThunk(
 );
 
 export const getAllGenre = createAsyncThunk(
-  "movieList/fetchAllGenre",
+  "movieList/getAllGenre",
   async (arg, { rejectWithValue }) => {
     try {
       const res = await instance.get(`genre/movie/list`, {
@@ -95,7 +95,7 @@ export const getAllGenre = createAsyncThunk(
 );
 
 export const getMovieByKeyword = createAsyncThunk(
-  "movieList/fetchMovieByKeyword",
+  "movieList/getMovieByKeyword",
   async (keyword, { rejectWithValue }) => {
     try {
       const res = await instance.get(`search/movie`, {
@@ -113,7 +113,7 @@ export const getMovieByKeyword = createAsyncThunk(
 );
 
 export const getMovieDetailByID = createAsyncThunk(
-  "movieList/fetchMovieByID",
+  "movieList/getMovieDetailByID",
   async (id, { rejectWithValue }) => {
     try {
       const res = await instance.get(`movie/${id}`, {
