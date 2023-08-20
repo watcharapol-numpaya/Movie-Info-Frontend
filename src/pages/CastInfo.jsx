@@ -5,6 +5,8 @@ import { getCastInfo, getMovieRelateToCast } from "../storage/slices/castSlice";
 import ImageNotFound from "../components/ImageNotFound";
 import MovieCard from "../components/MovieCard";
 import OnLoadingScreen from "./../components/OnLoadingScreen";
+import Carousel from "react-multi-carousel";
+import "react-multi-carousel/lib/styles.css";
 const CastInfo = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
@@ -15,6 +17,36 @@ const CastInfo = () => {
   const { castInfo, movies, moviesHaveContribute } = useSelector(
     (state) => state.cast
   );
+  const responsive = {
+    superLargeDesktop: {
+      // the naming can be any, depends on you.
+      breakpoint: { max: 4000, min: 1280 },
+      items: 5,
+      slidesToSlide: 3,
+    },
+    desktop: {
+      breakpoint: { max: 1280, min: 768 },
+      items: 4,
+      slidesToSlide: 3,
+    },
+    tablet: {
+      breakpoint: { max: 768, min: 572 }, //640
+      items: 3,
+      slidesToSlide: 1,
+    },
+    mobile: {
+      breakpoint: { max: 572, min: 540 },
+      items: 3,
+      slidesToSlide: 1,
+    },
+    xs: {
+      breakpoint: { max: 540, min: 0 },
+      items: 2,
+      slidesToSlide: 1,
+    },
+  };
+  
+  
   useEffect(() => {
     Promise.all([dispatch(getCastInfo(id)), dispatch(getMovieRelateToCast(id))])
       .then(() => {
@@ -58,14 +90,25 @@ const CastInfo = () => {
 
   const renderKnownForMovie = () => {
     return (
-      <div>
+      <div className="bg-green-200">
         Performance
-        <div>
+        <div className=" ">
           {console.log(moviesHaveContribute)}
-
+          <Carousel
+            responsive={responsive}
+            autoPlaySpeed={500}
+            containerClass="carousel-container"
+            removeArrowOnDeviceType={["tablet", "mobile"]}
+            dotListClass="custom-dot-list-style"
+          >
+            {movies &&
+              movies.map((movie) => (
+                <MovieCard key={movie.id} movie={movie} />
+              ))}
+          </Carousel>
           {/* {movies &&
             movies.map((movie) => (
-              <MovieCard key={movie.id} movie={movie}></MovieCard>
+              <Carousel key={movie.id} movie={movie}></Carousel>
             ))} */}
         </div>
       </div>
@@ -84,10 +127,10 @@ const CastInfo = () => {
             className="bg-blue-400 lg:w-160 md:w-144 sm:w-128 w-full h-full"
           >
             <div className="flex justify-center mt-4">
-              <div className="  rounded-2xl bg-white lg:w-86 lg:h-128  md:w-76 md:h-112 sm:w-64 sm:h-96 w-56 h-80 shadow-md overflow-hidden">
+              <div className="  rounded-2xl bg-white lg:w-84 lg:h-128  md:w-76 md:h-112 sm:w-64 sm:h-96 w-56 h-80 shadow-md overflow-hidden">
                 {castInfo.profile_path ? (
                   <img
-                    className="lg:w-86 lg:h-128  md:w-76 md:h-112 sm:w-64 sm:h-96 w-56 h-80  "
+                    className="lg:w-84 lg:h-128  md:w-76 md:h-112 sm:w-64 sm:h-96 w-56 h-80  "
                     src={`${imageUrl}/${castInfo.profile_path}`}
                   ></img>
                 ) : (
