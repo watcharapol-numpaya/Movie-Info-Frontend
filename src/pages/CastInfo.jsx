@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { getCastInfo, getMovieRelateToCast } from "../storage/slices/castSlice";
 import ImageNotFound from "../components/ImageNotFound";
 import MovieCard from "../components/MovieCard";
 import OnLoadingScreen from "./../components/OnLoadingScreen";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
+import ListTitle2SideCard from "../components/ListTitle2SideCard";
 const CastInfo = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
@@ -45,8 +46,7 @@ const CastInfo = () => {
       slidesToSlide: 1,
     },
   };
-  
-  
+
   useEffect(() => {
     Promise.all([dispatch(getCastInfo(id)), dispatch(getMovieRelateToCast(id))])
       .then(() => {
@@ -91,41 +91,78 @@ const CastInfo = () => {
   const renderKnownForMovie = () => {
     return (
       <div className="bg-green-200">
-        Performance
-        <div className=" ">
-          {console.log(moviesHaveContribute)}
-          <Carousel
-            responsive={responsive}
-            autoPlaySpeed={500}
-            containerClass="carousel-container"
-            removeArrowOnDeviceType={["tablet", "mobile"]}
-            dotListClass="custom-dot-list-style"
-          >
+        <p className="text-xl font-bold">Related Movie</p>
+        <div className="flex">
+          <div className="w-1/2">
             {movies &&
-              movies.map((movie) => (
-                <MovieCard key={movie.id} movie={movie} />
-              ))}
-          </Carousel>
-          {/* {movies &&
-            movies.map((movie) => (
-              <Carousel key={movie.id} movie={movie}></Carousel>
-            ))} */}
+              movies
+                .slice(0, Math.ceil(movies.length / 2))
+                .map((movie, index) => (
+                  <p key={movie.id}>
+                    <Link to={`/movieInfo/${movie.id}`}>
+                      {index + 1}. {movie.title}
+                    </Link>
+                  </p>
+                ))}
+          </div>
+          <div className="w-1/2">
+            {movies &&
+              movies
+                .slice(0, Math.ceil(movies.length / 2))
+                .map((movie, index) => (
+                  <p key={movie.id}>
+                    <Link to={`/movieInfo/${movie.id}`}>
+                      {index + Math.ceil(movies.length / 2) + 1}. {movie.title}{" "}
+                    </Link>
+                  </p>
+                ))}
+          </div>
         </div>
       </div>
     );
   };
   const renderParticipateForMovie = () => {
-    return <div>Participate in the creation of a movie </div>;
+    return (
+      <div className="bg-green-200">
+        <p className="text-xl font-bold">
+          Participate in the creation of a movie
+        </p>
+        <div className="flex">
+          <div className="w-1/2">
+            {moviesHaveContribute &&
+              moviesHaveContribute
+                .slice(0, Math.ceil(moviesHaveContribute.length / 2))
+                .map((movie, index) => (
+                  <p key={movie.id}>
+                    <Link to={`/movieInfo/${movie.id}`}>
+                      {index + 1}. {movie.title}
+                    </Link>
+                  </p>
+                ))}
+          </div>
+          <div className="w-1/2">
+            {moviesHaveContribute &&
+              moviesHaveContribute
+                .slice(0, Math.ceil(moviesHaveContribute.length / 2))
+                .map((movie, index) => (
+                  <p key={movie.id}>
+                    <Link to={`/movieInfo/${movie.id}`}>
+                      {index + Math.ceil(moviesHaveContribute.length / 2) + 1}.{" "}
+                      {movie.title}{" "}
+                    </Link>
+                  </p>
+                ))}
+          </div>
+        </div>
+      </div>
+    );
   };
 
   const renderCastSection = () => {
     return (
       <div className="xl:container mx-auto   ">
         <div className="flex sm:flex-row flex-col ">
-          <div
-            id="cast-image"
-            className="bg-blue-400 lg:w-160 md:w-144 sm:w-128 w-full h-full"
-          >
+          <div id="info" className="  lg:w-160 md:w-144 sm:w-128 w-full h-full">
             <div className="flex justify-center mt-4">
               <div className="  rounded-2xl bg-white lg:w-84 lg:h-128  md:w-76 md:h-112 sm:w-64 sm:h-96 w-56 h-80 shadow-md overflow-hidden">
                 {castInfo.profile_path ? (
@@ -142,7 +179,7 @@ const CastInfo = () => {
               <div className="w-full flex justify-center pt-3 px-2">
                 <p className="font-bold text-3xl">{castInfo.name}</p>
               </div>
-              <hr className="my-2 border-gray-300 mx-1"></hr>
+              <hr className="my-2 border-gray-200 mx-1"></hr>
 
               <div className="w-full     ">
                 <div className="pl-2 space-y-3 text-base font-normal">
@@ -181,18 +218,32 @@ const CastInfo = () => {
               </div>
             </div>
           </div>
-          <hr className="sm:hidden block   my-2 mx-1 border-gray-300 "></hr>
+          <hr className="sm:hidden block   my-2 mx-1 border-gray-200 "></hr>
           <div id="details" className="  w-full  h-auto   ">
             <div className="w-full  ">
               <div className="px-2  sm:pt-3">
                 <div id="biography" className=" ">
                   <p className="text-xl font-bold  ">Biography</p>
 
-                  <p className="pl-2">
+                  <p className="">
                     {castInfo.biography ? castInfo.biography : "-"}
                   </p>
                 </div>
-                <div>{renderKnownForMovie()}</div>
+               
+                <div className={`${movies.length!==0 ? "block" : "hidden"}`}>
+                <hr className="my-2 border-gray-200" />
+                  <ListTitle2SideCard title="Related Movie" data={movies} />
+                </div>
+               
+     
+                <div className={`${moviesHaveContribute.length!==0 ? "block" : "hidden"}`}>
+                <hr className=" my-2 border-gray-200" />
+                  <ListTitle2SideCard
+                    title="Participate in the creation of a movie"
+                    data={moviesHaveContribute}
+                  />
+                </div>
+                <hr className="my-4 border-gray-200" />
               </div>
             </div>
           </div>
