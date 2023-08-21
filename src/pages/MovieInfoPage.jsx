@@ -143,7 +143,7 @@ const MovieInfoPage = ({}) => {
   const renderSubInfoSection = () => {
     return (
       <>
-        <div className="xl:container mx-auto bg-black w-full h-full  ">
+        <div className="xl:container mx-auto bg-white w-full h-full  ">
           <div className="flex  sm:flex-row  flex-col-reverse ">
             <div id="details " className="w-full  p-2 ">
               {renderDetail()}
@@ -160,7 +160,7 @@ const MovieInfoPage = ({}) => {
   const renderDetail = () => {
     return (
       <>
-        <div className="w-full text-base text-white">
+        <div className="w-full text-base text-black">
           <p className="text-xl font-bold">Details</p>
           <hr className="my-2" />
           <div className=" ">
@@ -253,7 +253,7 @@ const MovieInfoPage = ({}) => {
         <div className=" ">
           <div className="  w-full h-full flex justify-center items-center  p-2  ">
             {trailer && (
-              <div className="h-full w-full     ">
+              <div className="h-full w-full  rounded-xl overflow-hidden   ">
                 <Youtube
                   className=" sm:h-112 h-52  w-full "
                   videoId={trailer.key}
