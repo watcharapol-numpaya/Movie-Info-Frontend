@@ -163,7 +163,7 @@ const CastInfo = () => {
       <div className="xl:container mx-auto   ">
         <div className="flex sm:flex-row flex-col ">
           <div id="info" className="  lg:w-160 md:w-144 sm:w-128 w-full h-full">
-            <div className="flex justify-center mt-4">
+            <div className="flex sm:justify-start justify-center  mt-4 sm:pl-2">
               <div className="  rounded-2xl bg-white lg:w-84 lg:h-128  md:w-76 md:h-112 sm:w-64 sm:h-96 w-56 h-80 shadow-md overflow-hidden">
                 {castInfo.profile_path ? (
                   <img
@@ -176,7 +176,7 @@ const CastInfo = () => {
               </div>
             </div>
             <div className=" bg-white ">
-              <div className="w-full flex justify-center pt-3 px-2">
+              <div className="w-full flex sm:justify-start justify-center pt-3 px-2">
                 <p className="font-bold text-3xl">{castInfo.name}</p>
               </div>
               <hr className="my-2 border-gray-200 mx-1"></hr>

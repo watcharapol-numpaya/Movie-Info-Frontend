@@ -83,8 +83,8 @@ function HomePage() {
     return (
       <>
         <div className="w-full sm:h-112 h-56  relative">
-          <div className=" absolute inset-y-0 left-0  sm:w-1/4 w-1/12 bg-gradient-to-l from-transparent to-black"></div>
-          <div className=" absolute inset-y-0 right-0 sm:w-1/4 w-1/12 bg-gradient-to-r from-transparent to-black"></div>
+          {/* <div className=" absolute inset-y-0 left-0  sm:w-1/4 w-1/12 bg-gradient-to-l from-transparent to-black"></div>
+          <div className=" absolute inset-y-0 right-0 sm:w-1/4 w-1/12 bg-gradient-to-r from-transparent to-black"></div> */}
  
           <div className="absolute sm:bottom-12 bottom-6 sm:pl-6 pl-3">
             <p style={{ textShadow: "3px 3px black" }} className="text-white cursor-pointer font-semibold sm:text-4xl  md:text-5xl text-xl drop-shadow-2xl  ">
@@ -113,7 +113,7 @@ function HomePage() {
               link={"#"}
             />
             <div>
-              <div className="flex justify-between items-center p-4 bg-red-600 text-white relative ">
+              <div className="flex justify-between items-center p-4 bg-gradient-to-r from-red-600 to-black text-white relative ">
                 <span className="font-semibold text-2xl  uppercase  ">
                   Movies
                 </span>
@@ -163,7 +163,7 @@ function HomePage() {
                 </div>
                 <div
                   id="genre-card"
-                  className="lg:block hidden w-1/4 bg-blue-200 p-2"
+                  className="lg:block hidden w-1/4 bg-gray-100 p-2  "
                 >
                   <GenreCard onSelectGenre={handleGetMovie} />
                 </div>
@@ -176,7 +176,7 @@ function HomePage() {
   };
 
   return (
-    <div className=" h-full bg-black">
+    <div className=" h-full bg-white">
       <div className=" xl:container  mx-auto  ">
         {isLoading ? <OnLoadingScreen /> : renderHomePage()}
       </div>
