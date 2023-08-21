@@ -6,17 +6,27 @@ import MovieCard from "../components/MovieCard";
 const responsive = {
   superLargeDesktop: {
     // the naming can be any, depends on you.
-    breakpoint: { max: 4000, min: 1280 },
+    breakpoint: { max: 6000, min: 1536 },
+    items: 7,
+    slidesToSlide: 3,
+  },
+  desktop2Xl: {
+    breakpoint: { max: 1536, min: 1280 },
+    items: 6,
+    slidesToSlide: 3,
+  },
+  desktopXl: {
+    breakpoint: { max: 1280, min: 1052 },
     items: 5,
     slidesToSlide: 3,
   },
   desktop: {
-    breakpoint: { max: 1280, min: 768 },
+    breakpoint: { max: 1052, min: 840 },
     items: 4,
     slidesToSlide: 3,
   },
   tablet: {
-    breakpoint: { max: 768, min: 572 }, //640
+    breakpoint: { max: 840, min: 572 }, //640
     items: 3,
     slidesToSlide: 1,
   },
@@ -32,8 +42,7 @@ const responsive = {
   },
 };
 
-
-function MovieCarouselCard({title,movies,link}) {
+function MovieCarouselCard({ title, movies, link }) {
   return (
     <>
       <div id="special-section">
@@ -43,16 +52,15 @@ function MovieCarouselCard({title,movies,link}) {
         </div>
         <div className="bg-gray-400  mx-auto">
           <Carousel
+            className="py-2"
             responsive={responsive}
             autoPlaySpeed={500}
             containerClass="carousel-container"
-            removeArrowOnDeviceType={["tablet", "mobile"]}
+            removeArrowOnDeviceType={[ ]}
             dotListClass="custom-dot-list-style"
           >
             {movies &&
-              movies.map((movie) => (
-                <MovieCard key={movie.id} movie={movie} />
-              ))}
+              movies.map((movie) => <MovieCard key={movie.id} movie={movie} />)}
           </Carousel>
         </div>
       </div>
