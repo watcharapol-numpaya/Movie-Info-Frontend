@@ -22,7 +22,7 @@ function Navbar() {
 
           <ul className="flex  h-full  items-center justify-end space-x-2 text-black">
             <li className="md:hidden flex  h-12 w-12 bg-yellow-400  rounded-full  items-center justify-center  cursor-pointer ">
-              <Link to="/mobileSearchPage">
+              <Link to="/mobile-search-page">
                 <i className="material-icons -scale-x-90 text-black text-3xl">
                   search
                 </i>

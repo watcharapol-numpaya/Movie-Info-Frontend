@@ -7,7 +7,7 @@ import MovieInfoPage from "./pages/MovieInfoPage";
 import ErrorPage from "./pages/ErrorPage";
 import Navbar from "./components/Navbar";
 import CastInfo from "./pages/CastInfo";
-
+import ViewMoreMoviePage from "./pages/ViewMoreMoviePage";
 function App() {
   return (
     <>
@@ -15,7 +15,8 @@ function App() {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/home" element={<HomePage />} />
-        <Route path="/mobileSearchPage" element={<MobileSearchPage />} />
+        <Route path="/view-more" element={<ViewMoreMoviePage />} />
+        <Route path="/mobile-search-page" element={<MobileSearchPage />} />
         <Route path="/movieInfo/:id" element={<MovieInfoPage />} />
         <Route path="/castInfo/:id" element={<CastInfo />} />
         <Route path="*" element={<ErrorPage />} />
