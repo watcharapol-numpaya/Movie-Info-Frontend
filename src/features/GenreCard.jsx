@@ -57,15 +57,15 @@ function GenreCard({onSelectGenre}) {
           ))}
       </div>
 
-      <div className="border my-2"></div>
+      <hr className="border my-2"/> 
       <div className="m-1 w-full flex justify-start items-center gap-2">
-        <button className="hover:bg-blue-600 hover:text-white rounded-full bg-white px-3 p-1" onClick={handleFind}>
+        <button className="hover:bg-blue-600 hover:text-white rounded-full bg-white px-3 p-1 shadow-md" onClick={handleFind}>
           Find
         </button>
-        <button className="hover:bg-blue-600 hover:text-white rounded-full bg-white px-3 p-1" onClick={handleSelectAll}>
+        <button className="hover:bg-blue-600 hover:text-white rounded-full bg-white px-3 p-1 shadow-md " onClick={handleSelectAll}>
           Select All
         </button>
-        <button className=" hover:bg-blue-600 hover:text-white rounded-full bg-white px-3 p-1" onClick={handleReset}>
+        <button className=" hover:bg-blue-600 hover:text-white rounded-full bg-white px-3 p-1 shadow-md" onClick={handleReset}>
           Reset
         </button>
       </div> 

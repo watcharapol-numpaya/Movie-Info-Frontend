@@ -9,7 +9,7 @@ function GenreButton({ genre, onSelect, isSelected }) {
     <>
       <button
         onClick={handleCheckboxChange}
-        className={`  rounded-full p-1 px-3 cursor-pointer ${
+        className={`   rounded-full p-1 px-3 cursor-pointer ${
           isSelected ? "bg-yellow-400" : "bg-gray-200"
         }`}
       >

@@ -50,9 +50,9 @@ function MovieCarouselCard({ title, movies, link }) {
           <span className="font-semibold text-2xl   uppercase">{title}</span>
           <button className="font-semibold text-xl  ">View More</button>
         </div>
-        <div className="bg-gray-400  mx-auto">
+        <div className="bg-white mx-auto  border-x">
           <Carousel
-            className="py-2"
+            className="py-2 pl-2"
             responsive={responsive}
             autoPlaySpeed={500}
             containerClass="carousel-container"
