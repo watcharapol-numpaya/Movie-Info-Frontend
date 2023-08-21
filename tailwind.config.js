@@ -9,11 +9,11 @@ export default {
         xsm: "384px",
       },
       height: {
+        18: "4.5rem",
         54: "13.5rem",
         76: "19rem",
         84: "21rem",
         88: "22rem",
-
         92: "23rem",
         112: "28rem",
         128: "32rem",
@@ -25,6 +25,7 @@ export default {
       width: {
         "70%": "70%",
         "30%": "30%",
+        18: "4.5rem",
         54: "13.5rem",
         76: "19rem",
         84: "21rem",

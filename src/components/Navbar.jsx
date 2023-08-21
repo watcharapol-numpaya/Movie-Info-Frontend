@@ -9,7 +9,7 @@ function Navbar() {
         <div className="flex h-full w-full justify-between items-center text-yellow-400  ">
           <div className="flex items-center  cursor-pointer">
             {/* <i className="material-icons text-4xl mr-4">menu</i> */}
-            <Link to="/home" >
+            <Link to="/home">
               <span className="tracking-widest0.25 font-bold text-lg">
                 MOVIEINFO
               </span>
@@ -49,7 +49,9 @@ function Navbar() {
 
   return (
     <>
-      <div className=" mx-auto h-20 bg-black   p-4">{renderNavbar()}</div>
+      <div className=" mx-auto sm:h-16 h-18  bg-black  px-4">
+        {renderNavbar()}
+      </div>
     </>
   );
 }
