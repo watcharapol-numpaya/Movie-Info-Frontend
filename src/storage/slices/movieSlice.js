@@ -18,7 +18,7 @@ const initialState = {
 };
 
 export const getTrendingMovies = createAsyncThunk(
-  "movieList/fetchTrendingMovie",
+  "movieList/getTrendingMovie",
   async (arg, { rejectWithValue }) => {
     try {
       const res = await instance.get(`trending/movie/week`, {
@@ -28,13 +28,13 @@ export const getTrendingMovies = createAsyncThunk(
       });
       return [...res.data.results];
     } catch (err) {
-      rejectWithValue(err.response.data);
+      return rejectWithValue(err.response.data);
     }
   }
 );
 
 export const getPopularMovies = createAsyncThunk(
-  "movieList/fetchPopularMovie",
+  "movieList/getPopularMovie",
   async (arg, { rejectWithValue }) => {
     try {
       const res = await instance.get(`movie/popular`, {
@@ -44,13 +44,13 @@ export const getPopularMovies = createAsyncThunk(
       });
       return [...res.data.results];
     } catch (err) {
-      rejectWithValue(err.response.data);
+      return  rejectWithValue(err.response.data);
     }
   }
 );
 
 export const getAllMovies = createAsyncThunk(
-  "movieList/fetchAllMovie",
+  "movieList/getAllMovie",
   async (data, { rejectWithValue }) => {
     try {
       let params = {
@@ -61,7 +61,7 @@ export const getAllMovies = createAsyncThunk(
       if (data.genre) {
         params.with_genres = data.genre.join("|");
       }
-      console.log(params);
+
       const res = await instance.get(`discover/movie`, {
         params,
       });
@@ -71,13 +71,13 @@ export const getAllMovies = createAsyncThunk(
         totalPages: res.data.total_pages,
       };
     } catch (err) {
-      rejectWithValue(err.response.data);
+      return rejectWithValue(err.response.data);
     }
   }
 );
 
 export const getAllGenre = createAsyncThunk(
-  "movieList/fetchAllGenre",
+  "movieList/getAllGenre",
   async (arg, { rejectWithValue }) => {
     try {
       const res = await instance.get(`genre/movie/list`, {
@@ -89,13 +89,13 @@ export const getAllGenre = createAsyncThunk(
       //   );
       return [...res.data.genres];
     } catch (err) {
-      rejectWithValue(err.response.data);
+      return rejectWithValue(err.response.data);
     }
   }
 );
 
 export const getMovieByKeyword = createAsyncThunk(
-  "movieList/fetchMovieByKeyword",
+  "movieList/getMovieByKeyword",
   async (keyword, { rejectWithValue }) => {
     try {
       const res = await instance.get(`search/movie`, {
@@ -104,16 +104,16 @@ export const getMovieByKeyword = createAsyncThunk(
           query: keyword,
         },
       });
-      console.log(res);
+      
       return [...res.data.results];
     } catch (err) {
-      rejectWithValue(err.response.data);
+      return rejectWithValue(err.response.data);
     }
   }
 );
 
-export const getMovieByID = createAsyncThunk(
-  "movieList/fetchMovieByID",
+export const getMovieDetailByID = createAsyncThunk(
+  "movieList/getMovieDetailByID",
   async (id, { rejectWithValue }) => {
     try {
       const res = await instance.get(`movie/${id}`, {
@@ -122,10 +122,10 @@ export const getMovieByID = createAsyncThunk(
           append_to_response: "videos",
         },
       });
-      console.log(res.data);
+  
       return res.data;
     } catch (err) {
-      rejectWithValue(err.response.data);
+      return rejectWithValue(err.response.data);
     }
   }
 );
@@ -203,15 +203,15 @@ const movieSlice = createSlice({
         state.isLoading = false;
         state.isSuccess = false;
       })
-      .addCase(getMovieByID.pending, (state, action) => {
+      .addCase(getMovieDetailByID.pending, (state, action) => {
         state.isLoading = true;
       })
-      .addCase(getMovieByID.fulfilled, (state, action) => {
+      .addCase(getMovieDetailByID.fulfilled, (state, action) => {
         state.isLoading = false;
         state.movieInfo = action.payload;
         state.isSuccess = true;
       })
-      .addCase(getMovieByID.rejected, (state, action) => {
+      .addCase(getMovieDetailByID.rejected, (state, action) => {
         state.message = action.payload;
         state.isLoading = false;
         state.isSuccess = false;

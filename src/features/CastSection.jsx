@@ -20,7 +20,7 @@ function CastSection() {
 
   return (
     <div className="w-full h-full p-2  ">
-      {console.log(allCast)}
+ 
       <p id="title" className="p-2 text-xl font-bold text-white">Cast</p>
       <hr />
       <div className="w-full flex justify-center flex-wrap pt-4 gap-2">
