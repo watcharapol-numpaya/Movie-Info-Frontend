@@ -13,6 +13,7 @@ function MovieCard({ movie }) {
   return (
     <>
       <Link to={`/movieInfo/${movie.id}`}>
+        {/* <div className="flex flex-col sm:bg-red-400 xsm:bg-green-400  bg-orange-400 sm:h-96 sm:w-52 xsm:h-80 xsm:w-44 h-72 w-40    sm:hover:scale-105 p-2 relative border-sky-100 border-b "> */}
         <div className="flex flex-col sm:bg-red-400 xsm:bg-green-400  bg-orange-400 sm:h-96 sm:w-52 xsm:h-80 xsm:w-44 h-72 w-40    sm:hover:scale-105 p-2 relative border-sky-100 border-b ">
           <div className="sm:w-48 sm:h-72  xsm:w-40 xsm:h-60 w-36  h-54 ">
             {movie.poster_path ? (
