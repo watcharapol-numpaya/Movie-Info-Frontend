@@ -223,7 +223,7 @@ const CastInfo = () => {
             <div className="w-full  ">
               <div className="px-2  sm:pt-3">
                 <div id="biography" className=" ">
-                  <p className="text-xl font-bold  ">Biography</p>
+                  <p className="text-xl font-bold pb-1 ">Biography</p>
 
                   <p className="">
                     {castInfo.biography ? castInfo.biography : "-"}
