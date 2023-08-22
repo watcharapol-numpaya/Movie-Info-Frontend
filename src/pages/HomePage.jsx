@@ -2,22 +2,17 @@ import React, { useEffect, useState } from "react";
 import CardMovie from "../components/CardMovie";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  getAllGenre,
   getAllMovies,
   getPopularMovies,
   getTrendingMovies,
 } from "../storage/slices/movieSlice";
 import MovieCard from "../components/MovieCard";
-import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
-import Button from "@mui/material/Button";
 import AppPagination from "../components/AppPagination";
-import GenreCard from "../features/GenreCard";
+import GenreSection from "../features/GenreSection";
 import MovieCarouselCard from "../features/MovieCarouselCard";
 import TuneIcon from "@mui/icons-material/Tune";
 import useMediaQuery from "@mui/material/useMediaQuery";
-import Navbar from "../components/Navbar";
-import Footer from "../components/Footer";
 import OnLoadingScreen from "../components/OnLoadingScreen";
 import ScrollToTop from "../components/ScrollToTop";
 
@@ -31,7 +26,7 @@ function HomePage() {
   const [bannerUrl, setBannerUrl] = useState(
     "https://www.themoviedb.org/t/p/w1280"
   );
-  const [isShowGenreCard, setIsShowGenreCard] = useState(false);
+  const [isShowGenreSection, setIsShowGenreSection] = useState(false);
   const isLgScreen = useMediaQuery("(min-width:1024px)");
   const [isLoading, setIsLoading] = useState(true);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
@@ -39,7 +34,7 @@ function HomePage() {
   useEffect(() => {
     // Hide the genre card automatically when the screen size is greater than "lg"
     if (!isLgScreen) {
-      setIsShowGenreCard(false);
+      setIsShowGenreSection(false);
     }
   }, [isLgScreen]);
 
@@ -125,7 +120,7 @@ function HomePage() {
                 <button
                   className="lg:hidden block"
                   onClick={() => {
-                    setIsShowGenreCard(!isShowGenreCard);
+                    setIsShowGenreSection(!isShowGenreSection);
                   }}
                 >
                   <TuneIcon />
@@ -133,10 +128,10 @@ function HomePage() {
 
                 <div
                   className={`absolute bg-white shadow-xl p-2 rounded-xl w-64 right-4 top-14 z-10 ${
-                    isLgScreen ? "hidden" : isShowGenreCard ? "block" : "hidden"
+                    isLgScreen ? "hidden" : isShowGenreSection ? "block" : "hidden"
                   }`}
                 >
-                  <GenreCard onSelectGenre={handleGetMovie} />
+                  <GenreSection onSelectGenre={handleGetMovie} />
                 </div>
               </div>
               <div className="flex">
@@ -169,7 +164,7 @@ function HomePage() {
                   id="genre-card"
                   className="lg:block hidden w-1/4 bg-gray-100 p-2  "
                 >
-                  <GenreCard onSelectGenre={handleGetMovie} />
+                  <GenreSection onSelectGenre={handleGetMovie} />
                 </div>
               </div>
             </div>

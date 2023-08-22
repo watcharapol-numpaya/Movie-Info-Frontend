@@ -5,7 +5,7 @@ import { getAllGenre } from "../storage/slices/movieSlice";
 import GenreButton from "../components/GenreButton";
 
 
-function GenreCard({onSelectGenre}) {
+function GenreSection({onSelectGenre}) {
   const [selectedGenres, setSelectedGenres] = useState([]);
   const dispatch = useDispatch();
   const { genres } = useSelector((state) => state.movies);
@@ -73,4 +73,4 @@ function GenreCard({onSelectGenre}) {
   );
 }
 
-export default GenreCard;
+export default GenreSection;
