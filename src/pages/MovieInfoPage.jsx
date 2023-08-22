@@ -12,6 +12,7 @@ import { getCast } from "../storage/slices/castSlice";
 import OpenInNewIcon from "@mui/icons-material/OpenInNew";
 import CastSection from "./../features/CastSection";
 import ImageNotFound from "../components/ImageNotFound";
+import ScrollToTop from "../components/ScrollToTop";
 
 const MovieInfoPage = ({}) => {
   const { movieInfo } = useSelector((state) => state.movies);
@@ -57,7 +58,7 @@ const MovieInfoPage = ({}) => {
     return (
       <>
         <div className="xl:container mx-auto h-full  w-full flex justify-center ">
-          <div className="relative sm:h-128 h-176  w-full   bg-black ">
+          <div className="relative sm:h-128 h-176  w-full  bg-black   ">
             <div
               id="image-background"
               className="h-128 w-full opacity-40 bg-gray-200 "
@@ -295,6 +296,7 @@ const MovieInfoPage = ({}) => {
 
   return (
     <>
+      <ScrollToTop />
       <div className="  w-full h-full ">
         {isLoading ? <OnLoadingScreen /> : renderMovieInfo()}
       </div>

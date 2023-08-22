@@ -9,7 +9,7 @@ import {
 import MovieCard from "../components/MovieCard";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
-
+import ScrollToTop from "../components/ScrollToTop";
 const ViewMoreMoviePage = () => {
   const { title } = useParams();
   const dispatch = useDispatch();
@@ -84,9 +84,12 @@ const ViewMoreMoviePage = () => {
   };
 
   return (
-    <div className=" ">
-      {isLoading ? <OnLoadingScreen /> : renderViewMore()}
-    </div>
+    <>
+      <ScrollToTop />
+      <div className=" ">
+        {isLoading ? <OnLoadingScreen /> : renderViewMore()}
+      </div>
+    </>
   );
 };
 

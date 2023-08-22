@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./App.css";
 import HomePage from "./pages/HomePage";
 import { Route, Routes } from "react-router-dom";
@@ -8,7 +8,8 @@ import ErrorPage from "./pages/ErrorPage";
 import Navbar from "./components/Navbar";
 import CastInfo from "./pages/CastInfo";
 import ViewMoreMoviePage from "./pages/ViewMoreMoviePage";
-function App() {
+const App = () => {
+ 
   return (
     <>
       <Navbar />
@@ -23,6 +24,6 @@ function App() {
       </Routes>
     </>
   );
-}
+};
 
 export default App;

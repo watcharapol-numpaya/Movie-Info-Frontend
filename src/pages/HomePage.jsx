@@ -19,6 +19,7 @@ import useMediaQuery from "@mui/material/useMediaQuery";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import OnLoadingScreen from "../components/OnLoadingScreen";
+import ScrollToTop from "../components/ScrollToTop";
 
 function HomePage() {
   const dispatch = useDispatch();
@@ -85,9 +86,12 @@ function HomePage() {
         <div className="w-full sm:h-112 h-56  relative">
           {/* <div className=" absolute inset-y-0 left-0  sm:w-1/4 w-1/12 bg-gradient-to-l from-transparent to-black"></div>
           <div className=" absolute inset-y-0 right-0 sm:w-1/4 w-1/12 bg-gradient-to-r from-transparent to-black"></div> */}
- 
+
           <div className="absolute sm:bottom-12 bottom-6 sm:pl-6 pl-3">
-            <p style={{ textShadow: "3px 3px black" }} className="text-white cursor-pointer font-semibold sm:text-4xl  md:text-5xl text-xl drop-shadow-2xl  ">
+            <p
+              style={{ textShadow: "3px 3px black" }}
+              className="text-white cursor-pointer font-semibold sm:text-4xl  md:text-5xl text-xl drop-shadow-2xl  "
+            >
               {trendingMovies[currentImageIndex].title}
             </p>
           </div>
@@ -176,12 +180,15 @@ function HomePage() {
   };
 
   return (
-    <div className=" h-full bg-white">
-      <div className=" xl:container  mx-auto  ">
-        {isLoading ? <OnLoadingScreen /> : renderHomePage()}
+    <>
+      <ScrollToTop />
+      <div className=" h-full bg-white">
+        <div className=" xl:container  mx-auto  ">
+          {isLoading ? <OnLoadingScreen /> : renderHomePage()}
+        </div>
+        {/* <Footer/> */}
       </div>
-      {/* <Footer/> */}
-    </div>
+    </>
   );
 }
 
