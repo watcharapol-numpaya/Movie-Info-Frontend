@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getMovieByKeyword } from "../storage/slices/movieSlice";
 import SearchCard from "../components/SearchCard";
 import DoDisturbOnIcon from "@mui/icons-material/DoDisturbOn";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 function SearchSectionMobile() {
   const [keyword, setKeyword] = useState("");
   const [showSearchCard, setShowSearchCard] = useState(false);
@@ -12,6 +12,11 @@ function SearchSectionMobile() {
   const dispatch = useDispatch();
   const { searchList } = useSelector((state) => state.movies);
   const limitedData = searchList.slice(0, 5);
+  const navigate = useNavigate();
+
+  const handleCancelClick = () => {
+    navigate(-1);
+  };
 
   const handleSearch = (e) => {
     setKeyword(e.target.value);
@@ -122,11 +127,12 @@ function SearchSectionMobile() {
                   </div>
                 </div>
               </div>
-              <Link to="/">
-                <div className="h-full flex px-2  items-center bg-yellow-400 rounded-full ml-1 ">
-                  <p className="font-semibold text-black">Cancel</p>
-                </div>
-              </Link>
+              <div
+                onClick={handleCancelClick}
+                className="h-full flex px-2  items-center bg-yellow-400 rounded-full ml-1 "
+              >
+                <p className="font-semibold text-black">Cancel</p>
+              </div>
             </div>
             {showSearchCard && (
               <div id="search-card" className=" ">

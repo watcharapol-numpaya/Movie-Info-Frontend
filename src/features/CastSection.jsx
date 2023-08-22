@@ -44,7 +44,7 @@ function CastSection() {
       {allCast.length === limitCast.length && (
      
         <div className="flex justify-center p-2 mb-4">
-          {console.log()}
+ 
           <button
             onClick={showLessCast}
             className="text-yellow-500  cursor-pointer font-semibold text-lg p-2 "

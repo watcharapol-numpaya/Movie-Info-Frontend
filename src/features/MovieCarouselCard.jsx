@@ -2,6 +2,7 @@ import React from "react";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import MovieCard from "../components/MovieCard";
+import { Link } from "react-router-dom";
 
 const responsive = {
   superLargeDesktop: {
@@ -48,7 +49,7 @@ function MovieCarouselCard({ title, movies, link }) {
       <div id="special-section">
         <div className="flex justify-between p-4 bg-gradient-to-r from-red-600 to-black text-white  ">
           <span className="font-semibold text-2xl   uppercase">{title}</span>
-          <button className="font-semibold text-xl  ">View More</button>
+          <Link to={`/view-more/${title}`} className="font-semibold text-xl  ">View More</Link>
         </div>
         <div className="bg-white mx-auto  border-x">
           <Carousel

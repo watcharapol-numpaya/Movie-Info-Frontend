@@ -8,6 +8,7 @@ import OnLoadingScreen from "./../components/OnLoadingScreen";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import ListTitle2SideCard from "../components/ListTitle2SideCard";
+import ScrollToTop from "../components/ScrollToTop";
 const CastInfo = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
@@ -229,15 +230,18 @@ const CastInfo = () => {
                     {castInfo.biography ? castInfo.biography : "-"}
                   </p>
                 </div>
-               
-                <div className={`${movies.length!==0 ? "block" : "hidden"}`}>
-                <hr className="my-2 border-gray-200" />
+
+                <div className={`${movies.length !== 0 ? "block" : "hidden"}`}>
+                  <hr className="my-2 border-gray-200" />
                   <ListTitle2SideCard title="Related Movie" data={movies} />
                 </div>
-               
-     
-                <div className={`${moviesHaveContribute.length!==0 ? "block" : "hidden"}`}>
-                <hr className=" my-2 border-gray-200" />
+
+                <div
+                  className={`${
+                    moviesHaveContribute.length !== 0 ? "block" : "hidden"
+                  }`}
+                >
+                  <hr className=" my-2 border-gray-200" />
                   <ListTitle2SideCard
                     title="Participate in the creation of a movie"
                     data={moviesHaveContribute}
@@ -253,9 +257,12 @@ const CastInfo = () => {
   };
 
   return (
-    <div className="w-full h-full bg-white">
-      {isLoading ? <OnLoadingScreen /> : renderCastSection()}
-    </div>
+    <>
+      <ScrollToTop />
+      <div className="w-full h-full bg-white">
+        {isLoading ? <OnLoadingScreen /> : renderCastSection()}
+      </div>
+    </>
   );
 };
 

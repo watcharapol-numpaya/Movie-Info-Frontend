@@ -25,12 +25,7 @@ function SearchSection() {
   };
 
   const handleClickOutsideInput = (e) => {
-    // console.log("1 : ----------------- "); console.log(onTyping.current)
-    // console.log("1 --------------------")
-    // console.log("2 : "+onTyping.current.contains(e.target))
-    // console.log("3 : -----------------");console.log(e.target)
-    // console.log("3 --------------------")
-
+ 
     //input.current เก็บค่าของ ref ใช้ tag input
     //e.target เก็บค่า element ที่ได้กดจากตรงก็ตามผ่าน handleClickOutsideInput
     //onTyping.current.contains(e.target) เช็คว่า ค่าใน input.current กับ onTyping.current.contains(e.target) ตรงกันไหม
