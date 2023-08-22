@@ -15,7 +15,7 @@ function App() {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/home" element={<HomePage />} />
-        <Route path="/view-more" element={<ViewMoreMoviePage />} />
+        <Route path="/view-more/:title" element={<ViewMoreMoviePage />} />
         <Route path="/mobile-search-page" element={<MobileSearchPage />} />
         <Route path="/movieInfo/:id" element={<MovieInfoPage />} />
         <Route path="/castInfo/:id" element={<CastInfo />} />
