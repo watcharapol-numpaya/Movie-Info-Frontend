@@ -65,11 +65,11 @@ const ViewMoreMoviePage = () => {
     return (
       <div className="xl:container mx-auto ">
         <div className="w-full bg-red">
-          <div className="flex justify-start items-center p-4   text-black sm:mb-4 ">
-            <Link to="/">
-              <ArrowBackIosIcon /> 
-            </Link> 
-            <span className="font-semibold text-2xl   uppercase">{title}</span>
+          <div className="flex justify-start items-center p-4 text-black sm:mb-4  ">
+            <Link className="  sm:block flex  " to="/">
+              <ArrowBackIosIcon />
+            </Link>
+            <span className="font-semibold text-2xl uppercase   ">{title}</span>
           </div>
 
           <div className="w-full flex justify-center ">
