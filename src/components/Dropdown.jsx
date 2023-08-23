@@ -1,4 +1,5 @@
 import React, { useRef } from "react";
+import { Link } from "react-router-dom";
 
 function Dropdown() {
   return (
@@ -13,12 +14,15 @@ function Dropdown() {
       >
         <div className="w-full    rounded-lg overflow-hidden  ">
           <ul className="   text-center  ">
-            <li className="hover:bg-gray-100 py-2  border-b"> Login</li>
-
             <li className="hover:bg-gray-100 py-2  border-b">
-              Favorite Movie
+              <Link>Login</Link>
             </li>
-            <li className="hover:bg-gray-100  py-2"> Logout</li>
+            <li className="hover:bg-gray-100 py-2  border-b">
+              <Link>Favorite Movie</Link>
+            </li>
+            <li className="hover:bg-gray-100  py-2">
+              <Link>Logout</Link>
+            </li>
           </ul>
         </div>
       </div>
