@@ -4,6 +4,8 @@ import { getMovieByKeyword } from "../storage/slices/movieSlice";
 import SearchCard from "../components/SearchCard";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+
+
 function SearchSection() {
   const [keyword, setKeyword] = useState("");
   const [showSearchCard, setShowSearchCard] = useState(false);
@@ -17,14 +19,13 @@ function SearchSection() {
     dispatch(getMovieByKeyword(e.target.value.trim()));
     setShowSearchCard(true); // Show the search card when typing in the input box
     setKeyword(e.target.value.trim());
-    console.log(e)
+ 
   };
 
   const handlePressEnter = (e) => {
-      console.log(e)
-    if (e.key === "Enter") {
-      navigate(`/all-result/${keyword}`)
-    } 
+    if (e.key === "Enter" && keyword.trim() !== "") {
+      navigate(`/all-result/${keyword}`);
+    }
   };
 
   const handleIsShowSearchMovieCard = () => {
@@ -61,7 +62,12 @@ function SearchSection() {
             <SearchCard key={movie.id} movie={movie} />
           ))}
         <div className="text-center py-1 cursor-pointer">
-          <Link to={`all-result/${keyword}`}>View all results</Link>
+          <Link
+            className="hover:text-black text-gray-600"
+            to={`/all-result/${keyword}`}
+          >
+            View all results
+          </Link>
         </div>
       </div>
     );
