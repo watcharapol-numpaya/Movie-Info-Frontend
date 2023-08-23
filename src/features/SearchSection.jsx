@@ -2,6 +2,9 @@ import React, { useState, useRef, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getMovieByKeyword } from "../storage/slices/movieSlice";
 import SearchCard from "../components/SearchCard";
+import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+
 
 function SearchSection() {
   const [keyword, setKeyword] = useState("");
@@ -10,10 +13,19 @@ function SearchSection() {
   const dispatch = useDispatch();
   const { searchList } = useSelector((state) => state.movies);
   const limitedData = searchList.slice(0, 5);
+  const navigate = useNavigate();
 
   const handleSearch = (e) => {
     dispatch(getMovieByKeyword(e.target.value.trim()));
     setShowSearchCard(true); // Show the search card when typing in the input box
+    setKeyword(e.target.value.trim());
+ 
+  };
+
+  const handlePressEnter = (e) => {
+    if (e.key === "Enter" && keyword.trim() !== "") {
+      navigate(`/all-result/${keyword}`);
+    }
   };
 
   const handleIsShowSearchMovieCard = () => {
@@ -25,18 +37,16 @@ function SearchSection() {
   };
 
   const handleClickOutsideInput = (e) => {
- 
     //input.current เก็บค่าของ ref ใช้ tag input
     //e.target เก็บค่า element ที่ได้กดจากตรงก็ตามผ่าน handleClickOutsideInput
     //onTyping.current.contains(e.target) เช็คว่า ค่าใน input.current กับ onTyping.current.contains(e.target) ตรงกันไหม
-     
+
     if (onTyping.current && !onTyping.current.contains(e.target)) {
       setShowSearchCard(false);
     }
   };
 
   useEffect(() => {
-
     document.addEventListener("click", handleClickOutsideInput);
 
     return () => {
@@ -52,7 +62,12 @@ function SearchSection() {
             <SearchCard key={movie.id} movie={movie} />
           ))}
         <div className="text-center py-1 cursor-pointer">
-          <p>View all results</p>
+          <Link
+            className="hover:text-black text-gray-600"
+            to={`/all-result/${keyword}`}
+          >
+            View all results
+          </Link>
         </div>
       </div>
     );
@@ -71,7 +86,7 @@ function SearchSection() {
             ref={onTyping}
             onClick={handleInputClick}
             onChange={handleSearch}
- 
+            onKeyDown={handlePressEnter}
             placeholder="Search movie"
             className="outline-none text-black sm:w-72 w-56 py-1 text-xl px-1 pl-5 rounded-r-full border-2 border-yellow-400"
             type="text"

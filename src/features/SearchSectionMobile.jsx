@@ -4,6 +4,8 @@ import { getMovieByKeyword } from "../storage/slices/movieSlice";
 import SearchCard from "../components/SearchCard";
 import DoDisturbOnIcon from "@mui/icons-material/DoDisturbOn";
 import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
+
 function SearchSectionMobile() {
   const [keyword, setKeyword] = useState("");
   const [showSearchCard, setShowSearchCard] = useState(false);
@@ -14,8 +16,14 @@ function SearchSectionMobile() {
   const limitedData = searchList.slice(0, 5);
   const navigate = useNavigate();
 
-  const handleCancelClick = () => {
+  const handlePressCancel = () => {
     navigate(-1);
+  };
+
+  const handlePressEnter = (e) => {
+    if (e.key === "Enter" && keyword.trim() !== "") {
+      navigate(`/all-result/${keyword}`);
+    }
   };
 
   const handleSearch = (e) => {
@@ -84,12 +92,13 @@ function SearchSectionMobile() {
               <SearchCard key={movie.id} movie={movie} />
             ))}
           <div className="text-center pt-6 cursor-pointer">
-            <p>View all results</p>
+            <Link
+              className="hover:text-black text-gray-600"
+              to={`/all-result/${keyword}`}
+            >
+              View all results
+            </Link>
           </div>
-        </div>
-
-        <div className="text-center py-1 cursor-pointer">
-          <p>View all results</p>
         </div>
       </div>
     );
@@ -116,6 +125,7 @@ function SearchSectionMobile() {
                     className="outline-none text-black  w-full py-1 h-full text-xl   pl-3      rounded-l-full "
                     type="text"
                     value={keyword}
+                    onKeyDown={handlePressEnter}
                   />
                   <div
                     onClick={handleClearText}
@@ -128,7 +138,7 @@ function SearchSectionMobile() {
                 </div>
               </div>
               <div
-                onClick={handleCancelClick}
+                onClick={handlePressCancel}
                 className="h-full flex px-2  items-center bg-yellow-400 rounded-full ml-1 "
               >
                 <p className="font-semibold text-black">Cancel</p>

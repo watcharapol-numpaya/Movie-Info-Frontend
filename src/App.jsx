@@ -8,6 +8,7 @@ import ErrorPage from "./pages/ErrorPage";
 import Navbar from "./components/Navbar";
 import CastInfo from "./pages/CastInfo";
 import ViewMoreMoviePage from "./pages/ViewMoreMoviePage";
+import ViewAllSearchResultPage from "./pages/ViewAllSearchResultPage";
 const App = () => {
  
   return (
@@ -20,10 +21,11 @@ const App = () => {
         <Route path="/mobile-search-page" element={<MobileSearchPage />} />
         <Route path="/movieInfo/:id" element={<MovieInfoPage />} />
         <Route path="/castInfo/:id" element={<CastInfo />} />
+        <Route path="/all-result/:keyword" element={<ViewAllSearchResultPage />} />
         <Route path="*" element={<ErrorPage />} />
       </Routes>
     </>
-  );
+  ); 
 };
 
 export default App;
