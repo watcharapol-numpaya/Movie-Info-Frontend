@@ -15,7 +15,7 @@ const initialState = {
   isLoading: false,
   isSuccess: false,
   message: "",
-  mySelectedGenres: [],
+  selectedGenres: [],
 };
 
 export const getTrendingMovies = createAsyncThunk(
@@ -135,22 +135,7 @@ const movieSlice = createSlice({
   name: "movieList",
   initialState,
   reducers: {
-    addSelectGenre: (state, action) => {
-      const genreId = action.payload;
-      state.mySelectedGenres.push(genreId);
-    },
-    removeSelectGenre: (state, action) => {
-      const genreId = action.payload;
-      state.mySelectedGenres = state.mySelectedGenres.filter(
-        (id) => id !== genreId
-      );
-    },
-    addAllGenre: (state, action) => {
-      state.mySelectedGenres = action.payload;
-    },
-    clearSelectedGenre: (state) => {
-      state.mySelectedGenres = [];
-    },
+ 
   },
   extraReducers: (builder) => {
     builder
@@ -236,10 +221,5 @@ const movieSlice = createSlice({
       });
   },
 });
-export const {
-  addSelectGenre,
-  removeSelectGenre,
-  addAllGenre,
-  clearSelectedGenre,
-} = movieSlice.actions;
+
 export default movieSlice.reducer;

@@ -1,7 +1,6 @@
 import {
   createSlice,
   createAsyncThunk,
-  isRejectedWithValue,
 } from "@reduxjs/toolkit";
 import { APIKeyTMDB } from "../../services/MovieApiKey";
 import { instance } from "../../services/MovieApi";

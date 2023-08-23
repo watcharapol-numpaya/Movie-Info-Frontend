@@ -1,15 +1,21 @@
 import React, { useEffect, useState } from "react";
- 
+
 import { useDispatch, useSelector } from "react-redux";
-import { addAllGenre, addSelectGenre, clearSelectedGenre, getAllGenre, removeSelectGenre } from "../storage/slices/movieSlice";
+import { getAllGenre } from "../storage/slices/movieSlice";
+
 import GenreButton from "../components/GenreButton";
+import {
+  addAllGenre,
+  addSelectGenre,
+  clearSelectedGenre,
+  removeSelectGenre,
+} from "../storage/slices/genreSlice";
 
-
-function GenreSection({onSelectGenre}) {
-  const [selectedGenres, setSelectedGenres] = useState([]);
+function GenreSection({ onSelectGenre }) {
+  // const [selectedGenres, setSelectedGenres] = useState([]);
   const dispatch = useDispatch();
-  const { genres,mySelectedGenres } = useSelector((state) => state.movies);
-
+  const { genres } = useSelector((state) => state.movies);
+  const { selectedGenres } = useSelector((state) => state.genre);
 
   useEffect(() => {
     dispatch(getAllGenre());
@@ -18,24 +24,23 @@ function GenreSection({onSelectGenre}) {
   useEffect(() => {
     if (genres) {
       // setSelectedGenres(genres.map((genre) => genre.id));
-      dispatch(addAllGenre(genres.map((genre) => genre.id)))
+      dispatch(addAllGenre(genres.map((genre) => genre.id)));
     }
   }, [genres]);
 
   const handleFind = () => {
-    onSelectGenre(mySelectedGenres)
+    onSelectGenre(selectedGenres);
     // alert("Find: " + selectedGenres);
   };
 
   const handleSelectAll = () => {
     // setSelectedGenres(genres.map((genre) => genre.id));
-    dispatch(addAllGenre(genres.map((genre) => genre.id)))
-
+    dispatch(addAllGenre(genres.map((genre) => genre.id)));
   };
 
   const handleReset = () => {
     // setSelectedGenres([]);
-    dispatch(clearSelectedGenre())
+    dispatch(clearSelectedGenre());
   };
 
   const handleGenreSelect = (genreId, isSelected) => {
@@ -59,24 +64,32 @@ function GenreSection({onSelectGenre}) {
             <GenreButton
               key={genre.id}
               genre={genre}
-              isSelected={mySelectedGenres.includes(genre.id)}
+              isSelected={selectedGenres.includes(genre.id)}
               onSelect={handleGenreSelect}
             />
           ))}
       </div>
-{console.log(mySelectedGenres)}
-      <hr className="border my-2"/> 
+      <hr className="border my-2" />
       <div className="m-1 w-full flex justify-start items-center gap-2">
-        <button className="hover:bg-blue-600 hover:text-white rounded-full bg-white px-3 p-1 shadow-md" onClick={handleFind}>
+        <button
+          className="hover:bg-blue-600 hover:text-white rounded-full bg-white px-3 p-1 shadow-md"
+          onClick={handleFind}
+        >
           Find
         </button>
-        <button className="hover:bg-blue-600 hover:text-white rounded-full bg-white px-3 p-1 shadow-md " onClick={handleSelectAll}>
+        <button
+          className="hover:bg-blue-600 hover:text-white rounded-full bg-white px-3 p-1 shadow-md "
+          onClick={handleSelectAll}
+        >
           Select All
         </button>
-        <button className=" hover:bg-blue-600 hover:text-white rounded-full bg-white px-3 p-1 shadow-md" onClick={handleReset}>
+        <button
+          className=" hover:bg-blue-600 hover:text-white rounded-full bg-white px-3 p-1 shadow-md"
+          onClick={handleReset}
+        >
           Reset
         </button>
-      </div> 
+      </div>
     </div>
   );
 }
