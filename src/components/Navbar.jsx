@@ -1,8 +1,28 @@
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 import SearchSection from "../features/SearchSection";
 import { Link } from "react-router-dom";
+import Dropdown from "./Dropdown";
 
 function Navbar() {
+const [isShow , setIsShow]= useState(false)
+const dropdownRef = useRef(null);
+
+const handleShowDropDown = ()=>{
+  setIsShow(!isShow)
+}
+
+useEffect(() => {
+  const handleClickOutside = (event) => {
+    if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+      setIsShow(false);
+    }
+  };
+  document.addEventListener("click", handleClickOutside);
+  return () => {
+    document.removeEventListener("click", handleClickOutside);
+  };
+}, []);
+
   const renderNavbar = () => {
     return (
       <>
@@ -34,12 +54,15 @@ function Navbar() {
             <li className="mobile:flex hidden  h-12 w-12 bg-yellow-400  rounded-full  items-center justify-center  cursor-pointer">
               <i className="material-icons text-3xl">shopping_cart</i>
             </li>
-            <li className="h-12 w-12 bg-yellow-400  rounded-full flex items-center justify-center  cursor-pointer">
-              <img
-                className="h-12 w-12 rounded-full"
-                alt=""
-                src="https://hips.hearstapps.com/hmg-prod/images/dog-puppy-on-garden-royalty-free-image-1586966191.jpg?crop=0.752xw:1.00xh;0.175xw,0&resize=1200:*"
-              />
+            <li className="h-12 w-12 bg-yellow-400  rounded-full flex items-center justify-center  cursor-pointer" onClick={handleShowDropDown}>
+              <div ref={dropdownRef} className=" relative w-full h-full">
+                <img
+                  className="h-12 w-12 rounded-full"
+                  alt=""
+                  src="https://hips.hearstapps.com/hmg-prod/images/dog-puppy-on-garden-royalty-free-image-1586966191.jpg?crop=0.752xw:1.00xh;0.175xw,0&resize=1200:*"
+                />
+                {isShow && <Dropdown />}
+              </div>
             </li>
           </ul>
         </div>
