@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from "react";
  
 import { useDispatch, useSelector } from "react-redux";
-import { getAllGenre } from "../storage/slices/movieSlice";
+import { addAllGenre, addSelectGenre, clearSelectedGenre, getAllGenre, removeSelectGenre } from "../storage/slices/movieSlice";
 import GenreButton from "../components/GenreButton";
 
 
 function GenreSection({onSelectGenre}) {
   const [selectedGenres, setSelectedGenres] = useState([]);
   const dispatch = useDispatch();
-  const { genres } = useSelector((state) => state.movies);
+  const { genres,mySelectedGenres } = useSelector((state) => state.movies);
 
 
   useEffect(() => {
@@ -17,28 +17,36 @@ function GenreSection({onSelectGenre}) {
 
   useEffect(() => {
     if (genres) {
-      setSelectedGenres(genres.map((genre) => genre.id));
+      // setSelectedGenres(genres.map((genre) => genre.id));
+      dispatch(addAllGenre(genres.map((genre) => genre.id)))
     }
   }, [genres]);
 
   const handleFind = () => {
-    onSelectGenre(selectedGenres)
+    onSelectGenre(mySelectedGenres)
     // alert("Find: " + selectedGenres);
   };
 
   const handleSelectAll = () => {
-    setSelectedGenres(genres.map((genre) => genre.id));
+    // setSelectedGenres(genres.map((genre) => genre.id));
+    dispatch(addAllGenre(genres.map((genre) => genre.id)))
+
   };
 
   const handleReset = () => {
-    setSelectedGenres([]);
+    // setSelectedGenres([]);
+    dispatch(clearSelectedGenre())
   };
 
   const handleGenreSelect = (genreId, isSelected) => {
     if (isSelected) {
-      setSelectedGenres((prevSelected) => [...prevSelected, genreId]);
+      // setSelectedGenres((prevSelected) => [...prevSelected, genreId]);
+      dispatch(addSelectGenre(genreId));
     } else {
-      setSelectedGenres((prevSelected) => prevSelected.filter((id) => id !== genreId));
+      // setSelectedGenres((prevSelected) =>
+      //   prevSelected.filter((id) => id !== genreId)
+      // );
+      dispatch(removeSelectGenre(genreId));
     }
   };
 
@@ -51,12 +59,12 @@ function GenreSection({onSelectGenre}) {
             <GenreButton
               key={genre.id}
               genre={genre}
-              isSelected={selectedGenres.includes(genre.id)}
+              isSelected={mySelectedGenres.includes(genre.id)}
               onSelect={handleGenreSelect}
             />
           ))}
       </div>
-
+{console.log(mySelectedGenres)}
       <hr className="border my-2"/> 
       <div className="m-1 w-full flex justify-start items-center gap-2">
         <button className="hover:bg-blue-600 hover:text-white rounded-full bg-white px-3 p-1 shadow-md" onClick={handleFind}>

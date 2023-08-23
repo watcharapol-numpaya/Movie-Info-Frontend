@@ -15,6 +15,7 @@ const initialState = {
   isLoading: false,
   isSuccess: false,
   message: "",
+  mySelectedGenres: [],
 };
 
 export const getTrendingMovies = createAsyncThunk(
@@ -44,7 +45,7 @@ export const getPopularMovies = createAsyncThunk(
       });
       return [...res.data.results];
     } catch (err) {
-      return  rejectWithValue(err.response.data);
+      return rejectWithValue(err.response.data);
     }
   }
 );
@@ -65,7 +66,7 @@ export const getAllMovies = createAsyncThunk(
       const res = await instance.get(`discover/movie`, {
         params,
       });
-
+      console.log(res.data);
       return {
         movies: [...res.data.results],
         totalPages: res.data.total_pages,
@@ -104,7 +105,7 @@ export const getMovieByKeyword = createAsyncThunk(
           query: keyword,
         },
       });
-      
+
       return [...res.data.results];
     } catch (err) {
       return rejectWithValue(err.response.data);
@@ -122,7 +123,7 @@ export const getMovieDetailByID = createAsyncThunk(
           append_to_response: "videos",
         },
       });
-  
+
       return res.data;
     } catch (err) {
       return rejectWithValue(err.response.data);
@@ -133,7 +134,24 @@ export const getMovieDetailByID = createAsyncThunk(
 const movieSlice = createSlice({
   name: "movieList",
   initialState,
-  reducers: {},
+  reducers: {
+    addSelectGenre: (state, action) => {
+      const genreId = action.payload;
+      state.mySelectedGenres.push(genreId);
+    },
+    removeSelectGenre: (state, action) => {
+      const genreId = action.payload;
+      state.mySelectedGenres = state.mySelectedGenres.filter(
+        (id) => id !== genreId
+      );
+    },
+    addAllGenre: (state, action) => {
+      state.mySelectedGenres = action.payload;
+    },
+    clearSelectedGenre: (state) => {
+      state.mySelectedGenres = [];
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(getTrendingMovies.pending, (state, action) => {
@@ -218,5 +236,10 @@ const movieSlice = createSlice({
       });
   },
 });
-
+export const {
+  addSelectGenre,
+  removeSelectGenre,
+  addAllGenre,
+  clearSelectedGenre,
+} = movieSlice.actions;
 export default movieSlice.reducer;
