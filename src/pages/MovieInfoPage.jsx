@@ -263,7 +263,7 @@ const MovieInfoPage = ({}) => {
                     width: "100%",
                     playerVars: {
                       autoplay: 0,
-                      origin: "http://localhost:5173/",
+                      origin: "https://mf-movie-info.netlify.app/",
                     },
                   }}
                 />
