@@ -30,6 +30,7 @@ function HomePage() {
   const isLgScreen = useMediaQuery("(min-width:1024px)");
   const [isLoading, setIsLoading] = useState(true);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const limitedTotalPages = totalPages > 500 ? 500 : totalPages;
 
   useEffect(() => {
     // Hide the genre card automatically when the screen size is greater than "lg"
@@ -140,7 +141,7 @@ function HomePage() {
                     <AppPagination
                       setPage={setPage}
                       page={page}
-                      numberOfPage={totalPages}
+                      numberOfPage={limitedTotalPages}
                     />
                   </div>
                   <div
@@ -155,7 +156,7 @@ function HomePage() {
                       <AppPagination
                         setPage={setPage}
                         page={page}
-                        numberOfPage={totalPages}
+                        numberOfPage={limitedTotalPages}
                       />
                     </div>
                   </div>
