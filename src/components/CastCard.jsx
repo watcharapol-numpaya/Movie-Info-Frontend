@@ -13,7 +13,7 @@ function CastCard({ cast }) {
         to={`/castInfo/${cast.id}`}
         className="rounded-xl overflow-hidden shadow-xl"
       >
-        <div className="w-44 h-80 bg-white px-2.5 pt-3 rounded-xl   ">
+        <div className="w-44 h-80 bg-white px-3 pt-3 rounded-xl   ">
           <div className="w-full  flex justify-center   ">
             <div className=" w-40 h-52 rounded-lg  overflow-hidden">
               {cast.profile_path ? (

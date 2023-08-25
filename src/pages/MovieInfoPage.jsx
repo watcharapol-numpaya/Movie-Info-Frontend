@@ -209,7 +209,6 @@ const MovieInfoPage = ({}) => {
             <div>
               <span className="font-semibold">Revenue : </span>
               <span>
-                {" "}
                 $
                 {movieInfo.budget
                   ? movieInfo.revenue.toLocaleString("en-US")
@@ -263,7 +262,7 @@ const MovieInfoPage = ({}) => {
                     width: "100%",
                     playerVars: {
                       autoplay: 0,
-                      origin: "https://mf-movie-info.netlify.app/",
+                      origin: "https://mf-movie-info.netlify.app",
                     },
                   }}
                 />
