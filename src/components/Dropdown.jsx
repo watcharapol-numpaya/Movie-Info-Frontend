@@ -11,7 +11,7 @@ function Dropdown() {
             <Link className="hover:bg-gray-100 py-2 border-b" to="/sign-up">
               Sign Up
             </Link>
-            <Link className="hover:bg-gray-100 py-2 border-b" to="/sign-in">
+            <Link className="hover:bg-gray-100 py-2 border-b" to="/sign-up">
               Sign In
             </Link>
             <Link
