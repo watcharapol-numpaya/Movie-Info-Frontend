@@ -10,6 +10,7 @@ import CastInfo from "./pages/CastInfo";
 import ViewMoreMoviePage from "./pages/ViewMoreMoviePage";
 import ViewAllSearchResultPage from "./pages/ViewAllSearchResultPage";
 import SignInPage from "./pages/SignInPage";
+import SignUpPage from "./pages/SignUpPage";
 
 const App = () => {
  
@@ -25,6 +26,7 @@ const App = () => {
         <Route path="/castInfo/:id" element={<CastInfo />} />
         <Route path="/all-result/:keyword" element={<ViewAllSearchResultPage />} />
         <Route path="/sign-in" element={<SignInPage />} />
+        <Route path="/sign-up" element={<SignUpPage />} />
         <Route path="*" element={<ErrorPage />} />
       </Routes>
     </> 
