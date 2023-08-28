@@ -1,10 +1,13 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import Validation from "../components/Validation";
 
 const SignUpPage = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [usernameMsg, setUsernameMsg] = useState("");
+  const [passwordMsg, setPasswordMsg] = useState("");
 
   const handleSignUp = (e) => {
     e.preventDefault();
@@ -12,14 +15,35 @@ const SignUpPage = () => {
   };
 
   const handleUsername = (e) => {
-    setUsername(e.target.value);
+    let username = e.target.value;
+    if (Validation.getValidateUsername(username)) {
+      setUsernameMsg("");
+    } else {
+      setUsernameMsg("Username must be 3-15 characters and no spaces.");
+    }
   };
 
   const handlePassword = (e) => {
-    setPassword(e.target.value);
+    let password = e.target.value;
+    if (Validation.getValidateUsername(password)) {
+      setPasswordMsg("");
+    } else {
+      setPasswordMsg(
+        "Password must include 1 lowercase (a-z), 1 uppercase (A-Z), and 8-128 characters."
+      );
+    }
   };
 
   const handleConfirmPassword = (e) => {
+    let confirmPassword = e.target.value;
+    if (Validation.getValidateConfirmPassword(confirmPassword)) {
+      setPasswordMsg("");
+    } else {
+      setPasswordMsg(
+        "Passwords do not match."
+      );
+    }
+
     setConfirmPassword(e.target.value);
   };
 
