@@ -55,7 +55,7 @@ useEffect(() => {
               <i className="material-icons text-3xl">shopping_cart</i>
             </li>
             <li className="h-12 w-12 bg-yellow-400  rounded-full flex items-center justify-center  cursor-pointer" onClick={handleShowDropDown}>
-              <div ref={dropdownRef} className=" relative w-full h-full">
+              <div ref={dropdownRef} className="   w-full h-full">
                 <img
                   className="h-12 w-12 rounded-full"
                   alt=""

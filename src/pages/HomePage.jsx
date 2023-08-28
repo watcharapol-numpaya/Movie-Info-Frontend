@@ -21,7 +21,7 @@ function HomePage() {
   const { movies } = useSelector((state) => state.movies);
   const { trendingMovies, popularMovies, allMovie, totalPages, genres } =
     useSelector((state) => state.movies);
-
+  const { selectedGenres } = useSelector((state) => state.genre);
   const [page, setPage] = useState(1);
   const [bannerUrl, setBannerUrl] = useState(
     "https://www.themoviedb.org/t/p/w1280"
@@ -67,12 +67,8 @@ function HomePage() {
   }, [trendingMovies]);
 
   const handleGetMovie = (genre) => {
-    let data = { page: page };
-
-    if (genre) {
-      data.genre = genre;
-    }
-
+    let data = { page: page, genre: selectedGenres };
+ 
     dispatch(getAllMovies(data));
   };
 
@@ -129,7 +125,11 @@ function HomePage() {
 
                 <div
                   className={`absolute bg-white shadow-xl p-2 rounded-xl w-64 right-4 top-14 z-10 ${
-                    isLgScreen ? "hidden" : isShowGenreSection ? "block" : "hidden"
+                    isLgScreen
+                      ? "hidden"
+                      : isShowGenreSection
+                      ? "block"
+                      : "hidden"
                   }`}
                 >
                   <GenreSection onSelectGenre={handleGetMovie} />
