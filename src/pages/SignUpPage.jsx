@@ -10,6 +10,19 @@ const SignUpPage = () => {
     e.preventDefault();
     // Implement your sign-in logic here
   };
+
+  const handleUsername = (e) => {
+    setUsername(e.target.value);
+  };
+
+  const handlePassword = (e) => {
+    setPassword(e.target.value);
+  };
+
+  const handleConfirmPassword = (e) => {
+    setConfirmPassword(e.target.value);
+  };
+
   const renderSignUpPage = () => {
     return (
       <div className="xl:container mx-auto  ">
