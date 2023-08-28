@@ -26,9 +26,7 @@ const SignUpPage = () => {
 
   }, [isRegisterPass]);
 
-  const handleNavigateToSignUp = ()=>{
-    dispatch(clearIsRegisterPassState())
-  }
+ 
 
   const handleSignUp = async (e) => {
     e.preventDefault();
