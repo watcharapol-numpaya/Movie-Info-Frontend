@@ -4,9 +4,9 @@ import { useNavigate } from "react-router-dom";
 
 const initialState = {
   user: {},
-  status: "",
   loading: false,
-  message: null,
+  message: "",
+  isRegisterPass: false,
 };
 
 export const registerUser = createAsyncThunk(
@@ -37,7 +37,12 @@ export const getSignIn = createAsyncThunk(
 const userSlice = createSlice({
   name: "user",
   initialState,
-  reducers: {},
+  reducers: {
+    clearIsRegisterPassState: (state, action) => {
+      state.isRegisterPass = false;
+      state.message = "";
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(registerUser.pending, (state) => {
@@ -46,16 +51,16 @@ const userSlice = createSlice({
       })
       .addCase(registerUser.fulfilled, (state, action) => {
         state.loading = false;
-        state.status = action.payload;
+        state.message = action.payload.msg;
+        state.isRegisterPass = action.payload.isRegisterPass;
       })
       .addCase(registerUser.rejected, (state, action) => {
         state.loading = false;
-        state.message = action.payload;
+        state.message = action.payload.msg;
+        state.isRegisterPass = action.payload.isRegisterPass;
       });
   },
 });
 
-// export const {
-//   /* Define any additional reducers if needed */
-// } = userSlice.actions;
+export const { clearIsRegisterPassState } = userSlice.actions;
 export default userSlice.reducer;

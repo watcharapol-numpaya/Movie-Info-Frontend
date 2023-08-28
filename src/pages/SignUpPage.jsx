@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Validation from "../components/Validation";
-import { useDispatch } from "react-redux";
-import { registerUser } from "../storage/slices/userSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { clearIsRegisterPassState, registerUser } from "../storage/slices/userSlice";
 import { useNavigate } from "react-router-dom";
 
 const SignUpPage = () => {
@@ -13,8 +13,22 @@ const SignUpPage = () => {
   const [passwordMsg, setPasswordMsg] = useState("");
   const [confirmPasswordMsg, setConfirmPasswordMsg] = useState("");
   const [msg, setMsg] = useState("");
+  const { isRegisterPass,message } = useSelector((state) => state.user);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  useEffect(() => {
+ 
+    if (isRegisterPass) {
+      navigate("/sign-in");
+    }
+
+
+  }, [isRegisterPass]);
+
+  const handleNavigateToSignUp = ()=>{
+    dispatch(clearIsRegisterPassState())
+  }
 
   const handleSignUp = async (e) => {
     e.preventDefault();
@@ -25,7 +39,6 @@ const SignUpPage = () => {
     ) {
       let userData = await { username: username, password: password };
       await dispatch(registerUser(userData));
-      await navigate("/sign-in");
     } else {
       setMsg("Invalid information.");
     }
@@ -100,7 +113,8 @@ const SignUpPage = () => {
                 value={confirmPassword}
                 onChange={handleConfirmPassword}
               />
-              <p className="text-xs text-red-500 pl-1">{confirmPasswordMsg}</p>
+              <p className="text-xs text-red-500 pl-1">{confirmPasswordMsg}</p> 
+              <p className="text-xs text-red-500 pl-1">{message}</p>
               <button
                 type="submit"
                 className="w-full py-2 bg-yellow-400 text-white rounded-md hover:bg-yellow-500 transition duration-300"
@@ -110,8 +124,8 @@ const SignUpPage = () => {
             </form>
             <div className="mt-4 text-center">
               <p className="text-sm">
-                Already have an account?
-                <Link to="/sign-in" className="text-yellow-500 hover:underline">
+                Already have an account?{" "}
+                <Link to="/sign-in" className="text-yellow-500 hover:underline"  >
                   Sign In
                 </Link>
               </p>

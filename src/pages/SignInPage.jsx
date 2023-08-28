@@ -1,14 +1,23 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
+import { clearIsRegisterPassState } from "../storage/slices/userSlice";
 
 const SignInPage = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-
+  const dispatch = useDispatch();
   const handleSignIn = (e) => {
     e.preventDefault();
     // Implement your sign-in logic here
   };
+
+  useEffect(() => {
+    return () => {
+      dispatch(clearIsRegisterPassState());
+    };
+  }, []);
+
   const renderSignIn = () => {
     return (
       <div className="xl:container mx-auto  ">
@@ -45,7 +54,7 @@ const SignInPage = () => {
             </form>
             <div className="mt-4 text-center">
               <p className="text-sm">
-                Don't have an account?
+                Don't have an account?{" "}
                 <Link to="/sign-up" className="text-yellow-500 hover:underline">
                   Sign Up
                 </Link>
