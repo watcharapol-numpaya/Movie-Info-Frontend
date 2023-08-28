@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import Validation from "../components/Validation";
+import { useDispatch } from "react-redux";
+import { registerUser } from "../storage/slices/userSlice";
+import { useNavigate } from "react-router-dom";
 
 const SignUpPage = () => {
   const [username, setUsername] = useState("");
@@ -8,14 +11,29 @@ const SignUpPage = () => {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [usernameMsg, setUsernameMsg] = useState("");
   const [passwordMsg, setPasswordMsg] = useState("");
+  const [confirmPasswordMsg, setConfirmPasswordMsg] = useState("");
+  const [msg, setMsg] = useState("");
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-  const handleSignUp = (e) => {
+  const handleSignUp = async (e) => {
     e.preventDefault();
-    // Implement your sign-in logic here
+    if (
+      Validation.getValidateUsername(username) &&
+      Validation.getValidatePassword(password) &&
+      Validation.getValidateConfirmPassword(password, confirmPassword)
+    ) {
+      let userData = await { username: username, password: password };
+      await dispatch(registerUser(userData));
+      await navigate("/sign-in");
+    } else {
+      setMsg("Invalid information.");
+    }
   };
 
   const handleUsername = (e) => {
     let username = e.target.value;
+    setUsername(username);
     if (Validation.getValidateUsername(username)) {
       setUsernameMsg("");
     } else {
@@ -25,7 +43,8 @@ const SignUpPage = () => {
 
   const handlePassword = (e) => {
     let password = e.target.value;
-    if (Validation.getValidateUsername(password)) {
+    setPassword(password);
+    if (Validation.getValidatePassword(password)) {
       setPasswordMsg("");
     } else {
       setPasswordMsg(
@@ -36,12 +55,11 @@ const SignUpPage = () => {
 
   const handleConfirmPassword = (e) => {
     let confirmPassword = e.target.value;
-    if (Validation.getValidateConfirmPassword(confirmPassword)) {
-      setPasswordMsg("");
+    setConfirmPassword(confirmPassword);
+    if (Validation.getValidateConfirmPassword(password, confirmPassword)) {
+      setConfirmPasswordMsg("");
     } else {
-      setPasswordMsg(
-        "Passwords do not match."
-      );
+      setConfirmPasswordMsg("Passwords do not match.");
     }
 
     setConfirmPassword(e.target.value);
@@ -58,28 +76,31 @@ const SignUpPage = () => {
               </span>
             </div>
             <h1 className="text-2xl font-semibold mb-6 text-center">Sign Up</h1>
-            <form className="space-y-4" onSubmit={handleSignUp}>
+            <form className="space-y-3" onSubmit={handleSignUp}>
               <input
                 type="text"
                 placeholder="Username"
                 className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring focus:border-blue-300"
                 value={username}
-                onChange={(e) => setUsername(e.target.value)}
+                onChange={handleUsername}
               />
+              <p className="text-xs text-red-500 pl-1">{usernameMsg}</p>
               <input
                 type="password"
                 placeholder="Password"
                 className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring focus:border-blue-300"
                 value={password}
-                onChange={(e) => setPassword(e.target.value)}
+                onChange={handlePassword}
               />
+              <p className="text-xs text-red-500 pl-1">{passwordMsg}</p>
               <input
                 type="password"
                 placeholder="Confirm Password"
                 className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring focus:border-blue-300"
                 value={confirmPassword}
-                onChange={(e) => setConfirmPassword(e.target.value)}
+                onChange={handleConfirmPassword}
               />
+              <p className="text-xs text-red-500 pl-1">{confirmPasswordMsg}</p>
               <button
                 type="submit"
                 className="w-full py-2 bg-yellow-400 text-white rounded-md hover:bg-yellow-500 transition duration-300"
@@ -89,7 +110,7 @@ const SignUpPage = () => {
             </form>
             <div className="mt-4 text-center">
               <p className="text-sm">
-                Already have an account?{" "}
+                Already have an account?
                 <Link to="/sign-in" className="text-yellow-500 hover:underline">
                   Sign In
                 </Link>

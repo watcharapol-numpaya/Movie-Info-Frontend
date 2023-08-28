@@ -1,16 +1,21 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { instance2 } from "../../services/MovieApi";
+import { useNavigate } from "react-router-dom";
 
 const initialState = {
   user: {},
+  status: "",
+  loading: false,
+  message: null,
 };
 
-export const getSignUp = createAsyncThunk(
-  "user/getSignUp",
-  async (arg, { rejectWithValue }) => {
+export const registerUser = createAsyncThunk(
+  "user/registerUser",
+  async (userData, { rejectWithValue }) => {
     try {
-      const res = await instance2.post(`/register`, {});
-      return res;
+      const res = await instance2.post(`/register`, userData);
+      console.log(res);
+      return res.data;
     } catch (err) {
       return rejectWithValue(err.response.data);
     }
@@ -35,20 +40,22 @@ const userSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(userSlice.pending, (state) => {
-        // Handle pending state if needed
+      .addCase(registerUser.pending, (state) => {
+        state.loading = true;
+        state.message = null;
       })
-      .addCase(userSlice.fulfilled, (state, action) => {
-        state.user = action.payload;
-        // Handle fulfilled state if needed
+      .addCase(registerUser.fulfilled, (state, action) => {
+        state.loading = false;
+        state.status = action.payload;
       })
-      .addCase(userSlice.rejected, (state, action) => {
-        // Handle rejected state if needed
+      .addCase(registerUser.rejected, (state, action) => {
+        state.loading = false;
+        state.message = action.payload;
       });
   },
 });
 
-export const {
-  /* Define any additional reducers if needed */
-} = userSlice.actions;
+// export const {
+//   /* Define any additional reducers if needed */
+// } = userSlice.actions;
 export default userSlice.reducer;
