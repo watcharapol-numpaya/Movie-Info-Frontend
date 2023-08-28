@@ -1,15 +1,21 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { clearIsRegisterPassState } from "../storage/slices/userSlice";
+import {
+  clearIsRegisterPassState,
+  signInUser,
+} from "../storage/slices/userSlice";
 
 const SignInPage = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const dispatch = useDispatch();
+  const { message } = useSelector((state) => state.user);
+
   const handleSignIn = (e) => {
     e.preventDefault();
-    // Implement your sign-in logic here
+    const userData = { username, password };
+    dispatch(signInUser(userData));
   };
 
   useEffect(() => {
@@ -44,7 +50,7 @@ const SignInPage = () => {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
               />
-
+              <p className="text-xs text-red-500 pl-1">{message}</p>
               <button
                 type="submit"
                 className="w-full py-2 bg-yellow-400 text-white rounded-md hover:bg-yellow-500 transition duration-300"

@@ -7,6 +7,7 @@ const initialState = {
   loading: false,
   message: "",
   isRegisterPass: false,
+  isSignInPass: false,
 };
 
 export const registerUser = createAsyncThunk(
@@ -22,12 +23,17 @@ export const registerUser = createAsyncThunk(
   }
 );
 
-export const getSignIn = createAsyncThunk(
-  "user/getSignIn",
-  async (arg, { rejectWithValue }) => {
+export const signInUser = createAsyncThunk(
+  "user/signInUser",
+  async (userData, { rejectWithValue }) => {
     try {
-      const res = await instance2.post(`/login`, {});
-      return res;
+      const res = await instance2.post(`/sign-in`, userData);
+      console.log(res.data.token)
+      if (res.status === 200) {
+        localStorage.setItem('token', res.data.token);
+        window.location= "/home"
+      }
+      return res.data;
     } catch (err) {
       return rejectWithValue(err.response.data);
     }
@@ -58,6 +64,20 @@ const userSlice = createSlice({
         state.loading = false;
         state.message = action.payload.msg;
         state.isRegisterPass = action.payload.isRegisterPass;
+      })
+      .addCase(signInUser.pending, (state) => {
+        state.loading = true;
+        state.message = null;
+      })
+      .addCase(signInUser.fulfilled, (state, action) => {
+        state.loading = false;
+        state.message = action.payload.msg;
+        state.isSignInPass = action.payload.isSignInPass;
+      })
+      .addCase(signInUser.rejected, (state, action) => {
+        state.loading = false;
+        state.message = action.payload.msg;
+        state.isSignInPass = action.payload.isSignInPass;
       });
   },
 });
