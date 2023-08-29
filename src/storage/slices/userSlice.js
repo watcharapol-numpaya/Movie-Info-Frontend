@@ -28,10 +28,30 @@ export const signInUser = createAsyncThunk(
   async (userData, { rejectWithValue }) => {
     try {
       const res = await instance2.post(`/sign-in`, userData);
-      console.log(res.data.token)
+      console.log(res.data.token);
       if (res.status === 200) {
-        localStorage.setItem('token', res.data.token);
-        window.location= "/home"
+        localStorage.setItem("token", res.data.token);
+      }
+      return res.data;
+    } catch (err) {
+      return rejectWithValue(err.response.data);
+    }
+  }
+);
+
+export const getAuthentication = createAsyncThunk(
+  "user/getAuthen",
+  async (arg, { rejectWithValue }) => {
+    try {
+      const token = localStorage.getItem("token");
+      const res = await instance2.post(`/authentication`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      console.log(res.data.token);
+      if (res.status === 200) {
+        localStorage.setItem("token", res.data.token);
       }
       return res.data;
     } catch (err) {
