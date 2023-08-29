@@ -51,12 +51,11 @@ export const getAuthentication = createAsyncThunk(
       // 2nd parameter is body if empty set it to {}
       const res = await instance2.post(
         `/authentication`,
-        // {},
+        {},
         {
           headers: {
             "Content-Type": "application/json",
-            "x-access-token": token,
-            // Authorization: `Bearer ${token}`,
+            Authorization: `Bearer ${token}`,
           },
         }
       );
