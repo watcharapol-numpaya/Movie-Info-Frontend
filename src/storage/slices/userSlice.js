@@ -8,6 +8,7 @@ const initialState = {
   message: "",
   isRegisterPass: false,
   isSignInPass: false,
+  isAuth:false
 };
 
 export const registerUser = createAsyncThunk(
@@ -15,7 +16,7 @@ export const registerUser = createAsyncThunk(
   async (userData, { rejectWithValue }) => {
     try {
       const res = await instance2.post(`/register`, userData);
-      console.log(res);
+      // console.log(res);
       return res.data;
     } catch (err) {
       return rejectWithValue(err.response.data);
@@ -28,7 +29,7 @@ export const signInUser = createAsyncThunk(
   async (userData, { rejectWithValue }) => {
     try {
       const res = await instance2.post(`/sign-in`, userData);
-      console.log(res.data.token);
+      // console.log(res.data.token);
       if (res.status === 200) {
         localStorage.setItem("token", res.data.token);
       }
@@ -40,22 +41,24 @@ export const signInUser = createAsyncThunk(
 );
 
 export const getAuthentication = createAsyncThunk(
-  "user/getAuthen",
-  async (arg, { rejectWithValue }) => {
+  'user/getAuthentication',
+  async (_, { rejectWithValue }) => {
     try {
-      const token = localStorage.getItem("token");
-      const res = await instance2.post(`/authentication`, {
+      const token = localStorage.getItem('token');
+      if (!token) {
+        throw new Error('Token not found');
+      }
+
+      const res = await instance2.post('/authentication', null, {
         headers: {
+          'Content-Type': 'application/json',
           Authorization: `Bearer ${token}`,
         },
       });
-      console.log(res.data.token);
-      if (res.status === 200) {
-        localStorage.setItem("token", res.data.token);
-      }
+
       return res.data;
     } catch (err) {
-      return rejectWithValue(err.response.data);
+      return rejectWithValue(err.response ? err.response.data : err.message);
     }
   }
 );
@@ -98,6 +101,20 @@ const userSlice = createSlice({
         state.loading = false;
         state.message = action.payload.msg;
         state.isSignInPass = action.payload.isSignInPass;
+      })
+      .addCase(getAuthentication.pending, (state) => {
+        state.loading = true;
+        state.message = null;
+      })
+      .addCase(getAuthentication.fulfilled, (state, action) => {
+        state.loading = false;
+        state.message = action.payload.msg;
+        state.isAuth = action.payload.isAuth;
+      })
+      .addCase(getAuthentication.rejected, (state, action) => {
+        state.loading = false;
+        state.message = action.payload.msg;
+        state.isAuth = action.payload.isAuth;
       });
   },
 });

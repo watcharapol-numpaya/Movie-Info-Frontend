@@ -13,6 +13,7 @@ import OpenInNewIcon from "@mui/icons-material/OpenInNew";
 import CastSection from "./../features/CastSection";
 import ImageNotFound from "../components/ImageNotFound";
 import ScrollToTop from "../components/ScrollToTop";
+import { getAuthentication } from "../storage/slices/userSlice";
 
 const MovieInfoPage = ({}) => {
   const { movieInfo } = useSelector((state) => state.movies);
@@ -25,6 +26,18 @@ const MovieInfoPage = ({}) => {
   );
   const isMobileScreen = useMediaQuery("(max-width:560px)");
   const voteAvgInPercentage = Math.round(movieInfo.vote_average * 10);
+
+  useEffect(() => {
+    dispatch(getAuthentication())
+      .then((res) => {
+        // console.log("authen complete token pass");
+        // console.log(res);
+      })
+      .catch((err) => {
+        // console.log("authen fail ");
+        // console.log(err);
+      });
+  });
 
   useEffect(() => {
     Promise.all([dispatch(getMovieDetailByID(id)), dispatch(getCast(id))])
