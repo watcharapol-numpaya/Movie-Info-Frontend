@@ -8,7 +8,7 @@ const initialState = {
   message: "",
   isRegisterPass: false,
   isSignInPass: false,
-  isAuth:false
+  isAuth: false,
 };
 
 export const registerUser = createAsyncThunk(
@@ -41,24 +41,27 @@ export const signInUser = createAsyncThunk(
 );
 
 export const getAuthentication = createAsyncThunk(
-  'user/getAuthentication',
-  async (_, { rejectWithValue }) => {
+  "user/getAuthentication",
+  async (arg, { rejectWithValue }) => {
     try {
-      const token = localStorage.getItem('token');
+      const token = await localStorage.getItem("token");
       if (!token) {
-        throw new Error('Token not found');
+        throw new Error("Token not found");
       }
-
-      const res = await instance2.post('/authentication', null, {
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`,
-        },
-      });
-
+      // 2nd parameter is body if empty set it to {}
+      const res = await instance2.post(
+        `/authentication`,
+        {},
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
       return res.data;
     } catch (err) {
-      return rejectWithValue(err.response ? err.response.data : err.message);
+      return rejectWithValue(err.response.data);
     }
   }
 );

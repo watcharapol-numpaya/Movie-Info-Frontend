@@ -30,12 +30,11 @@ const MovieInfoPage = ({}) => {
   useEffect(() => {
     dispatch(getAuthentication())
       .then((res) => {
-        // console.log("authen complete token pass");
-        // console.log(res);
+        console.log("authen complete token pass");
+        console.log(res);
       })
       .catch((err) => {
-        // console.log("authen fail ");
-        // console.log(err);
+        console.log(err);
       });
   });
 
