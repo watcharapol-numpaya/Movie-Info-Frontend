@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import {
   clearIsRegisterPassState,
@@ -12,11 +13,14 @@ const SignInPage = () => {
   const [password, setPassword] = useState("");
   const dispatch = useDispatch();
   const { message } = useSelector((state) => state.auth);
+  const navigate = useNavigate();
 
   const handleSignIn = (e) => {
     e.preventDefault();
     const userData = { username, password };
-    dispatch(signInUser(userData));
+    dispatch(signInUser(userData))
+      .unwrap()
+      .then(() => navigate("/"));
   };
 
   useEffect(() => {
