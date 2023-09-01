@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Navigate, Outlet, useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux"; // Import useSelector
-import { checkTokenExpiration } from "../services/tokenService";
+import { checkTokenExpiration } from "../services/jwtTokenService";
 import { getRefreshToken } from "../storage/slices/authSlice"; // Import the Redux action
 import OnLoadingScreen from "../components/OnLoadingScreen";
 
