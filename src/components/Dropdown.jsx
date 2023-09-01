@@ -1,7 +1,16 @@
 import React, { useRef } from "react";
+import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
+import { logout } from "../storage/slices/authSlice";
 
 function Dropdown() {
+  const dispatch = useDispatch();
+
+  const handleSignOut = () => {
+   
+    dispatch(logout())
+  };
+
   return (
     <div className="relative">
       <div className="absolute z-10 bg-white h-8 w-8 right-2 top-2 transform rotate-45"></div>
@@ -20,9 +29,7 @@ function Dropdown() {
             >
               Favorite Movie
             </Link>
-            <Link className="hover:bg-gray-100 py-2 border-b" to="/sign-out">
-              Sign Out
-            </Link>
+            <Link  className="hover:bg-gray-100 py-2 border-b" to="/" onClick={handleSignOut}>Sign Out</Link>
           </div>
         </div>
       </div>

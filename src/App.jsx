@@ -11,9 +11,10 @@ import ViewMoreMoviePage from "./pages/ViewMoreMoviePage";
 import ViewAllSearchResultPage from "./pages/ViewAllSearchResultPage";
 import SignInPage from "./pages/SignInPage";
 import SignUpPage from "./pages/SignUpPage";
+import ProtectedRoute from "./features/ProtectedRoute";
+import FavoriteMoviePage from "./pages/FavoriteMoviePage";
 
 const App = () => {
- 
   return (
     <>
       <Navbar />
@@ -21,16 +22,22 @@ const App = () => {
         <Route path="/" element={<HomePage />} />
         <Route path="/home" element={<HomePage />} />
         <Route path="/view-more/:title" element={<ViewMoreMoviePage />} />
-        <Route path="/mobile-search-page" element={<MobileSearchPage />} />
+        <Route path="/mobile-search-page" element={<MobileSearchPage />} />{" "}
         <Route path="/movieInfo/:id" element={<MovieInfoPage />} />
+        <Route element={<ProtectedRoute />}>
+          <Route path="/favorite-movie" element={<FavoriteMoviePage />} />
+        </Route>
         <Route path="/castInfo/:id" element={<CastInfo />} />
-        <Route path="/all-result/:keyword" element={<ViewAllSearchResultPage />} />
+        <Route
+          path="/all-result/:keyword"
+          element={<ViewAllSearchResultPage />}
+        />
         <Route path="/sign-in" element={<SignInPage />} />
         <Route path="/sign-up" element={<SignUpPage />} />
         <Route path="*" element={<ErrorPage />} />
       </Routes>
-    </> 
-  ); 
+    </>
+  );
 };
 
 export default App;

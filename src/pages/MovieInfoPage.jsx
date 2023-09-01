@@ -13,7 +13,7 @@ import OpenInNewIcon from "@mui/icons-material/OpenInNew";
 import CastSection from "./../features/CastSection";
 import ImageNotFound from "../components/ImageNotFound";
 import ScrollToTop from "../components/ScrollToTop";
-
+ 
 const MovieInfoPage = ({}) => {
   const { movieInfo } = useSelector((state) => state.movies);
   const { allCast } = useSelector((state) => state.cast);
@@ -36,6 +36,7 @@ const MovieInfoPage = ({}) => {
       });
   }, [dispatch, id]);
 
+ 
   const renderMovieInfo = () => {
     return (
       <>

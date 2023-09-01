@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Validation from "../components/Validation";
 import { useDispatch, useSelector } from "react-redux";
-import { clearIsRegisterPassState, registerUser } from "../storage/slices/userSlice";
+import { clearIsRegisterPassState, registerUser } from "../storage/slices/authSlice";
 import { useNavigate } from "react-router-dom";
 
 const SignUpPage = () => {
@@ -13,7 +13,7 @@ const SignUpPage = () => {
   const [passwordMsg, setPasswordMsg] = useState("");
   const [confirmPasswordMsg, setConfirmPasswordMsg] = useState("");
   const [msg, setMsg] = useState("");
-  const { isRegisterPass,message } = useSelector((state) => state.user);
+  const { isRegisterPass,message } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
