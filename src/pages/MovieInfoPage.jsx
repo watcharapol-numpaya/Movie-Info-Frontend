@@ -28,17 +28,6 @@ const MovieInfoPage = ({}) => {
   const voteAvgInPercentage = Math.round(movieInfo.vote_average * 10);
 
   useEffect(() => {
-    dispatch(getAuthentication())
-      .then((res) => {
-        console.log("authen complete token pass");
-        console.log(res);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  });
-
-  useEffect(() => {
     Promise.all([dispatch(getMovieDetailByID(id)), dispatch(getCast(id))])
       .then(() => {
         setIsLoading(false);
@@ -47,6 +36,20 @@ const MovieInfoPage = ({}) => {
         console.error("Error fetching data:", error);
       });
   }, [dispatch, id]);
+
+  useEffect(() => {
+    dispatch(getAuthentication()).unwrap()
+      .then((res) => {
+        console.log("pppppppppppp");
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log("fffffffffffffffffff");
+        console.log(err);
+      });
+  }, []);
+
+  getAuthentication;
 
   const renderMovieInfo = () => {
     return (

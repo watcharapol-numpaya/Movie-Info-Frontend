@@ -12,6 +12,7 @@ import ViewAllSearchResultPage from "./pages/ViewAllSearchResultPage";
 import SignInPage from "./pages/SignInPage";
 import SignUpPage from "./pages/SignUpPage";
 import ProtectedRoute from "./features/ProtectedRoute";
+import FavoriteMoviePage from "./pages/FavoriteMoviePage";
 
 const App = () => {
   return (
@@ -21,11 +22,11 @@ const App = () => {
         <Route path="/" element={<HomePage />} />
         <Route path="/home" element={<HomePage />} />
         <Route path="/view-more/:title" element={<ViewMoreMoviePage />} />
-        <Route path="/mobile-search-page" element={<MobileSearchPage />} />
+        <Route path="/mobile-search-page" element={<MobileSearchPage />} />{" "}
+        <Route path="/movieInfo/:id" element={<MovieInfoPage />} />
         <Route element={<ProtectedRoute />}>
-          <Route path="/movieInfo/:id" element={<MovieInfoPage />} />
+          <Route path="/favorite-movie" element={<FavoriteMoviePage />} />
         </Route>
-
         <Route path="/castInfo/:id" element={<CastInfo />} />
         <Route
           path="/all-result/:keyword"

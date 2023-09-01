@@ -66,7 +66,7 @@ export const getAllMovies = createAsyncThunk(
       const res = await instance.get(`discover/movie`, {
         params,
       });
-      console.log(res.data);
+      // console.log(res.data);
       return {
         movies: [...res.data.results],
         totalPages: res.data.total_pages,

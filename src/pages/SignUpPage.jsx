@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Validation from "../components/Validation";
 import { useDispatch, useSelector } from "react-redux";
-import { clearIsRegisterPassState, registerUser } from "../storage/slices/userSlice";
+import { clearIsRegisterPassState, registerUser } from "../storage/slices/authSlice";
 import { useNavigate } from "react-router-dom";
 
 const SignUpPage = () => {

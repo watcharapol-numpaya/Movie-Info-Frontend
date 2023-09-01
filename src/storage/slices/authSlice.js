@@ -1,7 +1,6 @@
+// authSlice.js
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { instance2 } from "../../services/MovieApi";
-import { useNavigate } from "react-router-dom";
-import { loginSuccess } from "./authSlice";
 
 const initialState = {
   user: {},
@@ -10,8 +9,12 @@ const initialState = {
   isRegisterPass: false,
   isSignInPass: false,
   isAuth: false,
-  accessToken: localStorage.getItem("access_token") ? localStorage.getItem("access_token") : null, 
-  refreshToken: localStorage.getItem("refresh_token") ? localStorage.getItem("refresh_token") : null,
+  accessToken: localStorage.getItem("access_token")
+    ? localStorage.getItem("access_token")
+    : null,
+  refreshToken: localStorage.getItem("refresh_token")
+    ? localStorage.getItem("refresh_token")
+    : null,
 };
 
 export const registerUser = createAsyncThunk(
@@ -36,7 +39,6 @@ export const signInUser = createAsyncThunk(
       if (res.status === 200) {
         localStorage.setItem("access_token", res.data.access_token);
         localStorage.setItem("refresh_token", res.data.refresh_token);
-      
       }
       return res.data;
     } catch (err) {
@@ -97,10 +99,25 @@ export const getRefreshToken = createAsyncThunk(
   }
 );
 
-const userSlice = createSlice({
-  name: "user",
+const authSlice = createSlice({
+  name: "auth",
   initialState,
   reducers: {
+    loginSuccess: (state, action) => {
+      console.log(action.payload);
+      state.isAuthenticated = true;
+      state.accessToken = action.payload.accessToken;
+      state.refreshToken = action.payload.refreshToken;
+      localStorage.setItem("access_token", action.payload.accessToken);
+      localStorage.setItem("refresh_token", action.payload.refreshToken);
+    },
+    logout: (state) => {
+      state.isAuthenticated = false;
+      state.accessToken = null;
+      state.refreshToken = null;
+      localStorage.removeItem("access_token");
+      localStorage.removeItem("refresh_token");
+    },
     clearIsRegisterPassState: (state, action) => {
       state.isRegisterPass = false;
       state.message = "";
@@ -127,12 +144,12 @@ const userSlice = createSlice({
         state.message = null;
       })
       .addCase(signInUser.fulfilled, (state, action) => {
-        console.log(action.payload)
+        console.log(action.payload);
         state.isLoading = false;
         state.message = action.payload.msg;
         state.isSignInPass = action.payload.is_sign_in_pass;
-        state.accessToken =action.payload.access_token
-        state.refreshToken =action.payload.refresh_token
+        state.accessToken = action.payload.access_token;
+        state.refreshToken = action.payload.refresh_token;
       })
       .addCase(signInUser.rejected, (state, action) => {
         state.isLoading = false;
@@ -160,10 +177,10 @@ const userSlice = createSlice({
       .addCase(getRefreshToken.fulfilled, (state, action) => {
         state.isLoading = false;
         state.message = action.payload.msg;
-        state.accessToken= action.payload.access_token
-        state.refreshToken= action.payload.refresh_token
-        localStorage.setItem('access_token',action.payload.access_token)
-        localStorage.setItem('refresh_token',action.payload.refresh_token)
+        state.accessToken = action.payload.access_token;
+        state.refreshToken = action.payload.refresh_token;
+        localStorage.setItem("access_token", action.payload.access_token);
+        localStorage.setItem("refresh_token", action.payload.refresh_token);
       })
       .addCase(getRefreshToken.rejected, (state, action) => {
         state.isLoading = false;
@@ -172,5 +189,6 @@ const userSlice = createSlice({
   },
 });
 
-export const { clearIsRegisterPassState } = userSlice.actions;
-export default userSlice.reducer;
+export const { loginSuccess, logout, clearIsRegisterPassState } =
+  authSlice.actions;
+export default authSlice.reducer;

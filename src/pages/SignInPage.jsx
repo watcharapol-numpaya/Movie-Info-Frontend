@@ -4,8 +4,8 @@ import { Link } from "react-router-dom";
 import {
   clearIsRegisterPassState,
   signInUser,
-} from "../storage/slices/userSlice";
-
+} from "../storage/slices/authSlice";
+ 
 const SignInPage = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -23,10 +23,11 @@ const SignInPage = () => {
       dispatch(clearIsRegisterPassState());
     };
   }, []);
-
+ 
   const renderSignIn = () => {
     return (
       <div className="xl:container mx-auto  ">
+ 
         <div className="flex items-center justify-center sm:min-h-screen bg-gray-100  ">
           <div className="bg-white rounded-lg shadow-md p-8 sm:w-96 w-full sm:h-full h-screen">
             <div className="w-full flex justify-center pb-6">
