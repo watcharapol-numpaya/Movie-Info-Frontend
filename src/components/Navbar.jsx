@@ -60,12 +60,13 @@ function Navbar() {
               className="h-12 w-12 bg-yellow-400  rounded-full flex items-center justify-center  cursor-pointer"
               onClick={handleShowDropDown}
             >
-              <div ref={dropdownRef} className="   w-full h-full">
-                <img
+              <div ref={dropdownRef} className="   w-12 h-12 flex justify-center items-center rounded-full">
+                <p className="uppercase font-semibold text-xl ">{user.username.substring(0, 2)}</p>
+                {/* <img
                   className="h-12 w-12 rounded-full"
                   alt=""
                   src="https://hips.hearstapps.com/hmg-prod/images/dog-puppy-on-garden-royalty-free-image-1586966191.jpg?crop=0.752xw:1.00xh;0.175xw,0&resize=1200:*"
-                />
+                /> */}
                 {isShow && <Dropdown />}
               </div>
             </li>
