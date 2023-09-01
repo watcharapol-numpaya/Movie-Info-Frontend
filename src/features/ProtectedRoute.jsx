@@ -3,6 +3,7 @@ import { Navigate, Outlet, useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux"; // Import useSelector
 import { checkTokenExpiration } from "../services/tokenService";
 import { getRefreshToken } from "../storage/slices/authSlice"; // Import the Redux action
+import OnLoadingScreen from "../components/OnLoadingScreen";
 
 const ProtectedRoute = ({ redirectPath = "/sign-in", children }) => {
   const dispatch = useDispatch();
@@ -11,16 +12,16 @@ const ProtectedRoute = ({ redirectPath = "/sign-in", children }) => {
   const refreshToken = useSelector((state) => state.auth.refreshToken); // Get refreshToken from Redux state
   const isAccessTokenExpired = checkTokenExpiration(accessToken);
   const isRefreshTokenExpired = checkTokenExpiration(refreshToken);
-
   const [isLoading, setIsLoading] = useState(true);
+
 
   useEffect(() => {
     if (!accessToken || isRefreshTokenExpired) {
       setIsLoading(false);
     } else if (isAccessTokenExpired) {
-      // Dispatch the getRefreshToken action instead of refreshAccessToken
+    
       dispatch(getRefreshToken())
-        .unwrap() // This is important to catch rejected cases
+        .unwrap() //catch rejected cases
         .then((newTokens) => {
           // Update the tokens in Redux state and local storage
           // localStorage.setItem("access_token", newTokens.access_token);
@@ -39,7 +40,7 @@ const ProtectedRoute = ({ redirectPath = "/sign-in", children }) => {
 
   if (isLoading) {
     // Show a isLoading indicator while refreshing tokens
-    return <div>isLoading...</div>;
+    return <OnLoadingScreen/> 
   }
 
   if (!accessToken || isRefreshTokenExpired) {
