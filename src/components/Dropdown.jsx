@@ -26,13 +26,9 @@ function Dropdown() {
             <Link className={`hover:bg-gray-100 py-2 border-b ${ user.length === 0 ? "hidden" : "block" }`} to="/favorite-movie"> 
              Favorite Movie
             </Link> 
-            <Link
-              className={`hover:bg-gray-100 py-2 border-b ${ user.length === 0 ? "hidden" : "block"}`} 
-              to="/"
-              onClick={handleSignOut}
-            >
-              Sign Out
-            </Link>
+            <Link className={`hover:bg-gray-100 py-2 border-b ${ user.length === 0 ? "hidden" : "block"}`}  to="/"  onClick={handleSignOut}>
+               Sign Out
+             </Link>
           </div>
         </div>
       </div>
