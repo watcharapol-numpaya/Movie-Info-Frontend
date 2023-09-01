@@ -5,6 +5,7 @@ import { instance2 } from "../../services/MovieApi";
 const initialState = {
   user: {},
   isLoading: false,
+  status: "",
   message: "",
   isRegisterPass: false,
   isSignInPass: false,

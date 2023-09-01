@@ -10,7 +10,7 @@ const SignInPage = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const dispatch = useDispatch();
-  const { message } = useSelector((state) => state.user);
+  const { message } = useSelector((state) => state.auth);
 
   const handleSignIn = (e) => {
     e.preventDefault();

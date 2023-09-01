@@ -13,7 +13,7 @@ const SignUpPage = () => {
   const [passwordMsg, setPasswordMsg] = useState("");
   const [confirmPasswordMsg, setConfirmPasswordMsg] = useState("");
   const [msg, setMsg] = useState("");
-  const { isRegisterPass,message } = useSelector((state) => state.user);
+  const { isRegisterPass,message } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
