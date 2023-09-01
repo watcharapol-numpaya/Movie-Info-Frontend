@@ -1,5 +1,5 @@
 import axios from "axios";
-import { checkTokenExpiration } from "./tokenService";
+import { checkTokenExpiration } from "./jwtTokenService";
 
 export const instance = axios.create({
   baseURL: import.meta.env.VITE_API,
