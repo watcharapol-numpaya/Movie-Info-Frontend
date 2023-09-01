@@ -115,6 +115,13 @@ const authSlice = createSlice({
       state.refreshToken = null;
       localStorage.removeItem("access_token");
       localStorage.removeItem("refresh_token");
+      state.user = [];
+      state.isLoading = false;
+      state.status = "";
+      state.message = "";
+      state.isRegisterPass = false;
+      state.isSignInPass = false;
+      state.isAuth = false;
     },
     clearIsRegisterPassState: (state, action) => {
       state.isRegisterPass = false;
@@ -151,7 +158,6 @@ const authSlice = createSlice({
         localStorage.setItem("access_token", action.payload.access_token);
         localStorage.setItem("refresh_token", action.payload.refresh_token);
         state.user = decodeUser(action.payload.refresh_token);
-      
       })
       .addCase(signInUser.rejected, (state, action) => {
         state.isLoading = false;
