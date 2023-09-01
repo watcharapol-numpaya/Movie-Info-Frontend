@@ -10,3 +10,11 @@ export const checkTokenExpiration = (token) => {
     return true;
   }
 };
+
+export const decodeUser = (token) => {
+  try {
+    return jwtDecode(token);
+  } catch(error) {
+console.log(error)
+  }
+};

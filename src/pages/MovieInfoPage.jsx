@@ -13,8 +13,7 @@ import OpenInNewIcon from "@mui/icons-material/OpenInNew";
 import CastSection from "./../features/CastSection";
 import ImageNotFound from "../components/ImageNotFound";
 import ScrollToTop from "../components/ScrollToTop";
-import { getAuthentication } from "../storage/slices/userSlice";
-
+ 
 const MovieInfoPage = ({}) => {
   const { movieInfo } = useSelector((state) => state.movies);
   const { allCast } = useSelector((state) => state.cast);
@@ -37,20 +36,7 @@ const MovieInfoPage = ({}) => {
       });
   }, [dispatch, id]);
 
-  useEffect(() => {
-    dispatch(getAuthentication()).unwrap()
-      .then((res) => {
-        console.log("pppppppppppp");
-        console.log(res);
-      })
-      .catch((err) => {
-        console.log("fffffffffffffffffff");
-        console.log(err);
-      });
-  }, []);
-
-  getAuthentication;
-
+ 
   const renderMovieInfo = () => {
     return (
       <>

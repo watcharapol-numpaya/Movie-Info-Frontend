@@ -1,9 +1,10 @@
 // authSlice.js
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { instance2 } from "../../services/MovieApi";
+import { decodeUser } from "../../services/tokenService";
 
 const initialState = {
-  user: {},
+  user: [],
   isLoading: false,
   status: "",
   message: "",
@@ -36,11 +37,7 @@ export const signInUser = createAsyncThunk(
   async (userData, { rejectWithValue }) => {
     try {
       const res = await instance2.post(`/sign-in`, userData);
-      // console.log(res.data.token);
-      if (res.status === 200) {
-        localStorage.setItem("access_token", res.data.access_token);
-        localStorage.setItem("refresh_token", res.data.refresh_token);
-      }
+
       return res.data;
     } catch (err) {
       return rejectWithValue(err.response.data);
@@ -151,6 +148,10 @@ const authSlice = createSlice({
         state.isSignInPass = action.payload.is_sign_in_pass;
         state.accessToken = action.payload.access_token;
         state.refreshToken = action.payload.refresh_token;
+        localStorage.setItem("access_token", action.payload.access_token);
+        localStorage.setItem("refresh_token", action.payload.refresh_token);
+        state.user = decodeUser(action.payload.refresh_token);
+      
       })
       .addCase(signInUser.rejected, (state, action) => {
         state.isLoading = false;
