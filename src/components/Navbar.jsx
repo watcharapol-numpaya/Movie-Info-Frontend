@@ -2,26 +2,28 @@ import React, { useEffect, useRef, useState } from "react";
 import SearchSection from "../features/SearchSection";
 import { Link } from "react-router-dom";
 import Dropdown from "./Dropdown";
+import { useSelector } from "react-redux";
 
 function Navbar() {
-const [isShow , setIsShow]= useState(false)
-const dropdownRef = useRef(null);
+  const [isShow, setIsShow] = useState(false);
+  const dropdownRef = useRef(null);
+  const { user } = useSelector((state) => state.auth);
 
-const handleShowDropDown = ()=>{
-  setIsShow(!isShow)
-}
+  const handleShowDropDown = () => {
+    setIsShow(!isShow);
+  };
 
-useEffect(() => {
-  const handleClickOutside = (event) => {
-    if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
-      setIsShow(false);
-    }
-  };
-  document.addEventListener("click", handleClickOutside);
-  return () => {
-    document.removeEventListener("click", handleClickOutside);
-  };
-}, []);
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setIsShow(false);
+      }
+    };
+    document.addEventListener("click", handleClickOutside);
+    return () => {
+      document.removeEventListener("click", handleClickOutside);
+    };
+  }, []);
 
   const renderNavbar = () => {
     return (
@@ -54,7 +56,10 @@ useEffect(() => {
             <li className="mobile:flex hidden  h-12 w-12 bg-yellow-400  rounded-full  items-center justify-center  cursor-pointer">
               <i className="material-icons text-3xl">shopping_cart</i>
             </li>
-            <li className="h-12 w-12 bg-yellow-400  rounded-full flex items-center justify-center  cursor-pointer" onClick={handleShowDropDown}>
+            <li
+              className="h-12 w-12 bg-yellow-400  rounded-full flex items-center justify-center  cursor-pointer"
+              onClick={handleShowDropDown}
+            >
               <div ref={dropdownRef} className="   w-full h-full">
                 <img
                   className="h-12 w-12 rounded-full"
