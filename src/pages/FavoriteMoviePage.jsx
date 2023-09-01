@@ -1,9 +1,13 @@
-import React from 'react'
+import React from "react";
 
 const FavoriteMoviePage = () => {
-  return (
-    <div className='h-screen bg-red-200'>FavoriteMoviePage</div>
-  )
-}
 
-export default FavoriteMoviePage
+  
+  const renderFavoriteMove = () => {
+    return <div className="xl:container"></div>;
+  };
+
+  return <div className="w-full h-full bg-red-200">{renderFavoriteMove()}</div>;
+};
+
+export default FavoriteMoviePage;
