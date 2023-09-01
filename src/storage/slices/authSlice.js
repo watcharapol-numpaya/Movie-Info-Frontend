@@ -1,7 +1,7 @@
 // authSlice.js
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { instance2 } from "../../services/MovieApi";
-import { decodeUser } from "../../services/tokenService";
+// import { decodeUser } from "../../services/tokenService";
 
 const initialState = {
   user: [],
@@ -157,7 +157,7 @@ const authSlice = createSlice({
         state.refreshToken = action.payload.refresh_token;
         localStorage.setItem("access_token", action.payload.access_token);
         localStorage.setItem("refresh_token", action.payload.refresh_token);
-        state.user = decodeUser(action.payload.refresh_token);
+        // state.user = decodeUser(action.payload.refresh_token);
       })
       .addCase(signInUser.rejected, (state, action) => {
         state.isLoading = false;
