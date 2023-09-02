@@ -7,8 +7,10 @@ const initialState = {
   isLoading: false,
 };
 
-export const getFavoriteMovie = createAsyncThunk(
-  "user/getFavoriteMovie",
+
+
+export const getFavoriteMovieId = createAsyncThunk(
+  "user/getFavoriteMovieId",
   async (id, { rejectWithValue }) => {
     try {
       const res = await instance2.post(`/favorite_movie`, {
@@ -27,15 +29,14 @@ const userSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(getFavoriteMovie.pending, (state, action) => {
+      .addCase(getFavoriteMovieId.pending, (state, action) => {
         state.isLoading = true;
       })
-      .addCase(getFavoriteMovie.fulfilled, (state, action) => {
-        console.log(action.payload);
+      .addCase(getFavoriteMovieId.fulfilled, (state, action) => {
         state.favoriteMovieList = action.payload.favorite_movie;
         state.isLoading = false;
       })
-      .addCase(getFavoriteMovie.rejected, (state, action) => {
+      .addCase(getFavoriteMovieId.rejected, (state, action) => {
         state.isLoading = false;
       });
   },
