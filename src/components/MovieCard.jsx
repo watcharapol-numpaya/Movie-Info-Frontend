@@ -20,9 +20,9 @@ function MovieCard({ movie }) {
   const dispatch = useDispatch();
   const { myFavoriteMovieIdList } = useSelector((state) => state.user);
   const { user } = useSelector((state) => state.auth);
-  const checkIsFavorite = myFavoriteMovieIdList
-    ? myFavoriteMovieIdList.includes(movie.id)
-    : false;
+  const checkIsFavorite = myFavoriteMovieIdList ? myFavoriteMovieIdList.includes(movie.id) : false;
+   
+   
   const navigate = useNavigate();
 
   const handleAddFavoriteMovie = (movieId, event) => {
