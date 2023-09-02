@@ -4,19 +4,16 @@ import { instance2 } from "../../services/MovieApi";
 import { decodeUser } from "../../services/jwtTokenService";
 
 const initialState = {
-  user: [],
+  user: localStorage.getItem("refresh_token")?decodeUser(localStorage.getItem("refresh_token")):[],
   isLoading: false,
   status: "",
   message: "",
   isRegisterPass: false,
   isSignInPass: false,
   isAuth: false,
-  accessToken: localStorage.getItem("access_token")
-    ? localStorage.getItem("access_token")
-    : null,
-  refreshToken: localStorage.getItem("refresh_token")
-    ? localStorage.getItem("refresh_token")
-    : null,
+  accessToken: localStorage.getItem("access_token") ? localStorage.getItem("access_token") : null,
+  refreshToken: localStorage.getItem("refresh_token")? localStorage.getItem("refresh_token") : null,
+   
 };
 
 export const registerUser = createAsyncThunk(
