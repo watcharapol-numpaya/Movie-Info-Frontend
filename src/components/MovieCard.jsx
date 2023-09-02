@@ -1,12 +1,14 @@
 import React, { useState } from "react";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import ImageNotFound from "./ImageNotFound";
 import { useDispatch, useSelector } from "react-redux";
 import {
   addFavoriteMovie,
   removeFavoriteMovie,
+  removeMyFavoriteMovieId,
+  sendMyFavoriteMovieId,
 } from "../storage/slices/userSlice";
 
 // import {FavoriteIcon,FavoriteBorderIcon} from '@mui/icons-material'
@@ -17,17 +19,41 @@ function MovieCard({ movie }) {
   const [favoriteMovies, setFavoriteMovies] = useState([]);
   const dispatch = useDispatch();
   const { myFavoriteMovieIdList } = useSelector((state) => state.user);
+  const { user } = useSelector((state) => state.auth);
+  const checkIsFavorite = myFavoriteMovieIdList
+    ? myFavoriteMovieIdList.includes(movie.id)
+    : false;
+  const navigate = useNavigate();
 
   const handleAddFavoriteMovie = (movieId, event) => {
     event.preventDefault(); // Prevent link navigation
     event.stopPropagation(); // Prevent event propagation to parent Link
+    console.log(user);
+    if (user.length === 0) {
+      return setTimeout(() => {
+        navigate("/sign-in");
+      }, 300);
+    }
+    const data = {
+      user_id: user.user_id,
+      myFavoriteMovieIdList: myFavoriteMovieIdList,
+    };
+
     dispatch(addFavoriteMovie(movieId));
+    dispatch(sendMyFavoriteMovieId(data));
   };
 
   const handleRemoveFavoriteMovie = (movieId, event) => {
     event.preventDefault(); // Prevent link navigation
     event.stopPropagation(); // Prevent event propagation to parent Link
+
+    const data = {
+      user_id: user.user_id,
+      myFavoriteMovieIdList: myFavoriteMovieIdList,
+    };
+
     dispatch(removeFavoriteMovie(movieId));
+    dispatch(removeMyFavoriteMovieId(data));
   };
 
   return (
@@ -47,9 +73,7 @@ function MovieCard({ movie }) {
             )}
           </div>
           <div
-            className={`${
-              myFavoriteMovieIdList.includes(movie.id) ? "block" : "hidden"
-            } `}
+            className={`${checkIsFavorite ? "block" : "hidden"} `}
             onClick={(event) => {
               handleRemoveFavoriteMovie(movie.id, event);
             }}
@@ -59,9 +83,7 @@ function MovieCard({ movie }) {
             />
           </div>
           <div
-            className={`${
-              myFavoriteMovieIdList.includes(movie.id) ? "hidden" : "block"
-            } `}
+            className={`${checkIsFavorite ? "hidden" : "block"} `}
             onClick={(event) => {
               handleAddFavoriteMovie(movie.id, event);
             }}

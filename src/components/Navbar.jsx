@@ -2,13 +2,15 @@ import React, { useEffect, useRef, useState } from "react";
 import SearchSection from "../features/SearchSection";
 import { Link } from "react-router-dom";
 import Dropdown from "./Dropdown";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import PersonIcon from "@mui/icons-material/Person";
+import { getMyFavoriteMovieId } from "../storage/slices/userSlice";
 
 function Navbar() {
   const [isShow, setIsShow] = useState(false);
   const dropdownRef = useRef(null);
   const { user } = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
 
   const handleShowDropDown = () => {
     setIsShow(!isShow);
@@ -26,6 +28,11 @@ function Navbar() {
     };
   }, []);
 
+  useEffect(() => {
+    if (user.user_id) {
+      dispatch(getMyFavoriteMovieId(user.user_id));
+    }
+  }, []);
   const renderNavbar = () => {
     return (
       <>
