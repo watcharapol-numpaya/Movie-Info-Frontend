@@ -3,12 +3,32 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import { Link } from "react-router-dom";
 import ImageNotFound from "./ImageNotFound";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  addFavoriteMovie,
+  removeFavoriteMovie,
+} from "../storage/slices/userSlice";
 
 // import {FavoriteIcon,FavoriteBorderIcon} from '@mui/icons-material'
 function MovieCard({ movie }) {
   const [imageUrl, setImageURL] = useState(
     "https://www.themoviedb.org/t/p/w780"
   );
+  const [favoriteMovies, setFavoriteMovies] = useState([]);
+  const dispatch = useDispatch();
+  const { myFavoriteMovieIdList } = useSelector((state) => state.user);
+
+  const handleAddFavoriteMovie = (movieId, event) => {
+    event.preventDefault(); // Prevent link navigation
+    event.stopPropagation(); // Prevent event propagation to parent Link
+    dispatch(addFavoriteMovie(movieId));
+  };
+
+  const handleRemoveFavoriteMovie = (movieId, event) => {
+    event.preventDefault(); // Prevent link navigation
+    event.stopPropagation(); // Prevent event propagation to parent Link
+    dispatch(removeFavoriteMovie(movieId));
+  };
 
   return (
     <>
@@ -26,8 +46,30 @@ function MovieCard({ movie }) {
               <ImageNotFound className=" " />
             )}
           </div>
-          <FavoriteIcon className="absolute top-2 right-3 m-1 text-yellow-300" />
-          <FavoriteBorderIcon className="absolute top-2 right-3 m-1 text-yellow-300" />
+          <div
+            className={`${
+              myFavoriteMovieIdList.includes(movie.id) ? "block" : "hidden"
+            } `}
+            onClick={(event) => {
+              handleRemoveFavoriteMovie(movie.id, event);
+            }}
+          >
+            <FavoriteIcon
+              className={`absolute top-2 right-3 m-1 text-yellow-300 `}
+            />
+          </div>
+          <div
+            className={`${
+              myFavoriteMovieIdList.includes(movie.id) ? "hidden" : "block"
+            } `}
+            onClick={(event) => {
+              handleAddFavoriteMovie(movie.id, event);
+            }}
+          >
+            <FavoriteBorderIcon
+              className={`absolute top-2 right-3 m-1 text-yellow-300`}
+            />
+          </div>
           <span className="font-medium pt-1 px-1  sm:text-base text-sm  overflow-hidden text-black">
             {movie.title}
           </span>
