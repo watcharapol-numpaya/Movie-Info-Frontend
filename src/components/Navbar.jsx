@@ -29,7 +29,7 @@ function Navbar() {
   }, []);
 
   useEffect(() => {
-    if (user.user_id) {
+    if (user.length!==0) {
       dispatch(getMyFavoriteMovieId(user.user_id));
     }
   }, []);
