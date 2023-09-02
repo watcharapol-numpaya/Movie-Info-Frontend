@@ -49,11 +49,11 @@ function MovieCard({ movie }) {
 
     const data = {
       user_id: user.user_id,
-      myFavoriteMovieIdList: myFavoriteMovieIdList,
+      movieId: movieId, //id to remove
     };
 
-    dispatch(removeFavoriteMovie(movieId));
-    dispatch(removeMyFavoriteMovieId(data));
+    dispatch(removeFavoriteMovie(movieId)); //remove id from myFavoriteMovieIdList
+    dispatch(removeMyFavoriteMovieId(data)); //remove id from database
   };
 
   return (

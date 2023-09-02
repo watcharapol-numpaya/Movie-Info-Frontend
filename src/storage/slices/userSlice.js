@@ -31,7 +31,7 @@ export const removeMyFavoriteMovieId = createAsyncThunk(
     try {
       const res = await instance2.put(`/remove_favorite_movie`, {
         user_id: data.user_id,
-        favorite_movie: data.myFavoriteMovieIdList,
+        favorite_movie: [data.movieId],
       });
       return res.data;
     } catch (err) {
