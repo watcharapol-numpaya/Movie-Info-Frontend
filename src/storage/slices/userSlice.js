@@ -2,9 +2,9 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { instance2 } from "../../services/MovieApi";
 
 const initialState = {
-  favoriteMovieList: [],
+ 
   favoriteMovieIdList: [], //keep movie id
-  favoriteMovie: [],
+  favoriteMovies: [],
   message: "",
   isLoading: false,
 };
@@ -70,8 +70,8 @@ const userSlice = createSlice({
     },
     clearUserSliceState: (state, action) => {
       state.favoriteMovieIdList = [];
-      state.favoriteMovieList = [];
-      state.favoriteMovie = [];
+ 
+      state.favoriteMovies = [];
       state.message = "";
       state.isLoading = false;
     },

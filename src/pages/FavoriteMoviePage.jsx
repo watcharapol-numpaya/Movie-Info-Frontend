@@ -41,7 +41,7 @@ const FavoriteMoviePage = () => {
   };
 
   const renderFavoriteMove = () => {
-    return <div className="xl:container"> {console.log(favoriteMovieIdList)}</div>;
+    return <div className="xl:container"></div>;
   };
 
   return (
