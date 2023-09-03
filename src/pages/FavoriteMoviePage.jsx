@@ -48,7 +48,7 @@ const FavoriteMoviePage = () => {
       const favoriteMovieIds = results.payload.favorite_movie;
 
       //Receive promise, create array of promise
-      const moviePromises = favoriteMovieIds.map((movieId) =>
+      const moviePromises =await favoriteMovieIds.map((movieId) =>
         dispatch(getMovieDetailByID(movieId))
       );
 
@@ -121,7 +121,7 @@ const FavoriteMoviePage = () => {
   };
 
   return (
-    <div className="w-full h-full bg-red-200">
+    <div className="w-full h-full  ">
       {isLoading ? <OnLoadingScreen /> : renderFavoriteMove()}
     </div>
   );
