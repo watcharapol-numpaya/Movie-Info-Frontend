@@ -17,7 +17,7 @@ function MovieCard({ movie }) {
   const [imageUrl, setImageURL] = useState(
     "https://www.themoviedb.org/t/p/w780"
   );
-  const [favoriteMovies, setFavoriteMovies] = useState([]);
+ 
   const dispatch = useDispatch();
   const { favoriteMovieIdList } = useSelector((state) => state.user);
   const { user } = useSelector((state) => state.auth);

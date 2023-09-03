@@ -4,6 +4,7 @@ import { instance2 } from "../../services/MovieApi";
 const initialState = {
   favoriteMovieIdList: [], //keep movie id
   favoriteMovies: [],
+  testArray:[],
   message: "",
   isLoading: false,
 };
@@ -79,13 +80,11 @@ const userSlice = createSlice({
         state.favoriteMovies.push(movieToAdd);
       }
     },
-    removeMovieFromFavoriteMovies:(state,action)=>{
+    removeMovieFromFavoriteMovies: (state, action) => {
       const movieId = action.payload;
-      console.log(state.favoriteMovies)
-      state.favoriteMovies = state.favoriteMovies.filter(
-        (id) => id !== movieId
-      );
+      state.favoriteMovies = state.favoriteMovies.filter((movie) => movie.id !== movieId);
     }
+    
   
 
   },
