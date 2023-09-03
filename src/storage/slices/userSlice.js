@@ -69,11 +69,18 @@ const userSlice = createSlice({
     },
     clearUserSliceState: (state, action) => {
       state.favoriteMovieIdList = [];
-
       state.favoriteMovies = [];
       state.message = "";
       state.isLoading = false;
     },
+    addMovieToFavoriteMovies:(state,action)=>{
+      state.favoriteMovies.push(action.payload)
+    },
+    removeMovieToFavoriteMovies:(state,action)=>{
+
+    }
+  
+
   },
   extraReducers: (builder) => {
     builder
@@ -115,6 +122,6 @@ const userSlice = createSlice({
   },
 });
 
-export const { addFavoriteMovie, removeFavoriteMovie, clearUserSliceState } =
+export const { addFavoriteMovie, removeFavoriteMovie, clearUserSliceState ,addMovieToFavoriteMovies,removeMovieToFavoriteMovies} =
   userSlice.actions;
 export default userSlice.reducer;
