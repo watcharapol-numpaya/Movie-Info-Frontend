@@ -48,7 +48,7 @@ const FavoriteMoviePage = () => {
       const favoriteMovieIds = results.payload.favorite_movie;
 
       //Receive promise, create array of promise
-      const moviePromises =await favoriteMovieIds.map((movieId) =>
+      const moviePromises = favoriteMovieIds.map((movieId) =>
         dispatch(getMovieDetailByID(movieId))
       );
 
