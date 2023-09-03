@@ -23,7 +23,7 @@ const SignInPage = () => {
     dispatch(signInUser(userData))
       .unwrap()
       .then((res) => {
-        dispatch(getMyFavoriteMovieId(decodeUser(res.refresh_token).user_id));
+        // dispatch(getMyFavoriteMovieId(decodeUser(res.refresh_token).user_id));
         navigate("/");
       });
   };

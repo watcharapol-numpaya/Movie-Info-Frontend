@@ -60,6 +60,7 @@ const userSlice = createSlice({
   reducers: {
     addFavoriteMovie: (state, action) => {
       const movieId = action.payload;
+      console.log(state.myFavoriteMovieIdList)
       state.myFavoriteMovieIdList.push(movieId);
     },
     removeFavoriteMovie: (state, action) => {
@@ -102,7 +103,8 @@ const userSlice = createSlice({
         state.isLoading = true;
       })
       .addCase(getMyFavoriteMovieId.fulfilled, (state, action) => {
-        state.myFavoriteMovieIdList = action.payload.favorite_movie;
+        console.log(action.payload.favorite_movie)
+        state.myFavoriteMovieIdList = action.payload.favorite_movie!==null?action.payload.favorite_movie:[];
         state.isLoading = false;
       })
       .addCase(getMyFavoriteMovieId.rejected, (state, action) => {
