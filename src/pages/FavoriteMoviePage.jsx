@@ -51,9 +51,9 @@ const FavoriteMoviePage = () => {
       const favoriteMovies = await Promise.all(moviePromises);
 
       // add favorite movie to state
-      favoriteMovies.forEach((movieDetail) =>
-        dispatch(addMovieToFavoriteMovies(movieDetail))
-      );
+      favoriteMovies.forEach((movieDetail) => {
+        dispatch(addMovieToFavoriteMovies(movieDetail.payload));
+      });
 
       setIsLoading(false);
     } catch (error) {
@@ -63,7 +63,7 @@ const FavoriteMoviePage = () => {
   };
 
   const renderFavoriteMove = () => {
-    return <div className="xl:container">{console.log(favoriteMovies)}</div>;
+    return <div className="xl:container"> </div>;
   };
 
   return (
