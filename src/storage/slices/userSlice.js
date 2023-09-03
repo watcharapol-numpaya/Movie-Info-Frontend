@@ -74,7 +74,10 @@ const userSlice = createSlice({
       state.isLoading = false;
     },
     addMovieToFavoriteMovies:(state,action)=>{
-      state.favoriteMovies.push(action.payload)
+         const movieToAdd = action.payload;
+      if (!state.favoriteMovies.some((movie) => movie.id === movieToAdd.id)) {
+        state.favoriteMovies.push(movieToAdd);
+      }
     },
     removeMovieToFavoriteMovies:(state,action)=>{
 

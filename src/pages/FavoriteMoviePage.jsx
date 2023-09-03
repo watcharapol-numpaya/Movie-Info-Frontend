@@ -7,6 +7,10 @@ import {
 import OnLoadingScreen from "../components/OnLoadingScreen";
 import axios from "axios";
 import { getMovieDetailByID } from "../storage/slices/movieSlice";
+import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
+import { Link } from "react-router-dom";
+import MovieCard from "../components/MovieCard";
+
 
 const FavoriteMoviePage = () => {
   const dispatch = useDispatch();
@@ -61,9 +65,59 @@ const FavoriteMoviePage = () => {
       console.error(error);
     }
   };
+  
+  const renderNotFound = () => {
+    return (
+      <div className="  h-144 flex   items-center ">
+        <p className="text-black text-2xl font-semibold">
+          Not Found  
+        </p>
+      </div>
+    );
+  };
+
+  const renderShowMovie = () => {
+    return (
+      <>
+        {favoriteMovies.length !== 0 ? (
+          <>
+            {favoriteMovies &&
+              favoriteMovies.map((item) => (
+                <div key={item.id}>
+                  <MovieCard movie={item} />
+                </div>
+              ))}
+          </>
+        ) : (
+          <>{renderNotFound()}</>
+        )}
+      </>
+    );
+  };
 
   const renderFavoriteMove = () => {
-    return <div className="xl:container"> </div>;
+    return (
+      <div className="xl:container mx-auto ">
+        <div className="w-full bg-red">
+          <div className="flex  p-4 text-black sm:mb-4  ">
+            <Link className=" flex  items-center  " to="/">
+              <span className="sm:block flex">
+                <ArrowBackIosIcon />
+              </span>
+            </Link> 
+            <span id="Back" className="font-semibold text-2xl  uppercase ">
+              Result
+            </span>
+          </div>
+          {console.log(favoriteMovies)}
+          <div className="w-full flex justify-center ">
+            <div className="flex  flex-wrap xl:gap-6 gap-4 justify-center mb-4  ">
+              {renderShowMovie()}
+            </div>
+          </div>
+        </div>
+      </div>
+    );
   };
 
   return (

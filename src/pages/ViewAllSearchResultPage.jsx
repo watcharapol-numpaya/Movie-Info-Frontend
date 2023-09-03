@@ -30,7 +30,7 @@ const ViewAllSearchResultPage = () => {
     );
   };
 
-  const checkHasData = () => {
+  const renderShowMovie = () => {
     return (
       <>
         {searchList.length !== 0 ? (
@@ -66,7 +66,7 @@ const ViewAllSearchResultPage = () => {
           {console.log(searchList)}
           <div className="w-full flex justify-center ">
             <div className="flex  flex-wrap xl:gap-6 gap-4 justify-center mb-4  ">
-              {checkHasData()}
+              {renderShowMovie()}
             </div>
           </div>
         </div>
