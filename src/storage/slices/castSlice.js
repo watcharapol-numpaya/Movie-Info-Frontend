@@ -3,7 +3,7 @@ import {
   createAsyncThunk,
 } from "@reduxjs/toolkit";
 import { APIKeyTMDB } from "../../services/apiKey";
-import { movieApiInstance } from "../../services/movieApi";
+import { movieApiInstance } from "../../services/mApi";
 
 const initialState = {
   allCast: [],
