@@ -86,7 +86,7 @@ const FavoriteMoviePage = () => {
               </span>
             </Link>
             <span id="Back" className="font-semibold text-2xl  uppercase ">
-              Result
+              Favorite Movie
             </span>
           </div>
           {console.log(favoriteMovies)}

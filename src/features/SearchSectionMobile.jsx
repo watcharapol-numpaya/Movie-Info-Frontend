@@ -54,7 +54,7 @@ function SearchSectionMobile() {
     // console.log("3 --------------------")
 
     //onType.current เก็บค่าของ ref ใช้ tag input
-    //e.target เก็บค่า element ที่ได้กดจากตรงก็ตามผ่าน handleClickOutsideInput
+    //e.target เก็บค่า element ที่ได้กดจากตรงไหนก็ตามผ่าน handleClickOutsideInput
     //onType.current.contains(e.target) เช็คว่า ค่าใน input.current กับ onType.current.contains(e.target) ตรงกันไหม
 
     if (onType.current && !onType.current.contains(e.target)) {
