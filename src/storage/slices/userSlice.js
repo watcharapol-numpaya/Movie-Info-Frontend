@@ -4,7 +4,7 @@ import { userApiInstance } from "../../services/userApi";
 const initialState = {
   favoriteMovieIdList: [], //keep movie id
   favoriteMovies: [],
-  testArray:[],
+  testArray: [],
   message: "",
   isLoading: false,
 };
@@ -42,10 +42,24 @@ export const removeFavoriteMovieId = createAsyncThunk(
 export const getFavoriteMovieId = createAsyncThunk(
   "user/getFavoriteMovieId",
   async (user_id, { rejectWithValue }) => {
+    const token = await localStorage.getItem("access_token");
+    if (!token) {
+      throw new Error("Token not found");
+    }
+
     try {
-      const res = await userApiInstance.post(`/favorite_movie`, {
-        user_id: user_id,
-      });
+      const res = await userApiInstance.post(
+        `/favorite_movie`,
+        {
+          user_id: user_id,
+        },
+        // {
+        //   headers: {
+        //     "Content-Type": "application/json",
+        //     Authorization: `Bearer ${token}`,
+        //   },
+        // }
+      );
       return res.data;
     } catch (err) {
       return rejectWithValue(err.response.data);
@@ -74,19 +88,18 @@ const userSlice = createSlice({
       state.message = "";
       state.isLoading = false;
     },
-    addMovieToFavoriteMovies:(state,action)=>{
-         const movieToAdd = action.payload;
+    addMovieToFavoriteMovies: (state, action) => {
+      const movieToAdd = action.payload;
       if (!state.favoriteMovies.some((movie) => movie.id === movieToAdd.id)) {
         state.favoriteMovies.push(movieToAdd);
       }
     },
     removeMovieFromFavoriteMovies: (state, action) => {
       const movieId = action.payload;
-      state.favoriteMovies = state.favoriteMovies.filter((movie) => movie.id !== movieId);
-    }
-    
-  
-
+      state.favoriteMovies = state.favoriteMovies.filter(
+        (movie) => movie.id !== movieId
+      );
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -128,6 +141,11 @@ const userSlice = createSlice({
   },
 });
 
-export const { addFavoriteMovie, removeFavoriteMovie, clearUserSliceState ,addMovieToFavoriteMovies,removeMovieFromFavoriteMovies} =
-  userSlice.actions;
+export const {
+  addFavoriteMovie,
+  removeFavoriteMovie,
+  clearUserSliceState,
+  addMovieToFavoriteMovies,
+  removeMovieFromFavoriteMovies,
+} = userSlice.actions;
 export default userSlice.reducer;

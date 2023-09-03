@@ -4,16 +4,21 @@ import { userApiInstance } from "../../services/userApi";
 import { decodeUser } from "../../services/jwtTokenService";
 
 const initialState = {
-  user: localStorage.getItem("refresh_token")?decodeUser(localStorage.getItem("refresh_token")):[],
+  user: localStorage.getItem("refresh_token")
+    ? decodeUser(localStorage.getItem("refresh_token"))
+    : [],
   isLoading: false,
   status: "",
   message: "",
   isRegisterPass: false,
   isSignInPass: false,
   isAuth: false,
-  accessToken: localStorage.getItem("access_token") ? localStorage.getItem("access_token") : null,
-  refreshToken: localStorage.getItem("refresh_token")? localStorage.getItem("refresh_token") : null,
-   
+  accessToken: localStorage.getItem("access_token")
+    ? localStorage.getItem("access_token")
+    : null,
+  refreshToken: localStorage.getItem("refresh_token")
+    ? localStorage.getItem("refresh_token")
+    : null,
 };
 
 export const registerUser = createAsyncThunk(
@@ -120,6 +125,10 @@ const authSlice = createSlice({
       state.isSignInPass = false;
       state.isAuth = false;
     },
+    updateToken: (state, action) => {
+      state.accessToken = action.payload.accessToken;
+      state.refreshToken = action.payload.refreshToken;
+    },
     clearIsRegisterPassState: (state, action) => {
       state.isRegisterPass = false;
       state.message = "";
@@ -194,6 +203,6 @@ const authSlice = createSlice({
   },
 });
 
-export const { loginSuccess, logout, clearIsRegisterPassState } =
+export const { loginSuccess, logout, clearIsRegisterPassState,updateToken } =
   authSlice.actions;
 export default authSlice.reducer;
