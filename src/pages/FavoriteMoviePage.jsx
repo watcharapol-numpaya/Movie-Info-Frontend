@@ -52,10 +52,10 @@ const FavoriteMoviePage = () => {
         dispatch(getMovieDetailByID(movieId))
       );
 
-      const favoriteMovies = await Promise.all(moviePromises);
+      const resultPromise = await Promise.all(moviePromises);
 
       // add favorite movie to state
-      favoriteMovies.forEach((movieDetail) => {
+      resultPromise.forEach((movieDetail) => {
         dispatch(addMovieToFavoriteMovies(movieDetail.payload));
       });
 
