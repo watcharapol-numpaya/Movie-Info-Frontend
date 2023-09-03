@@ -2,8 +2,8 @@ import {
   createSlice,
   createAsyncThunk,
 } from "@reduxjs/toolkit";
-import { APIKeyTMDB } from "../../services/MovieApiKey";
-import { instance } from "../../services/MovieApi";
+import { APIKeyTMDB } from "../../services/movieApiKey";
+import { movieApiInstance } from "../../services/movieApi";
 
 const initialState = {
   allCast: [],
@@ -19,7 +19,7 @@ export const getCast = createAsyncThunk(
   "castList/fetchCast",
   async (movieId, { rejectWithValue }) => {
     try {
-      const res = await instance.get(`movie/${movieId}/credits`, {
+      const res = await movieApiInstance.get(`movie/${movieId}/credits`, {
         params: {
           api_key: APIKeyTMDB,
         },
@@ -36,7 +36,7 @@ export const getCastInfo = createAsyncThunk(
   "castList/getCastInfo",
   async (id, { rejectWithValue }) => {
     try {
-      const res = await instance.get(`person/${id}`, {
+      const res = await movieApiInstance.get(`person/${id}`, {
         params: {
           api_key: APIKeyTMDB,
         },
@@ -53,7 +53,7 @@ export const getMovieRelateToCast = createAsyncThunk(
   "castList/getMovieRelateToCast",
   async (id, { rejectWithValue }) => {
     try {
-      const res = await instance.get(`person/${id}/movie_credits`, {
+      const res = await movieApiInstance.get(`person/${id}/movie_credits`, {
         params: {
           api_key: APIKeyTMDB,
         },

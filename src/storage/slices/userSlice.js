@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { instance2 } from "../../services/MovieApi";
+import { userApiInstance } from "../../services/userApi";
 
 const initialState = {
   favoriteMovieIdList: [], //keep movie id
@@ -13,7 +13,7 @@ export const sendFavoriteMovieId = createAsyncThunk(
   "user/sendFavoriteMovieId",
   async (data, { rejectWithValue }) => {
     try {
-      const res = await instance2.put(`/add_favorite_movie`, {
+      const res = await userApiInstance.put(`/add_favorite_movie`, {
         user_id: data.user_id,
         favorite_movie: [data.movieId],
       });
@@ -28,7 +28,7 @@ export const removeFavoriteMovieId = createAsyncThunk(
   "user/removeFavoriteMovieId",
   async (data, { rejectWithValue }) => {
     try {
-      const res = await instance2.put(`/remove_favorite_movie`, {
+      const res = await userApiInstance.put(`/remove_favorite_movie`, {
         user_id: data.user_id,
         favorite_movie: [data.movieId],
       });
@@ -43,7 +43,7 @@ export const getFavoriteMovieId = createAsyncThunk(
   "user/getFavoriteMovieId",
   async (user_id, { rejectWithValue }) => {
     try {
-      const res = await instance2.post(`/favorite_movie`, {
+      const res = await userApiInstance.post(`/favorite_movie`, {
         user_id: user_id,
       });
       return res.data;

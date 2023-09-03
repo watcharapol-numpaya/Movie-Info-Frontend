@@ -1,1 +1,1 @@
- export const APIKeyTMDB = import.meta.env.VITE_API_KEY;
+export const APIKeyTMDB = import.meta.env.VITE_API_KEY;

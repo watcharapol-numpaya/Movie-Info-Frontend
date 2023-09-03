@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { APIKeyTMDB } from "../../services/MovieApiKey";
-import { instance } from "../../services/MovieApi";
+import { APIKeyTMDB } from "../../services/movieApiKey";
+import { movieApiInstance } from "../../services/movieApi";
 
 const initialState = {
   movies: [],
@@ -22,7 +22,7 @@ export const getTrendingMovies = createAsyncThunk(
   "movieList/getTrendingMovie",
   async (arg, { rejectWithValue }) => {
     try {
-      const res = await instance.get(`trending/movie/week`, {
+      const res = await movieApiInstance.get(`trending/movie/week`, {
         params: {
           api_key: APIKeyTMDB,
         },
@@ -38,7 +38,7 @@ export const getPopularMovies = createAsyncThunk(
   "movieList/getPopularMovie",
   async (arg, { rejectWithValue }) => {
     try {
-      const res = await instance.get(`movie/popular`, {
+      const res = await movieApiInstance.get(`movie/popular`, {
         params: {
           api_key: APIKeyTMDB,
         },
@@ -63,7 +63,7 @@ export const getAllMovies = createAsyncThunk(
         params.with_genres = data.genre.join("|");
       }
 
-      const res = await instance.get(`discover/movie`, {
+      const res = await movieApiInstance.get(`discover/movie`, {
         params,
       });
       // console.log(res.data);
@@ -81,7 +81,7 @@ export const getAllGenre = createAsyncThunk(
   "movieList/getAllGenre",
   async (arg, { rejectWithValue }) => {
     try {
-      const res = await instance.get(`genre/movie/list`, {
+      const res = await movieApiInstance.get(`genre/movie/list`, {
         params: {
           api_key: APIKeyTMDB,
         },
@@ -99,7 +99,7 @@ export const getMovieByKeyword = createAsyncThunk(
   "movieList/getMovieByKeyword",
   async (keyword, { rejectWithValue }) => {
     try {
-      const res = await instance.get(`search/movie`, {
+      const res = await movieApiInstance.get(`search/movie`, {
         params: {
           api_key: APIKeyTMDB,
           query: keyword,
@@ -117,7 +117,7 @@ export const getMovieDetailByID = createAsyncThunk(
   "movieList/getMovieDetailByID",
   async (id, { rejectWithValue }) => {
     try {
-      const res = await instance.get(`movie/${id}`, {
+      const res = await movieApiInstance.get(`movie/${id}`, {
         params: {
           api_key: APIKeyTMDB,
           append_to_response: "videos",

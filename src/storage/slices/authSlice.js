@@ -1,6 +1,6 @@
 // authSlice.js
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { instance2 } from "../../services/MovieApi";
+import { userApiInstance } from "../../services/userApi";
 import { decodeUser } from "../../services/jwtTokenService";
 
 const initialState = {
@@ -20,7 +20,7 @@ export const registerUser = createAsyncThunk(
   "user/registerUser",
   async (userData, { rejectWithValue }) => {
     try {
-      const res = await instance2.post(`/register`, userData);
+      const res = await userApiInstance.post(`/register`, userData);
       // console.log(res);
       return res.data;
     } catch (err) {
@@ -33,7 +33,7 @@ export const signInUser = createAsyncThunk(
   "user/signInUser",
   async (userData, { rejectWithValue }) => {
     try {
-      const res = await instance2.post(`/sign-in`, userData);
+      const res = await userApiInstance.post(`/sign-in`, userData);
 
       return res.data;
     } catch (err) {
@@ -51,7 +51,7 @@ export const getAuthentication = createAsyncThunk(
         throw new Error("Token not found");
       }
       // 2nd parameter is body if empty set it to {}
-      const res = await instance2.post(
+      const res = await userApiInstance.post(
         `/authentication`,
         {},
         {
@@ -77,7 +77,7 @@ export const getRefreshToken = createAsyncThunk(
         throw new Error("Token not found");
       }
       // 2nd parameter is body if empty set it to {}
-      const res = await instance2.post(
+      const res = await userApiInstance.post(
         `/refresh_token`,
         {},
         {
