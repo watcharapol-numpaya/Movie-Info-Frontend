@@ -7,6 +7,8 @@ import {
   getRefreshToken,
   signInUser,
 } from "../storage/slices/authSlice";
+import { getFavoriteMovieId } from "../storage/slices/userSlice";
+import { decodeUser } from "../services/jwtTokenService";
 
 const SignInPage = () => {
   const [username, setUsername] = useState("");
@@ -20,7 +22,10 @@ const SignInPage = () => {
     const userData = { username, password };
     dispatch(signInUser(userData))
       .unwrap()
-      .then(() => navigate("/"));
+      .then((res) => {
+        dispatch(getFavoriteMovieId(decodeUser(res.refresh_token).user_id));
+        navigate("/");
+      });
   };
 
   useEffect(() => {
