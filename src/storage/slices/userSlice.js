@@ -16,7 +16,7 @@ export const sendMyFavoriteMovieId = createAsyncThunk(
     try {
       const res = await instance2.put(`/add_favorite_movie`, {
         user_id: data.user_id,
-        favorite_movie: data.myFavoriteMovieIdList,
+        favorite_movie: [data.movieId],
       });
       return res.data;
     } catch (err) {

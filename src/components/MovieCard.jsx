@@ -34,19 +34,21 @@ function MovieCard({ movie }) {
         navigate("/sign-in");
       }, 300);
     }
+    
     const data = {
       user_id: user.user_id,
-      myFavoriteMovieIdList: myFavoriteMovieIdList,
+      movieId: movieId, //id to add
     };
-
+ 
     dispatch(addFavoriteMovie(movieId));
     dispatch(sendMyFavoriteMovieId(data));
   };
 
+  
   const handleRemoveFavoriteMovie = (movieId, event) => {
     event.preventDefault(); // Prevent link navigation
     event.stopPropagation(); // Prevent event propagation to parent Link
-
+ 
     const data = {
       user_id: user.user_id,
       movieId: movieId, //id to remove
