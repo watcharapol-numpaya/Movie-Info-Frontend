@@ -14,36 +14,7 @@ const ProtectedRoute = ({ redirectPath = "/sign-in", children }) => {
   const isRefreshTokenExpired = checkTokenExpiration(refreshToken);
   const [isLoading, setIsLoading] = useState(true);
 
-
-  useEffect(() => {
-    if (!accessToken || isRefreshTokenExpired) {
-      setIsLoading(false);
-    } else if (isAccessTokenExpired) {
-    
-      dispatch(getRefreshToken())
-        .unwrap() //catch rejected cases
-        .then((newTokens) => {
-          // Update the tokens in Redux state and local storage
-          // localStorage.setItem("access_token", newTokens.access_token);
-          // localStorage.setItem("refresh_token", newTokens.refresh_token);
-    
-          setIsLoading(false);
-        })
-        .catch((error) => {
-          console.error("Error refreshing tokens:", error);
-          setIsLoading(false);
-        });
-    } else {
-      setIsLoading(false);
-    }
-  }, [accessToken, refreshToken, isAccessTokenExpired, isRefreshTokenExpired, dispatch]);
-
-  if (isLoading) {
-    // Show a isLoading indicator while refreshing tokens
-    return <OnLoadingScreen/> 
-  }
-
-  if (!accessToken || isRefreshTokenExpired) {
+  if (!accessToken) {
     return <Navigate to={redirectPath} replace state={{ from: location }} />;
   }
 
@@ -51,4 +22,3 @@ const ProtectedRoute = ({ redirectPath = "/sign-in", children }) => {
 };
 
 export default ProtectedRoute;
-

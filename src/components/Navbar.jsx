@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import PersonIcon from "@mui/icons-material/Person";
 import { getFavoriteMovieId } from "../storage/slices/userSlice";
 
-function Navbar() {
+const  Navbar =()=> {
   const [isShow, setIsShow] = useState(false);
   const dropdownRef = useRef(null);
   const { user } = useSelector((state) => state.auth);
@@ -58,10 +58,8 @@ function Navbar() {
                 </i>
               </Link>
             </li>
-            <li className="mobile:flex hidden  h-12 w-12 bg-yellow-400  rounded-full  items-center justify-center  cursor-pointer">
-              <i className="material-icons text-3xl">translate</i>
-            </li>
-         
+            <li className="lg:flex hidden invisible  h-12 w-12 bg-yellow-400  rounded-full  items-center justify-center  cursor-pointer"></li>
+
             <li
               className="h-12 w-12 bg-yellow-400  rounded-full flex items-center justify-center  cursor-pointer"
               onClick={handleShowDropDown}
@@ -75,7 +73,7 @@ function Navbar() {
                     {user.username.substring(0, 2)}{" "}
                   </p>
                 ) : (
-                  <PersonIcon fontSize="large"/>
+                  <PersonIcon fontSize="large" />
                 )}
 
                 {isShow && <Dropdown />}

@@ -19,25 +19,7 @@ const FavoriteMoviePage = () => {
   const { user } = useSelector((state) => state.auth);
   const [data, setData] = useState([]);
 
-  // useEffect(() => {
-  //   dispatch(getFavoriteMovieId(user.user_id))
-  //     .unwrap()
-  //     .then((res) => {
-  //       let movies = res.favorite_movie;
-  //       dispatch(getMovieDetailByID(movies[i]))
-  //         .unwrap()
-  //         .then((res) => {
-  //           dispatch(addMovieToFavoriteMovies(res));
-  //         });
-
-  //       setIsLoading(false);
-  //     })
-  //     .catch(() => {
-  //       setIsLoading(true);
-  //     });
-
-  // }, [user.user_id]);
-
+ 
   useEffect(() => {
     fetchFavoriteMovies();
   }, [dispatch, user.user_id]);
