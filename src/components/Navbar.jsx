@@ -29,7 +29,7 @@ function Navbar() {
   }, []);
 
   useEffect(() => {
-    if (user.length!==0) {
+    if (user.length !== 0) {
       dispatch(getFavoriteMovieId(user.user_id));
     }
   }, []);
@@ -61,9 +61,7 @@ function Navbar() {
             <li className="mobile:flex hidden  h-12 w-12 bg-yellow-400  rounded-full  items-center justify-center  cursor-pointer">
               <i className="material-icons text-3xl">translate</i>
             </li>
-            <li className="mobile:flex hidden  h-12 w-12 bg-yellow-400  rounded-full  items-center justify-center  cursor-pointer">
-              <i className="material-icons text-3xl">shopping_cart</i>
-            </li>
+         
             <li
               className="h-12 w-12 bg-yellow-400  rounded-full flex items-center justify-center  cursor-pointer"
               onClick={handleShowDropDown}
@@ -77,7 +75,7 @@ function Navbar() {
                     {user.username.substring(0, 2)}{" "}
                   </p>
                 ) : (
-                  <PersonIcon />
+                  <PersonIcon fontSize="large"/>
                 )}
 
                 {isShow && <Dropdown />}
