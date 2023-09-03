@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { sendFavoriteMovieId } from "../storage/slices/userSlice";
+import { getFavoriteMovieId } from "../storage/slices/userSlice";
 import OnLoadingScreen from "../components/OnLoadingScreen";
 import axios from "axios";
 
@@ -13,7 +13,7 @@ const FavoriteMoviePage = () => {
 
   useEffect(() => {
  
-    dispatch(sendFavoriteMovieId(user.user_id))
+    dispatch(getFavoriteMovieId(user.user_id))
       .unwrap()
       .then(() => {
         setIsLoading(false);
