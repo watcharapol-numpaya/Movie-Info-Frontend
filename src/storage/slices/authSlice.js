@@ -133,6 +133,7 @@ const authSlice = createSlice({
       state.isRegisterPass = false;
       state.message = "";
     },
+ 
   },
   extraReducers: (builder) => {
     builder
