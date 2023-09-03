@@ -54,7 +54,7 @@ function MovieCard({ movie }) {
       user_id: user.user_id,
       movieId: movieId, //id to remove
     };
-
+    
     dispatch(removeFavoriteMovie(movieId)); //remove id from favoriteMovieIdList
     dispatch(removeFavoriteMovieId(data)); //remove id from database
     dispatch(removeMovieFromFavoriteMovies(movieId)) //remove item from favoriteMovies

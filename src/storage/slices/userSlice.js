@@ -81,7 +81,7 @@ const userSlice = createSlice({
     },
     removeMovieFromFavoriteMovies:(state,action)=>{
       const movieId = action.payload;
-      state.selectedGenres = state.selectedGenres.filter(
+      state.favoriteMovies = state.favoriteMovies.filter(
         (id) => id !== movieId
       );
     }
