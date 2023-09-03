@@ -53,7 +53,7 @@ export const getFavoriteMovieId = createAsyncThunk(
 );
 
 const userSlice = createSlice({
-  name: "auth",
+  name: "user",
   initialState,
   reducers: {
     addFavoriteMovie: (state, action) => {
@@ -79,8 +79,11 @@ const userSlice = createSlice({
         state.favoriteMovies.push(movieToAdd);
       }
     },
-    removeMovieToFavoriteMovies:(state,action)=>{
-
+    removeMovieFromFavoriteMovies:(state,action)=>{
+      const movieId = action.payload;
+      state.selectedGenres = state.selectedGenres.filter(
+        (id) => id !== movieId
+      );
     }
   
 
@@ -125,6 +128,6 @@ const userSlice = createSlice({
   },
 });
 
-export const { addFavoriteMovie, removeFavoriteMovie, clearUserSliceState ,addMovieToFavoriteMovies,removeMovieToFavoriteMovies} =
+export const { addFavoriteMovie, removeFavoriteMovie, clearUserSliceState ,addMovieToFavoriteMovies,removeMovieFromFavoriteMovies} =
   userSlice.actions;
 export default userSlice.reducer;

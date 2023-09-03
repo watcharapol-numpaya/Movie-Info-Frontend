@@ -8,6 +8,7 @@ import {
   addFavoriteMovie,
   removeFavoriteMovie,
   removeFavoriteMovieId,
+  removeMovieFromFavoriteMovies,
   sendFavoriteMovieId,
 } from "../storage/slices/userSlice";
 
@@ -41,6 +42,7 @@ function MovieCard({ movie }) {
  
     dispatch(addFavoriteMovie(movieId));
     dispatch(sendFavoriteMovieId(data));
+ 
   };
 
   
@@ -55,6 +57,7 @@ function MovieCard({ movie }) {
 
     dispatch(removeFavoriteMovie(movieId)); //remove id from favoriteMovieIdList
     dispatch(removeFavoriteMovieId(data)); //remove id from database
+    dispatch(removeMovieFromFavoriteMovies(movieId)) //remove item from favoriteMovies
   };
 
   return (
