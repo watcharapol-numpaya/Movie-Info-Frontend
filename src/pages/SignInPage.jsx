@@ -9,6 +9,7 @@ import {
 } from "../storage/slices/authSlice";
 import { getFavoriteMovieId } from "../storage/slices/userSlice";
 import { decodeUser } from "../services/jwtTokenService";
+import ScrollToTop from "../components/ScrollToTop";
 
 const SignInPage = () => {
   const [username, setUsername] = useState("");
@@ -82,7 +83,12 @@ const SignInPage = () => {
     );
   };
 
-  return <div className="bg-gray-100">{renderSignIn()} </div>;
+  return (
+    <>
+      <ScrollToTop />
+      <div className="bg-gray-100">{renderSignIn()} </div>
+    </>
+  );
 };
 
 export default SignInPage;

@@ -4,6 +4,7 @@ import Validation from "../components/Validation";
 import { useDispatch, useSelector } from "react-redux";
 import { clearIsRegisterPassState, registerUser } from "../storage/slices/authSlice";
 import { useNavigate } from "react-router-dom";
+import ScrollToTop from './../components/ScrollToTop';
 
 const SignUpPage = () => {
   const [username, setUsername] = useState("");
@@ -134,7 +135,7 @@ const SignUpPage = () => {
     );
   };
 
-  return <div>{renderSignUpPage()}</div>;
+  return<><ScrollToTop /><div>{renderSignUpPage()}</div></> ;
 };
 
 export default SignUpPage;

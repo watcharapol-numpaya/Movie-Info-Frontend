@@ -10,7 +10,7 @@ import { getMovieDetailByID } from "../storage/slices/movieSlice";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import { Link } from "react-router-dom";
 import MovieCard from "../components/MovieCard";
-
+import ScrollToTop from "../components/ScrollToTop";
 
 const FavoriteMoviePage = () => {
   const dispatch = useDispatch();
@@ -65,13 +65,11 @@ const FavoriteMoviePage = () => {
       console.error(error);
     }
   };
-  
+
   const renderNotFound = () => {
     return (
       <div className="  h-144 flex   items-center ">
-        <p className="text-black text-2xl font-semibold">
-          Not Found  
-        </p>
+        <p className="text-black text-2xl font-semibold">Not Found</p>
       </div>
     );
   };
@@ -104,7 +102,7 @@ const FavoriteMoviePage = () => {
               <span className="sm:block flex">
                 <ArrowBackIosIcon />
               </span>
-            </Link> 
+            </Link>
             <span id="Back" className="font-semibold text-2xl  uppercase ">
               Result
             </span>
@@ -121,9 +119,12 @@ const FavoriteMoviePage = () => {
   };
 
   return (
-    <div className="w-full h-full  ">
-      {isLoading ? <OnLoadingScreen /> : renderFavoriteMove()}
-    </div>
+    <>
+      <ScrollToTop />
+      <div className="w-full h-full  ">
+        {isLoading ? <OnLoadingScreen /> : renderFavoriteMove()}
+      </div>
+    </>
   );
 };
 
