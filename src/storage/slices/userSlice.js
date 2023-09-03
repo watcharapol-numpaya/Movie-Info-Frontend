@@ -3,15 +3,14 @@ import { instance2 } from "../../services/MovieApi";
 
 const initialState = {
   favoriteMovieList: [],
-  favoriteMovieIdList: [],
-  myFavoriteMovieIdList: [], //keep movie id
+  favoriteMovieIdList: [], //keep movie id
   favoriteMovie: [],
   message: "",
   isLoading: false,
 };
 
-export const sendMyFavoriteMovieId = createAsyncThunk(
-  "user/sendMyFavoriteMovieId",
+export const sendFavoriteMovieId = createAsyncThunk(
+  "user/sendFavoriteMovieId",
   async (data, { rejectWithValue }) => {
     try {
       const res = await instance2.put(`/add_favorite_movie`, {
@@ -25,8 +24,8 @@ export const sendMyFavoriteMovieId = createAsyncThunk(
   }
 );
 
-export const removeMyFavoriteMovieId = createAsyncThunk(
-  "user/removeMyFavoriteMovieId",
+export const removeFavoriteMovieId = createAsyncThunk(
+  "user/removeFavoriteMovieId",
   async (data, { rejectWithValue }) => {
     try {
       const res = await instance2.put(`/remove_favorite_movie`, {
@@ -40,7 +39,7 @@ export const removeMyFavoriteMovieId = createAsyncThunk(
   }
 );
 
-export const getMyFavoriteMovieId = createAsyncThunk(
+export const getFavoriteMovieId = createAsyncThunk(
   "user/getFavoriteMovieId",
   async (id, { rejectWithValue }) => {
     try {
@@ -60,20 +59,18 @@ const userSlice = createSlice({
   reducers: {
     addFavoriteMovie: (state, action) => {
       const movieId = action.payload;
-      console.log(state.myFavoriteMovieIdList)
-      state.myFavoriteMovieIdList.push(movieId);
+      console.log(state.favoriteMovieIdList)
+      state.favoriteMovieIdList.push(movieId);
     },
     removeFavoriteMovie: (state, action) => {
       const movieId = action.payload;
-      state.myFavoriteMovieIdList = state.myFavoriteMovieIdList.filter(
+      state.favoriteMovieIdList = state.favoriteMovieIdList.filter(
         (id) => id !== movieId
       );
     },
     clearUserSliceState: (state, action) => {
-      state.myFavoriteMovieIdList = [];
-      state.favoriteMovieList = [];
       state.favoriteMovieIdList = [];
-      state.myFavoriteMovieIdList = [];
+      state.favoriteMovieList = [];
       state.favoriteMovie = [];
       state.message = "";
       state.isLoading = false;
@@ -81,33 +78,33 @@ const userSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addCase(sendMyFavoriteMovieId.pending, (state, action) => {
+      .addCase(sendFavoriteMovieId.pending, (state, action) => {
         state.isLoading = true;
       })
-      .addCase(sendMyFavoriteMovieId.fulfilled, (state, action) => {
+      .addCase(sendFavoriteMovieId.fulfilled, (state, action) => {
         state.isLoading = false;
       })
-      .addCase(sendMyFavoriteMovieId.rejected, (state, action) => {
+      .addCase(sendFavoriteMovieId.rejected, (state, action) => {
         state.isLoading = false;
       })
-      .addCase(removeMyFavoriteMovieId.pending, (state, action) => {
+      .addCase(removeFavoriteMovieId.pending, (state, action) => {
         state.isLoading = true;
       })
-      .addCase(removeMyFavoriteMovieId.fulfilled, (state, action) => {
+      .addCase(removeFavoriteMovieId.fulfilled, (state, action) => {
         state.isLoading = false;
       })
-      .addCase(removeMyFavoriteMovieId.rejected, (state, action) => {
+      .addCase(removeFavoriteMovieId.rejected, (state, action) => {
         state.isLoading = false;
       })
-      .addCase(getMyFavoriteMovieId.pending, (state, action) => {
+      .addCase(getFavoriteMovieId.pending, (state, action) => {
         state.isLoading = true;
       })
-      .addCase(getMyFavoriteMovieId.fulfilled, (state, action) => {
+      .addCase(getFavoriteMovieId.fulfilled, (state, action) => {
         console.log(action.payload.favorite_movie)
-        state.myFavoriteMovieIdList = action.payload.favorite_movie!==null?action.payload.favorite_movie:[];
+        state.favoriteMovieIdList = action.payload.favorite_movie!==null?action.payload.favorite_movie:[];
         state.isLoading = false;
       })
-      .addCase(getMyFavoriteMovieId.rejected, (state, action) => {
+      .addCase(getFavoriteMovieId.rejected, (state, action) => {
         state.isLoading = false;
       });
   },

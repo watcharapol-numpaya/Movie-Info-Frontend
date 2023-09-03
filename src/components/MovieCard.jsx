@@ -7,8 +7,8 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   addFavoriteMovie,
   removeFavoriteMovie,
-  removeMyFavoriteMovieId,
-  sendMyFavoriteMovieId,
+  removeFavoriteMovieId,
+  sendFavoriteMovieId,
 } from "../storage/slices/userSlice";
 
 // import {FavoriteIcon,FavoriteBorderIcon} from '@mui/icons-material'
@@ -18,13 +18,12 @@ function MovieCard({ movie }) {
   );
   const [favoriteMovies, setFavoriteMovies] = useState([]);
   const dispatch = useDispatch();
-  const { myFavoriteMovieIdList } = useSelector((state) => state.user);
+  const { favoriteMovieIdList } = useSelector((state) => state.user);
   const { user } = useSelector((state) => state.auth);
-  const checkIsFavorite = myFavoriteMovieIdList ? myFavoriteMovieIdList.includes(movie.id) : false;
+  const checkIsFavorite = favoriteMovieIdList ? favoriteMovieIdList.includes(movie.id) : false;
    
    
   const navigate = useNavigate();
-
   const handleAddFavoriteMovie = (movieId, event) => {
     event.preventDefault(); // Prevent link navigation
     event.stopPropagation(); // Prevent event propagation to parent Link
@@ -41,7 +40,7 @@ function MovieCard({ movie }) {
     };
  
     dispatch(addFavoriteMovie(movieId));
-    dispatch(sendMyFavoriteMovieId(data));
+    dispatch(sendFavoriteMovieId(data));
   };
 
   
@@ -54,8 +53,8 @@ function MovieCard({ movie }) {
       movieId: movieId, //id to remove
     };
 
-    dispatch(removeFavoriteMovie(movieId)); //remove id from myFavoriteMovieIdList
-    dispatch(removeMyFavoriteMovieId(data)); //remove id from database
+    dispatch(removeFavoriteMovie(movieId)); //remove id from favoriteMovieIdList
+    dispatch(removeFavoriteMovieId(data)); //remove id from database
   };
 
   return (

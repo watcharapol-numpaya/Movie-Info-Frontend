@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import Dropdown from "./Dropdown";
 import { useDispatch, useSelector } from "react-redux";
 import PersonIcon from "@mui/icons-material/Person";
-import { getMyFavoriteMovieId } from "../storage/slices/userSlice";
+import { getFavoriteMovieId } from "../storage/slices/userSlice";
 
 function Navbar() {
   const [isShow, setIsShow] = useState(false);
@@ -30,7 +30,7 @@ function Navbar() {
 
   useEffect(() => {
     if (user.length!==0) {
-      dispatch(getMyFavoriteMovieId(user.user_id));
+      dispatch(getFavoriteMovieId(user.user_id));
     }
   }, []);
   const renderNavbar = () => {

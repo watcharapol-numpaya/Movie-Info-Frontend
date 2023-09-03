@@ -7,7 +7,7 @@ import {
   getRefreshToken,
   signInUser,
 } from "../storage/slices/authSlice";
-import { getMyFavoriteMovieId } from "../storage/slices/userSlice";
+import { getFavoriteMovieId } from "../storage/slices/userSlice";
 import { decodeUser } from "../services/jwtTokenService";
 
 const SignInPage = () => {
@@ -23,7 +23,7 @@ const SignInPage = () => {
     dispatch(signInUser(userData))
       .unwrap()
       .then((res) => {
-        // dispatch(getMyFavoriteMovieId(decodeUser(res.refresh_token).user_id));
+        // dispatch(getFavoriteMovieId(decodeUser(res.refresh_token).user_id));
         navigate("/");
       });
   };
