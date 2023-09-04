@@ -1,22 +1,31 @@
 import React, { useState, useRef, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getMovieByKeyword } from "../storage/slices/movieSlice";
+import { clearKeyword, getMovieByKeyword } from "../storage/slices/movieSlice";
 import SearchCard from "../components/SearchCard";
 import DoDisturbOnIcon from "@mui/icons-material/DoDisturbOn";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
+import { useMediaQuery } from "@mui/material";
+import {setKeyword} from '../storage/slices/movieSlice'
 
 function SearchSectionMobile() {
-  const [keyword, setKeyword] = useState("");
+  // const [keyword, setKeyword] = useState("");
   const [showSearchCard, setShowSearchCard] = useState(false);
   const onType = useRef(null);
-
+  const isMobileScreen = useMediaQuery("(max-width:767px)");
   const dispatch = useDispatch();
-  const { searchList } = useSelector((state) => state.movies);
+  const { searchList, keyword } = useSelector((state) => state.movies);
   const limitedData = searchList.slice(0, 5);
   const navigate = useNavigate();
 
+  useEffect(() => {
+    if (!isMobileScreen) {
+      navigate(-1);
+    }
+  }, [isMobileScreen]);
+
   const handlePressCancel = () => {
+    dispatch(clearKeyword())
     navigate(-1);
   };
 
@@ -27,7 +36,7 @@ function SearchSectionMobile() {
   };
 
   const handleSearch = (e) => {
-    setKeyword(e.target.value);
+    dispatch(setKeyword(e.target.value));
     dispatch(getMovieByKeyword(e.target.value.trim()));
     setShowSearchCard(true); // Show the search card when typing in the input box
   };
@@ -121,11 +130,12 @@ function SearchSectionMobile() {
                     ref={onType}
                     onClick={handleInputClick}
                     onChange={handleSearch}
+                    onKeyDown={handlePressEnter}
                     placeholder="Search movie"
                     className="outline-none text-black  w-full py-1 h-full text-xl   pl-3      rounded-l-full "
                     type="text"
                     value={keyword}
-                    onKeyDown={handlePressEnter}
+                     
                   />
                   <div
                     onClick={handleClearText}

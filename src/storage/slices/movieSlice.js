@@ -16,6 +16,7 @@ const initialState = {
   isSuccess: false,
   message: "",
   selectedGenres: [],
+  keyword: "",
 };
 
 export const getTrendingMovies = createAsyncThunk(
@@ -135,7 +136,12 @@ const movieSlice = createSlice({
   name: "movieList",
   initialState,
   reducers: {
- 
+    setKeyword: (state, action) => {
+      state.keyword = action.payload
+    },
+    clearKeyword:(state,action)=>{
+      state.keyword = ""
+    }
   },
   extraReducers: (builder) => {
     builder
@@ -221,5 +227,5 @@ const movieSlice = createSlice({
       });
   },
 });
-
+export const {setKeyword,clearKeyword} = movieSlice.actions
 export default movieSlice.reducer;

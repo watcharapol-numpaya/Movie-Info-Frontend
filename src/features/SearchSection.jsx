@@ -1,24 +1,25 @@
 import React, { useState, useRef, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getMovieByKeyword } from "../storage/slices/movieSlice";
+import { getMovieByKeyword, setKeyword } from "../storage/slices/movieSlice";
 import SearchCard from "../components/SearchCard";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
 
 function SearchSection() {
-  const [keyword, setKeyword] = useState("");
+  // const [keyword, setKeyword] = useState("");
   const [showSearchCard, setShowSearchCard] = useState(false);
   const onTyping = useRef(null);
   const dispatch = useDispatch();
-  const { searchList } = useSelector((state) => state.movies);
+  const { searchList,keyword } = useSelector((state) => state.movies);
   const limitedData = searchList.slice(0, 5);
   const navigate = useNavigate();
 
   const handleSearch = (e) => {
+    dispatch(setKeyword(e.target.value));
     dispatch(getMovieByKeyword(e.target.value.trim()));
     setShowSearchCard(true); // Show the search card when typing in the input box
-    setKeyword(e.target.value.trim());
+
  
   };
 
@@ -90,6 +91,7 @@ function SearchSection() {
             placeholder="Search movie"
             className="outline-none text-black sm:w-72 w-56 py-1 text-xl px-1 pl-5 rounded-r-full border-2 border-yellow-400"
             type="text"
+            value={keyword}
           />
         </div>
 
