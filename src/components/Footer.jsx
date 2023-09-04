@@ -1,6 +1,6 @@
 import React from "react";
 
-function Footer() {
+const Footer =()=> {
   return (
     <>
       <div className="h-44 w-full bg-black flex pl-6 pr-2 text-yellow-400 ">

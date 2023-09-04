@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-function ListTitle2SideCard({ title, data }) {
+const ListTitle2SideCard=({ title, data })=> {
   return (
     <div className=" ">
       <p className="text-xl font-bold pb-1">{title}</p>

@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { logout } from "../storage/slices/authSlice";
 import { clearUserSliceState } from "../storage/slices/userSlice";
 
-function Dropdown() {
+const Dropdown =()=> {
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.auth);
 

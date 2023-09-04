@@ -11,7 +11,7 @@ import {
   removeSelectGenre,
 } from "../storage/slices/genreSlice";
 
-function GenreSection({ onSelectGenre }) {
+const  GenreSection =({ onSelectGenre })=> {
   // const [selectedGenres, setSelectedGenres] = useState([]);
   const dispatch = useDispatch();
   const { genres } = useSelector((state) => state.movies);

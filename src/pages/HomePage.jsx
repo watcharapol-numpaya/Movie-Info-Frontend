@@ -16,7 +16,7 @@ import useMediaQuery from "@mui/material/useMediaQuery";
 import OnLoadingScreen from "../components/OnLoadingScreen";
 import ScrollToTop from "../components/ScrollToTop";
 
-function HomePage() {
+const HomePage =()=> {
   const dispatch = useDispatch();
   const { movies } = useSelector((state) => state.movies);
   const { trendingMovies, popularMovies, allMovie, totalPages, genres } =

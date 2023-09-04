@@ -2,7 +2,7 @@ import React from "react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import ImageNotFound from "./ImageNotFound";
-function CastCard({ cast }) {
+const CastCard = ({ cast }) => {
   const [imageUrl, setImageURL] = useState(
     "https://www.themoviedb.org/t/p/w780"
   );
@@ -24,7 +24,7 @@ function CastCard({ cast }) {
                   loading="lazy"
                 />
               ) : (
-                <ImageNotFound/>
+                <ImageNotFound />
               )}
             </div>
           </div>
@@ -36,6 +36,6 @@ function CastCard({ cast }) {
       </Link>
     </>
   );
-}
+};
 
 export default CastCard;

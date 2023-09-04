@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 import { useMediaQuery } from "@mui/material";
 import {setKeyword} from '../storage/slices/movieSlice'
 
-function SearchSectionMobile() {
+const  SearchSectionMobile =()=> {
   // const [keyword, setKeyword] = useState("");
   const [showSearchCard, setShowSearchCard] = useState(false);
   const onType = useRef(null);

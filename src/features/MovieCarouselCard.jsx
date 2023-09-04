@@ -43,7 +43,7 @@ const responsive = {
   },
 };
 
-function MovieCarouselCard({ title, movies, link }) {
+const  MovieCarouselCard =({ title, movies, link })=> {
   return (
     <>
       <div id="special-section">

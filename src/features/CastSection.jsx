@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import HideImageOutlinedIcon from "@mui/icons-material/HideImageOutlined";
 import CastCard from "../components/CastCard";
 
-function CastSection() {
+const  CastSection =()=> {
   const [isLoading, setIsLoading] = useState(true);
   const [displayedCast, setDisplayedCast] = useState(8); // Number of initially displayed cast
   const imageUrl = "https://www.themoviedb.org/t/p/w1280";

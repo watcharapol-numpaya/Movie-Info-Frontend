@@ -1,6 +1,6 @@
 import React from "react";
 
-function GenreButton({ genre, onSelect, isSelected }) {
+const GenreButton =({ genre, onSelect, isSelected })=> {
   const handleCheckboxChange = () => {
     onSelect(genre.id, !isSelected);
   };

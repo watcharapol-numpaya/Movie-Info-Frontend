@@ -13,7 +13,7 @@ import {
 } from "../storage/slices/userSlice";
 
 // import {FavoriteIcon,FavoriteBorderIcon} from '@mui/icons-material'
-function MovieCard({ movie }) {
+const  MovieCard =({ movie })=> {
   const [imageUrl, setImageURL] = useState(
     "https://www.themoviedb.org/t/p/w780"
   );
