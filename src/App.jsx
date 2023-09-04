@@ -7,7 +7,6 @@ import MovieInfoPage from "./pages/MovieInfoPage";
 import ErrorPage from "./pages/ErrorPage";
 import Navbar from "./components/Navbar";
 import CastInfo from "./pages/CastInfo";
-import ViewMoreMoviePage from "./pages/ViewMoreMoviePage";
 import ViewAllSearchResultPage from "./pages/ViewAllSearchResultPage";
 import SignInPage from "./pages/SignInPage";
 import SignUpPage from "./pages/SignUpPage";
