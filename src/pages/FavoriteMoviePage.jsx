@@ -11,6 +11,7 @@ import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import { Link } from "react-router-dom";
 import MovieCard from "../components/MovieCard";
 import ScrollToTop from "../components/ScrollToTop";
+import MovieListCard from "../components/MovieListCard";
 
 const FavoriteMoviePage = () => {
   const dispatch = useDispatch();
@@ -48,65 +49,11 @@ const FavoriteMoviePage = () => {
     }
   };
 
-  const renderNotFound = () => {
-    return (
-      <div className="  h-144 flex   items-center ">
-        <p className="text-black text-2xl font-semibold">Not Found</p>
-      </div>
-    );
-  };
-
-  const renderShowMovie = () => {
-    return (
-      <>
-        {favoriteMovies.length !== 0 ? (
-          <>
-            {favoriteMovies &&
-              favoriteMovies.map((item) => (
-                <div key={item.id}>
-                  <MovieCard movie={item} />
-                </div>
-              ))}
-          </>
-        ) : (
-          <>{renderNotFound()}</>
-        )}
-      </>
-    );
-  };
-
-  const renderFavoriteMove = () => {
-    return (
-      <div className="xl:container mx-auto ">
-        <div className="w-full bg-red">
-          <div className="flex  p-4 text-black sm:mb-4  ">
-            <Link className=" flex  items-center  " to="/">
-              <span className="sm:block flex">
-                <ArrowBackIosIcon />
-              </span>
-            </Link>
-            <span id="Back" className="font-semibold text-2xl  uppercase ">
-              Favorite Movie
-            </span>
-          </div>
-          {console.log(favoriteMovies)}
-          <div className="w-full flex justify-center ">
-            <div className="flex  flex-wrap xl:gap-6 gap-4 justify-center mb-4  ">
-              {renderShowMovie()}
-            </div>
-          </div>
-        </div>
-      </div>
-    );
-  };
-
+ 
   return (
-    <>
-      <ScrollToTop />
-      <div className="w-full h-full  ">
-        {isLoading ? <OnLoadingScreen /> : renderFavoriteMove()}
-      </div>
-    </>
+    <div className=" ">
+      {isLoading ? <OnLoadingScreen /> : <MovieListCard movies={favoriteMovies} title="Favorite Movie"   />}
+    </div>
   );
 };
 

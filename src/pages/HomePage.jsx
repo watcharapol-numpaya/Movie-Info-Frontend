@@ -101,12 +101,12 @@ function HomePage() {
             <MovieCarouselCard
               title={"trending"}
               movies={trendingMovies}
-              link={"#"}
+              // link={"#"}
             />
             <MovieCarouselCard
               title={"popular"}
               movies={popularMovies}
-              link={"#"}
+              // link={"#"}
             />
             <div>
               <div className="flex justify-between items-center p-4 bg-gradient-to-r from-red-600 to-black text-white relative ">

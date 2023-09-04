@@ -57,7 +57,7 @@ function MovieCarouselCard({ title, movies, link }) {
             responsive={responsive}
             autoPlaySpeed={500}
             containerClass="carousel-container"
-            removeArrowOnDeviceType={[ ]}
+            removeArrowOnDeviceType={[]}
             dotListClass="custom-dot-list-style"
           >
             {movies &&
