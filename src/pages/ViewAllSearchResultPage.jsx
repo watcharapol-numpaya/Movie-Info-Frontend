@@ -24,7 +24,7 @@ const ViewAllSearchResultPage = () => {
     return (
       <div className="  h-144 flex   items-center ">
         <p className="text-black text-2xl font-semibold">
-          Not Found : {searchList.length===0?keyword:""}
+          Not Found : {searchList.length === 0 ? keyword : ""}
         </p>
       </div>
     );
@@ -58,7 +58,7 @@ const ViewAllSearchResultPage = () => {
               <span className="sm:block flex">
                 <ArrowBackIosIcon />
               </span>
-            </Link> 
+            </Link>
             <span id="Back" className="font-semibold text-2xl  uppercase ">
               Result
             </span>
