@@ -63,7 +63,6 @@ const ViewAllSearchResultPage = () => {
               Result
             </span>
           </div>
-          {console.log(searchList)}
           <div className="w-full flex justify-center ">
             <div className="flex  flex-wrap xl:gap-6 gap-4 justify-center mb-4  ">
               {renderShowMovie()}

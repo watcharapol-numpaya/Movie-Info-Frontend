@@ -91,6 +91,7 @@ const ViewMoreMoviePage = () => {
       </div>
     </>
   );
+  
 };
 
 export default ViewMoreMoviePage;
