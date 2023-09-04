@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import Validation from "../components/Validation";
+import Validation from "../services/Validation";
 import { useDispatch, useSelector } from "react-redux";
 import { clearIsRegisterPassState, registerUser } from "../storage/slices/authSlice";
 import { useNavigate } from "react-router-dom";
