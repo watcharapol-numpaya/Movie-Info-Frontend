@@ -99,7 +99,8 @@ const FavoriteMoviePage = () => {
       </div>
     );
   };
-
+ 
+  
   return (
     <>
       <ScrollToTop />
