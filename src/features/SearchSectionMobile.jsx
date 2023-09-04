@@ -5,16 +5,23 @@ import SearchCard from "../components/SearchCard";
 import DoDisturbOnIcon from "@mui/icons-material/DoDisturbOn";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
+import { useMediaQuery } from "@mui/material";
 
 function SearchSectionMobile() {
   const [keyword, setKeyword] = useState("");
   const [showSearchCard, setShowSearchCard] = useState(false);
   const onType = useRef(null);
-
+  const isMobileScreen = useMediaQuery("(max-width:767px)");
   const dispatch = useDispatch();
   const { searchList } = useSelector((state) => state.movies);
   const limitedData = searchList.slice(0, 5);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!isMobileScreen) {
+      navigate(-1);
+    }
+  }, [isMobileScreen]);
 
   const handlePressCancel = () => {
     navigate(-1);
