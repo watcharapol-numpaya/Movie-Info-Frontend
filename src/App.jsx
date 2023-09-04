@@ -13,6 +13,8 @@ import SignInPage from "./pages/SignInPage";
 import SignUpPage from "./pages/SignUpPage";
 import ProtectedRoute from "./features/ProtectedRoute";
 import FavoriteMoviePage from "./pages/FavoriteMoviePage";
+import ViewMoreTrendingMoviePage from "./pages/ViewMoreTrendingMoviePage";
+import ViewMorePopularMoviePage from "./pages/ViewMorePopularMoviePage";
 
 const App = () => {
   return (
@@ -21,8 +23,10 @@ const App = () => {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/home" element={<HomePage />} />
-        <Route path="/view-more/:title" element={<ViewMoreMoviePage />} />
-        <Route path="/mobile-search-page" element={<MobileSearchPage />} />{" "}
+        {/* <Route path="/view-more/:title" element={<ViewMoreMoviePage />} /> */}
+        <Route path="/view-more/trending" element={<ViewMoreTrendingMoviePage />} />
+        <Route path="/view-more/popular" element={<ViewMorePopularMoviePage />} />
+        <Route path="/mobile-search-page" element={<MobileSearchPage />} />
         <Route path="/movieInfo/:id" element={<MovieInfoPage />} />
         <Route element={<ProtectedRoute />}>
           <Route path="/favorite-movie" element={<FavoriteMoviePage />} />
