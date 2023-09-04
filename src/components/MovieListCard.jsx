@@ -14,7 +14,7 @@ const MovieListCard = ({ movies, title, notFoundTitle }) => {
     return (
       <div className="  h-144 flex   items-center ">
         <p className="text-black text-2xl font-semibold">
-          Not Found : {movies.length !== 0 ? notFoundTitle : ""}
+          Not Found : {movies.length === 0 ? notFoundTitle : ""}
         </p>
       </div>
     );
