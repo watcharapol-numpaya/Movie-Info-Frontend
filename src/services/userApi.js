@@ -1,24 +1,27 @@
 import axios from "axios";
 import { checkTokenExpiration } from "./jwtTokenService";
- 
+
 export const userApiInstance = axios.create({
   baseURL: import.meta.env.VITE_API_USER,
 });
 
 //Interceptors
 userApiInstance.interceptors.request.use(async (req) => {
-  const access_token = localStorage.getItem("access_token") || null;
+  const accessToken = localStorage.getItem("access_token") || null;
+  const refreshToken = localStorage.getItem("refresh_token");
 
-  if (!access_token) {
+  if (!accessToken) {
     return req;
   }
 
-  const isAccessTokenExpire = checkTokenExpiration(access_token);
+  const isAccessTokenExpire = checkTokenExpiration(accessToken);
+  const isRefreshTokenExpire = checkTokenExpiration(refreshToken);
 
-  // req.headers.Authorization = `Bearer ${access_token}`;
+  if (isRefreshTokenExpire) {
+    return (window.location.href = "/sign-in");
+  }
 
   if (isAccessTokenExpire) {
-    const refresh_token = localStorage.getItem("refresh_token");
     const refreshUrl = `${import.meta.env.VITE_API_USER}refresh_token`;
 
     try {
@@ -28,7 +31,7 @@ userApiInstance.interceptors.request.use(async (req) => {
         {
           headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer ${refresh_token}`,
+            Authorization: `Bearer ${refreshToken}`,
           },
         }
       );
@@ -40,12 +43,12 @@ userApiInstance.interceptors.request.use(async (req) => {
       // Handle token refresh failure here
     }
   } else {
-    req.headers.Authorization = `Bearer ${access_token}`;
+    req.headers.Authorization = `Bearer ${accessToken}`;
   }
 
-  const new_access_token = localStorage.getItem("access_token");
+  const newAccessToken = localStorage.getItem("access_token");
 
-  req.headers.Authorization = `Bearer ${new_access_token}`;
+  req.headers.Authorization = `Bearer ${newAccessToken}`;
 
   return req;
 });

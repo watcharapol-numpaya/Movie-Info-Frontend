@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import {
   clearIsRegisterPassState,
   getRefreshToken,
+  logout,
   signInUser,
 } from "../storage/slices/authSlice";
 import { getFavoriteMovieId } from "../storage/slices/userSlice";
@@ -30,6 +31,8 @@ const SignInPage = () => {
   };
 
   useEffect(() => {
+    //handle user who navigate to sign-in without logout before
+    dispatch(logout());
     return () => {
       dispatch(clearIsRegisterPassState());
     };
