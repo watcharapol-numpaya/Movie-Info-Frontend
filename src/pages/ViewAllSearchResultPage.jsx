@@ -15,7 +15,7 @@ const ViewAllSearchResultPage = () => {
 
   useEffect(() => {
  
-    if (searchList !== []) {
+    if (searchList.length !== 0) {
       setIsLoading(false);
     }
   }, []);
