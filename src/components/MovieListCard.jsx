@@ -5,7 +5,7 @@ import OnLoadingScreen from "../components/OnLoadingScreen";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import MovieCard from "../components/MovieCard";
 
-const MovieListCard = ({ movies, title, notFoundTitle }) => {
+const MovieListCard = ({ movies, title="", notFoundTitle="" }) => {
   const [isLoading, setIsLoading] = useState(true);
 
   const renderNotFound = () => {
