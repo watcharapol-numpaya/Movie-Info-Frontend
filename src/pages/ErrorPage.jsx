@@ -2,7 +2,7 @@ import React from 'react'
 
 function ErrorPage() {
   return (
-    <div>ErrorPage</div>
+    <div className='xl:container bg-red-400 h-screen'>404 Page not found</div>
   )
 }
 

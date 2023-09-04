@@ -13,7 +13,7 @@ import OpenInNewIcon from "@mui/icons-material/OpenInNew";
 import CastSection from "./../features/CastSection";
 import ImageNotFound from "../components/ImageNotFound";
 import ScrollToTop from "../components/ScrollToTop";
- 
+
 const MovieInfoPage = ({}) => {
   const { movieInfo } = useSelector((state) => state.movies);
   const { allCast } = useSelector((state) => state.cast);
@@ -36,29 +36,26 @@ const MovieInfoPage = ({}) => {
       });
   }, [dispatch, id]);
 
- 
   const renderMovieInfo = () => {
     return (
-      <>
-        <div className=" h-full w-full ">
-          <div id="banner-section" className="h-full w-full   ">
-            {renderTitleAndBannerSection()}
-          </div>
-          <div id="details-section" className="h-full w-full  ">
-            {renderSubInfoSection()}
-          </div>
-          <div id="cast-section" className="h-full w-full ">
-            {renderCastSection()}
-          </div>
+      <div className="xl:container mx-auto">
+        <div id="banner-section" className="h-full w-full">
+          {renderTitleAndBannerSection()}
         </div>
-      </>
+        <div id="details-section" className="h-full w-full  ">
+          {renderSubInfoSection()}
+        </div>
+        <div id="cast-section" className="h-full w-full ">
+          {renderCastSection()}
+        </div>
+      </div>
     );
   };
 
   const renderTitleAndBannerSection = () => {
     return (
       <>
-        <div className="xl:container mx-auto h-full  w-full flex justify-center ">
+        <div className="  mx-auto h-full  w-full flex justify-center ">
           <div className="relative sm:h-128 h-176  w-full  bg-black   ">
             <div
               id="image-background"
@@ -145,7 +142,7 @@ const MovieInfoPage = ({}) => {
   const renderSubInfoSection = () => {
     return (
       <>
-        <div className="xl:container mx-auto bg-white w-full h-full  ">
+        <div className="  bg-white w-full h-full  ">
           <div className="flex  sm:flex-row  flex-col-reverse ">
             <div id="details " className="w-full  p-2 ">
               {renderDetail()}
@@ -287,7 +284,7 @@ const MovieInfoPage = ({}) => {
   const renderCastSection = () => {
     return (
       <>
-        <div className="xl:container mx-auto  w-full h-full">
+        <div className="   w-full h-full">
           <CastSection />
         </div>
       </>
