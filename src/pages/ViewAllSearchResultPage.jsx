@@ -29,6 +29,7 @@ const ViewAllSearchResultPage = () => {
       </div>
     );
   };
+  
 
   const renderShowMovie = () => {
     return (
