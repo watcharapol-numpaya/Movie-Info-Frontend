@@ -24,7 +24,7 @@ const ViewAllSearchResultPage = () => {
     return (
       <div className="  h-144 flex   items-center ">
         <p className="text-black text-2xl font-semibold">
-          Not Found : {searchList.length!==0?keyword:""}
+          Not Found : {searchList.length===0?keyword:""}
         </p>
       </div>
     );
