@@ -28,8 +28,8 @@ const FavoriteMoviePage = () => {
   const fetchFavoriteMovies = async () => {
     try {
       const results = await dispatch(getFavoriteMovieId(user.user_id));
-      const favoriteMovieIds = results.payload.favorite_movie;
-
+      const favoriteMovieIds = results.payload.favorite_movie!==null?results.payload.favorite_movie:[];
+      
       //Receive promise, create array of promise
       const moviePromises = favoriteMovieIds.map((movieId) =>
         dispatch(getMovieDetailByID(movieId))
