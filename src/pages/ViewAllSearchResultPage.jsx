@@ -9,20 +9,16 @@ import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import MovieListCard from "../components/MovieListCard";
 
 const ViewAllSearchResultPage = () => {
-  const [isLoading, setIsLoading] = useState(true);
   const { searchList } = useSelector((state) => state.movies); //receive data from search
   const { keyword } = useParams();
 
-  useEffect(() => {
- 
-    if (searchList.length !== 0) {
-      setIsLoading(false);
-    }
-  }, []);
- 
   return (
     <div className=" ">
-      {isLoading ? <OnLoadingScreen /> : <MovieListCard movies={searchList} title="Result" notFoundTitle={keyword} />}
+      <MovieListCard
+        movies={searchList}
+        title="Result"
+        notFoundTitle={keyword}
+      />
     </div>
   );
 };
