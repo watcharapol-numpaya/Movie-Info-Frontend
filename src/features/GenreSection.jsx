@@ -21,12 +21,12 @@ const  GenreSection =({ onSelectGenre })=> {
     dispatch(getAllGenre());
   }, []);
 
-  useEffect(() => {
-    if (genres) {
-      // setSelectedGenres(genres.map((genre) => genre.id));
-      dispatch(addAllGenre(genres.map((genre) => genre.id)));
-    }
-  }, [genres]);
+  // useEffect(() => {
+  //   if (genres) {
+  //     // setSelectedGenres(genres.map((genre) => genre.id));
+  //     dispatch(addAllGenre(genres.map((genre) => genre.id)));
+  //   }
+  // }, [genres]);
 
   const handleFind = () => {
     onSelectGenre(selectedGenres);
