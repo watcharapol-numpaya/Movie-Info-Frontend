@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { getMovieDetailByID } from "../storage/slices/movieSlice";
 import OnLoadingScreen from "../components/OnLoadingScreen";
 import useMediaQuery from "@mui/material/useMediaQuery";
@@ -13,6 +13,7 @@ import OpenInNewIcon from "@mui/icons-material/OpenInNew";
 import CastSection from "./../features/CastSection";
 import ImageNotFound from "../components/ImageNotFound";
 import ScrollToTop from "../components/ScrollToTop";
+import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 
 const MovieInfoPage = ({}) => {
   const { movieInfo } = useSelector((state) => state.movies);
@@ -57,9 +58,17 @@ const MovieInfoPage = ({}) => {
       <>
         <div className="  mx-auto h-full  w-full flex justify-center ">
           <div className="relative sm:h-128 h-176  w-full  bg-black   ">
+          <Link
+              className="sm:hidden flex     absolute top-4 left-4    items-center justify-center z-10 h-12 w-12 pl-2 bg-gray-200 opacity-50 rounded-full  "
+              to="/"
+            >
+              <div className=" flex justify-center items-center">
+                <ArrowBackIosIcon />
+              </div>
+            </Link>
             <div
               id="image-background"
-              className="h-128 w-full opacity-40 bg-gray-200 "
+              className="h-128 w-full opacity-40 bg-gray-200  "
             >
               {movieInfo.backdrop_path ? (
                 <img
