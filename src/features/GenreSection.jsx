@@ -11,7 +11,7 @@ import {
   removeSelectGenre,
 } from "../storage/slices/genreSlice";
 
-const  GenreSection =({ onSelectGenre })=> {
+const  GenreSection =({ onSelectGenre,onCloseDropdown })=> {
   // const [selectedGenres, setSelectedGenres] = useState([]);
   const dispatch = useDispatch();
   const { genres } = useSelector((state) => state.movies);
@@ -30,6 +30,8 @@ const  GenreSection =({ onSelectGenre })=> {
 
   const handleFind = () => {
     onSelectGenre(selectedGenres);
+    setTimeout(()=>{  onCloseDropdown()},400)
+  
     // alert("Find: " + selectedGenres);
   };
 
