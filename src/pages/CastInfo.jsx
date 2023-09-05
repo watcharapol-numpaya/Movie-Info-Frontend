@@ -9,6 +9,8 @@ import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import ListTitle2SideCard from "../components/ListTitle2SideCard";
 import ScrollToTop from "../components/ScrollToTop";
+import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
+
 const CastInfo = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
@@ -163,7 +165,18 @@ const CastInfo = () => {
     return (
       <div className="xl:container mx-auto   ">
         <div className="flex sm:flex-row flex-col ">
-          <div id="info" className="  lg:w-160 md:w-144 sm:w-128 w-full h-full">
+          <div
+            id="info"
+            className="  lg:w-160 md:w-144 sm:w-128 w-full h-full relative"
+          >
+            <Link
+              className="sm:hidden flex     absolute top-4 left-4    items-center justify-center z-10 h-12 w-12 pl-2 bg-gray-200 opacity-50 rounded-full  "
+              to="/"
+            >
+              <div className=" flex justify-center items-center">
+                <ArrowBackIosIcon />
+              </div>
+            </Link>
             <div className="flex sm:justify-start justify-center  mt-4 sm:pl-2">
               <div className="  rounded-2xl bg-white lg:w-84 lg:h-128  md:w-76 md:h-112 sm:w-64 sm:h-96 w-56 h-80 shadow-md overflow-hidden">
                 {castInfo.profile_path ? (

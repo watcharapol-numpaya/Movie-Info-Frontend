@@ -58,8 +58,8 @@ const MovieInfoPage = ({}) => {
       <>
         <div className="  mx-auto h-full  w-full flex justify-center ">
           <div className="relative sm:h-128 h-176  w-full  bg-black   ">
-            <Link
-              className="sm:hidden flex     absolute top-4 left-4    items-center justify-center z-10 h-12 w-12 pl-2 bg-white opacity-50 rounded-full  "
+          <Link
+              className="sm:hidden flex     absolute top-4 left-4    items-center justify-center z-10 h-12 w-12 pl-2 bg-gray-200 opacity-50 rounded-full  "
               to="/"
             >
               <div className=" flex justify-center items-center">
