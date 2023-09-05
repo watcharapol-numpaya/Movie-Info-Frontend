@@ -68,7 +68,7 @@ const MovieInfoPage = ({}) => {
             </Link>
             <div
               id="image-background"
-              className="h-128 w-full opacity-40 bg-gray-200  "
+              className="sm:h-full h-176 w-full opacity-40 bg-gray-200  "
             >
               {movieInfo.backdrop_path ? (
                 <img
