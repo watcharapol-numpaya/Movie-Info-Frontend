@@ -25,7 +25,7 @@ const HomePage =()=> {
   const [bannerUrl, setBannerUrl] = useState(
     "https://www.themoviedb.org/t/p/w1280"
   );
-  const [isShowGenreSection, setIsShowGenreSection] = useState(false);
+  const [isShowMobileGenreSection, setIsShowMobileGenreSection] = useState(false);
   const isLgScreen = useMediaQuery("(min-width:1024px)");
   const [isLoading, setIsLoading] = useState(true);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
@@ -33,10 +33,17 @@ const HomePage =()=> {
 
   useEffect(() => {
     // Hide the genre card automatically when the screen size is greater than "lg"
+ 
     if (!isLgScreen) {
-      setIsShowGenreSection(false);
-    }
+      handleCloseMobileGenreSection()
+    }    
+    console.log(isLgScreen)
   }, [isLgScreen]);
+
+  const handleCloseMobileGenreSection = ()=>{
+    setIsShowMobileGenreSection(false);
+  }
+
 
   useEffect(() => {
     Promise.all([
@@ -116,7 +123,7 @@ const HomePage =()=> {
                 <button
                   className="lg:hidden block"
                   onClick={() => {
-                    setIsShowGenreSection(!isShowGenreSection);
+                    setIsShowMobileGenreSection(!isShowMobileGenreSection);
                   }}
                 >
                   <TuneIcon />
@@ -126,12 +133,12 @@ const HomePage =()=> {
                   className={`absolute bg-white shadow-xl p-2 rounded-xl w-64 right-4 top-14 z-10 ${
                     isLgScreen
                       ? "hidden"
-                      : isShowGenreSection
+                      : isShowMobileGenreSection
                       ? "block"
                       : "hidden"
                   }`}
                 >
-                  <GenreSection onSelectGenre={handleGetMovie} />
+                  <GenreSection onSelectGenre={handleGetMovie} onCloseDropdown={handleCloseMobileGenreSection}/>
                 </div>
               </div>
               <div className="flex">
