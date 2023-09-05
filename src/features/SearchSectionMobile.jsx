@@ -50,11 +50,12 @@ const  SearchSectionMobile =()=> {
   };
 
   const handleClearText = () => {
-    setKeyword("");
+    dispatch(clearKeyword())
     dispatch(getMovieByKeyword(""));
     onType.current.focus();
   };
 
+ 
   const handleClickOutsideInput = (e) => {
     // console.log("1 : ----------------- "); console.log(onType.current)
     // console.log("1 --------------------")
@@ -141,7 +142,7 @@ const  SearchSectionMobile =()=> {
                     onClick={handleClearText}
                     className=" flex items-center justify-center   rounded-r-full   h-12 w-12    cursor-pointer"
                   >
-                    <span className="material-icons -scale-x-90 text-black  ">
+                    <span className="material-icons -scale-x-90 text-black  " onClick={handleClearText}>
                       cancel
                     </span>
                   </div>
