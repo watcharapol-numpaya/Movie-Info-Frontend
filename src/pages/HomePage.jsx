@@ -14,8 +14,7 @@ import MovieCarouselCard from "../features/MovieCarouselCard";
 import TuneIcon from "@mui/icons-material/Tune";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import OnLoadingScreen from "../components/OnLoadingScreen";
-import ScrollToTop from "../components/ScrollToTop";
-
+ 
 const HomePage =()=> {
   const dispatch = useDispatch();
   const { movies } = useSelector((state) => state.movies);
@@ -177,7 +176,6 @@ const HomePage =()=> {
 
   return (
     <>
-      <ScrollToTop />
       <div className=" h-full bg-white">
         <div className=" xl:container  mx-auto  ">
           {isLoading ? <OnLoadingScreen /> : renderHomePage()}
