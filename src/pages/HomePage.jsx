@@ -37,7 +37,6 @@ const HomePage =()=> {
     if (!isLgScreen) {
       handleCloseMobileGenreSection()
     }    
-    console.log(isLgScreen)
   }, [isLgScreen]);
 
   const handleCloseMobileGenreSection = ()=>{

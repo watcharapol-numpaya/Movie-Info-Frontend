@@ -104,7 +104,6 @@ const authSlice = createSlice({
   initialState,
   reducers: {
     loginSuccess: (state, action) => {
-      console.log(action.payload);
       state.isAuthenticated = true;
       state.accessToken = action.payload.accessToken;
       state.refreshToken = action.payload.refreshToken;
@@ -156,7 +155,6 @@ const authSlice = createSlice({
         state.message = null;
       })
       .addCase(signInUser.fulfilled, (state, action) => {
-        console.log(action.payload);
         state.isLoading = false;
         state.message = action.payload.msg;
         state.isSignInPass = action.payload.is_sign_in_pass;
