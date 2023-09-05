@@ -92,27 +92,26 @@ const  SearchSectionMobile =()=> {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
-
+  
   const renderSearchMovieCard = () => {
     return (
-      <div className="bg-white text-black w-80 h-128 rounded-lg overflow-hidden shadow-2xl mt-1">
-        <div className="h-full overflow-y-scroll">
-          {limitedData &&
-            limitedData.map((movie) => (
-              <SearchCard key={movie.id} movie={movie} />
-            ))}
-          <div className="text-center pt-6 cursor-pointer">
-            <Link
-              className="hover:text-black text-gray-600"
-              to={`/all-result/${keyword}`}
-            >
-              View all results
-            </Link>
-          </div>
+      <div className="bg-white text-black w-80 rounded-lg overflow-hidden shadow-2xl mt-1">
+        {limitedData &&
+          limitedData.map((movie) => (
+            <SearchCard key={movie.id} movie={movie} />
+          ))}
+        <div className="text-center py-1 cursor-pointer">
+          <Link
+            className="hover:text-black text-gray-600"
+            to={`/all-result/${keyword}`}
+          >
+            View all results
+          </Link>
         </div>
       </div>
     );
   };
+ 
 
   return (
     <>
