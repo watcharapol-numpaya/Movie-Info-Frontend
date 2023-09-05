@@ -5,8 +5,9 @@ import Dropdown from "./Dropdown";
 import { useDispatch, useSelector } from "react-redux";
 import PersonIcon from "@mui/icons-material/Person";
 import { getFavoriteMovieId } from "../storage/slices/userSlice";
+import ScrollToTop from "./ScrollToTop";
 
-const  Navbar =()=> {
+const Navbar = () => {
   const [isShow, setIsShow] = useState(false);
   const dropdownRef = useRef(null);
   const { user } = useSelector((state) => state.auth);
@@ -87,11 +88,12 @@ const  Navbar =()=> {
 
   return (
     <>
+      <ScrollToTop />
       <div className=" mx-auto sm:h-16 h-18  bg-black  px-4">
         {renderNavbar()}
       </div>
     </>
   );
-}
+};
 
 export default Navbar;
