@@ -10,13 +10,14 @@ import {
   clearSelectedGenre,
   removeSelectGenre,
 } from "../storage/slices/genreSlice";
+import { useMediaQuery } from "@mui/material";
 
-const  GenreSection =({ onSelectGenre,onCloseDropdown })=> {
+const GenreSection = ({ onSelectGenre, onCloseDropdown }) => {
   // const [selectedGenres, setSelectedGenres] = useState([]);
   const dispatch = useDispatch();
   const { genres } = useSelector((state) => state.movies);
   const { selectedGenres } = useSelector((state) => state.genre);
-
+  const isLgScreen = useMediaQuery("(min-width:1024px)");
   useEffect(() => {
     dispatch(getAllGenre());
   }, []);
@@ -30,8 +31,12 @@ const  GenreSection =({ onSelectGenre,onCloseDropdown })=> {
 
   const handleFind = () => {
     onSelectGenre(selectedGenres);
-    setTimeout(()=>{  onCloseDropdown()},400)
-  
+    if (!isLgScreen) {
+      setTimeout(() => {
+        onCloseDropdown();
+      }, 400);
+    }
+
     // alert("Find: " + selectedGenres);
   };
 
@@ -94,6 +99,6 @@ const  GenreSection =({ onSelectGenre,onCloseDropdown })=> {
       </div>
     </div>
   );
-}
+};
 
 export default GenreSection;
