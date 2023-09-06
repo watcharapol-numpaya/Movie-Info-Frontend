@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import CardMovie from "../components/CardMovie";
 import { useDispatch, useSelector } from "react-redux";
 import {
   getAllMovies,

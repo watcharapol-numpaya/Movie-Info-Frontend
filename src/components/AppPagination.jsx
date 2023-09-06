@@ -2,6 +2,7 @@ import React from "react";
 import { Pagination } from "@mui/material";
 
 const AppPagination = ({ setPage, page, numberOfPage }) => {
+  
   const handleChange = (event, value) => {
     setPage(value);
   };
