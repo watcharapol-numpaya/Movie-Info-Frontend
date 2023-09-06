@@ -53,12 +53,6 @@ export const getFavoriteMovieId = createAsyncThunk(
         {
           user_id: user_id,
         },
-        // {
-        //   headers: {
-        //     "Content-Type": "application/json",
-        //     Authorization: `Bearer ${token}`,
-        //   },
-        // }
       );
       return res.data;
     } catch (err) {

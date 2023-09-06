@@ -13,7 +13,6 @@ import {
 import { useMediaQuery } from "@mui/material";
 
 const GenreSection = ({ onSelectGenre, onCloseDropdown }) => {
-  // const [selectedGenres, setSelectedGenres] = useState([]);
   const dispatch = useDispatch();
   const { genres } = useSelector((state) => state.movies);
   const { selectedGenres } = useSelector((state) => state.genre);
@@ -22,12 +21,6 @@ const GenreSection = ({ onSelectGenre, onCloseDropdown }) => {
     dispatch(getAllGenre());
   }, []);
 
-  // useEffect(() => {
-  //   if (genres) {
-  //     // setSelectedGenres(genres.map((genre) => genre.id));
-  //     dispatch(addAllGenre(genres.map((genre) => genre.id)));
-  //   }
-  // }, [genres]);
 
   const handleFind = () => {
     onSelectGenre(selectedGenres);
@@ -37,27 +30,23 @@ const GenreSection = ({ onSelectGenre, onCloseDropdown }) => {
       }, 400);
     }
 
-    // alert("Find: " + selectedGenres);
+
   };
 
   const handleSelectAll = () => {
-    // setSelectedGenres(genres.map((genre) => genre.id));
     dispatch(addAllGenre(genres.map((genre) => genre.id)));
   };
 
   const handleReset = () => {
-    // setSelectedGenres([]);
     dispatch(clearSelectedGenre());
   };
 
   const handleGenreSelect = (genreId, isSelected) => {
     if (isSelected) {
-      // setSelectedGenres((prevSelected) => [...prevSelected, genreId]);
+  
       dispatch(addSelectGenre(genreId));
     } else {
-      // setSelectedGenres((prevSelected) =>
-      //   prevSelected.filter((id) => id !== genreId)
-      // );
+
       dispatch(removeSelectGenre(genreId));
     }
   };

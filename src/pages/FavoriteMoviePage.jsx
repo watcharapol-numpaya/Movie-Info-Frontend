@@ -5,11 +5,7 @@ import {
   getFavoriteMovieId,
 } from "../storage/slices/userSlice";
 import OnLoadingScreen from "../components/OnLoadingScreen";
-import axios from "axios";
 import { getMovieDetailByID } from "../storage/slices/movieSlice";
-import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
-import { Link } from "react-router-dom";
-import MovieCard from "../components/MovieCard";
 import ScrollToTop from "../components/ScrollToTop";
 import MovieListCard from "../components/MovieListCard";
 
@@ -18,7 +14,7 @@ const FavoriteMoviePage = () => {
   const [isLoading, setIsLoading] = useState(true);
   const { favoriteMovies } = useSelector((state) => state.user);
   const { user } = useSelector((state) => state.auth);
-  const [data, setData] = useState([]);
+
 
  
   useEffect(() => {
@@ -51,9 +47,12 @@ const FavoriteMoviePage = () => {
 
  
   return (
+    <>    
+    <ScrollToTop/>
     <div className=" ">
       {isLoading ? <OnLoadingScreen /> : <MovieListCard movies={favoriteMovies} title="Favorite Movie"   />}
-    </div>
+    </div></>
+
   );
 };
 

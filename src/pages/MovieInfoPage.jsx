@@ -17,7 +17,6 @@ import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 
 const MovieInfoPage = ({}) => {
   const { movieInfo } = useSelector((state) => state.movies);
-  const { allCast } = useSelector((state) => state.cast);
   const { id } = useParams();
   const [isLoading, setIsLoading] = useState(true);
   const dispatch = useDispatch();
@@ -167,7 +166,7 @@ const MovieInfoPage = ({}) => {
 
   const renderDetail = () => {
     return (
-      <>
+  
         <div className="w-full text-base text-black">
           <p className="text-xl font-bold">Details</p>
           <hr className="my-2" />
@@ -242,7 +241,7 @@ const MovieInfoPage = ({}) => {
             </div>
           </div>
         </div>
-      </>
+ 
     );
   };
 
@@ -256,7 +255,6 @@ const MovieInfoPage = ({}) => {
     );
 
     return (
-      <>
         <div className=" ">
           <div className="  w-full h-full flex justify-center items-center  p-2  ">
             {trailer && (
@@ -286,17 +284,14 @@ const MovieInfoPage = ({}) => {
             )}
           </div>
         </div>
-      </>
     );
   };
 
   const renderCastSection = () => {
     return (
-      <>
-        <div className="   w-full h-full">
+        <div className="w-full h-full">
           <CastSection />
         </div>
-      </>
     );
   };
 

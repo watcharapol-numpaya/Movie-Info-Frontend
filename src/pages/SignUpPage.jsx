@@ -2,9 +2,12 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Validation from "../services/Validation";
 import { useDispatch, useSelector } from "react-redux";
-import { clearIsRegisterPassState, registerUser } from "../storage/slices/authSlice";
+import {
+  logout,
+  registerUser,
+} from "../storage/slices/authSlice";
 import { useNavigate } from "react-router-dom";
-import ScrollToTop from './../components/ScrollToTop';
+import ScrollToTop from "./../components/ScrollToTop";
 
 const SignUpPage = () => {
   const [username, setUsername] = useState("");
@@ -14,20 +17,16 @@ const SignUpPage = () => {
   const [passwordMsg, setPasswordMsg] = useState("");
   const [confirmPasswordMsg, setConfirmPasswordMsg] = useState("");
   const [msg, setMsg] = useState("");
-  const { isRegisterPass,message } = useSelector((state) => state.auth);
+  const { isRegisterPass, message } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   useEffect(() => {
- 
+    dispatch(logout());
     if (isRegisterPass) {
       navigate("/sign-in");
     }
-
-
   }, [isRegisterPass]);
-
- 
 
   const handleSignUp = async (e) => {
     e.preventDefault();
@@ -112,7 +111,7 @@ const SignUpPage = () => {
                 value={confirmPassword}
                 onChange={handleConfirmPassword}
               />
-              <p className="text-xs text-red-500 pl-1">{confirmPasswordMsg}</p> 
+              <p className="text-xs text-red-500 pl-1">{confirmPasswordMsg}</p>
               <p className="text-xs text-red-500 pl-1">{message}</p>
               <button
                 type="submit"
@@ -124,7 +123,7 @@ const SignUpPage = () => {
             <div className="mt-4 text-center">
               <p className="text-sm">
                 Already have an account?{" "}
-                <Link to="/sign-in" className="text-yellow-500 hover:underline"  >
+                <Link to="/sign-in" className="text-yellow-500 hover:underline">
                   Sign In
                 </Link>
               </p>
@@ -135,7 +134,12 @@ const SignUpPage = () => {
     );
   };
 
-  return<><ScrollToTop /><div>{renderSignUpPage()}</div></> ;
+  return (
+    <>
+      <ScrollToTop />
+      <div>{renderSignUpPage()}</div>
+    </>
+  );
 };
 
 export default SignUpPage;

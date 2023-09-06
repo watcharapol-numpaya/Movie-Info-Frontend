@@ -9,7 +9,6 @@ import { useMediaQuery } from "@mui/material";
 import {setKeyword} from '../storage/slices/movieSlice'
 
 const  SearchSectionMobile =()=> {
-  // const [keyword, setKeyword] = useState("");
   const [showSearchCard, setShowSearchCard] = useState(false);
   const onType = useRef(null);
   const isMobileScreen = useMediaQuery("(max-width:767px)");
@@ -57,11 +56,6 @@ const  SearchSectionMobile =()=> {
 
  
   const handleClickOutsideInput = (e) => {
-    // console.log("1 : ----------------- "); console.log(onType.current)
-    // console.log("1 --------------------")
-    // console.log("2 : "+onType.current.contains(e.target))
-    // console.log("3 : -----------------");console.log(e.target)
-    // console.log("3 --------------------")
 
     //onType.current เก็บค่าของ ref ใช้ tag input
     //e.target เก็บค่า element ที่ได้กดจากตรงไหนก็ตามผ่าน handleClickOutsideInput

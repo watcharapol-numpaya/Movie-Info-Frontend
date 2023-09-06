@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 
 
 const  SearchSection =()=> {
-  // const [keyword, setKeyword] = useState("");
+
   const [showSearchCard, setShowSearchCard] = useState(false);
   const onTyping = useRef(null);
   const dispatch = useDispatch();

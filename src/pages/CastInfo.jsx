@@ -3,9 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
 import { getCastInfo, getMovieRelateToCast } from "../storage/slices/castSlice";
 import ImageNotFound from "../components/ImageNotFound";
-import MovieCard from "../components/MovieCard";
 import OnLoadingScreen from "./../components/OnLoadingScreen";
-import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import ListTitle2SideCard from "../components/ListTitle2SideCard";
 import ScrollToTop from "../components/ScrollToTop";
@@ -91,75 +89,7 @@ const CastInfo = () => {
     }
   };
 
-  const renderKnownForMovie = () => {
-    return (
-      <div className="bg-green-200">
-        <p className="text-xl font-bold">Related Movie</p>
-        <div className="flex">
-          <div className="w-1/2">
-            {movies &&
-              movies
-                .slice(0, Math.ceil(movies.length / 2))
-                .map((movie, index) => (
-                  <p key={movie.id}>
-                    <Link to={`/movieInfo/${movie.id}`}>
-                      {index + 1}. {movie.title}
-                    </Link>
-                  </p>
-                ))}
-          </div>
-          <div className="w-1/2">
-            {movies &&
-              movies
-                .slice(0, Math.ceil(movies.length / 2))
-                .map((movie, index) => (
-                  <p key={movie.id}>
-                    <Link to={`/movieInfo/${movie.id}`}>
-                      {index + Math.ceil(movies.length / 2) + 1}. {movie.title}{" "}
-                    </Link>
-                  </p>
-                ))}
-          </div>
-        </div>
-      </div>
-    );
-  };
-  const renderParticipateForMovie = () => {
-    return (
-      <div className="bg-green-200">
-        <p className="text-xl font-bold">
-          Participate in the creation of a movie
-        </p>
-        <div className="flex">
-          <div className="w-1/2">
-            {moviesHaveContribute &&
-              moviesHaveContribute
-                .slice(0, Math.ceil(moviesHaveContribute.length / 2))
-                .map((movie, index) => (
-                  <p key={movie.id}>
-                    <Link to={`/movieInfo/${movie.id}`}>
-                      {index + 1}. {movie.title}
-                    </Link>
-                  </p>
-                ))}
-          </div>
-          <div className="w-1/2">
-            {moviesHaveContribute &&
-              moviesHaveContribute
-                .slice(0, Math.ceil(moviesHaveContribute.length / 2))
-                .map((movie, index) => (
-                  <p key={movie.id}>
-                    <Link to={`/movieInfo/${movie.id}`}>
-                      {index + Math.ceil(moviesHaveContribute.length / 2) + 1}.{" "}
-                      {movie.title}{" "}
-                    </Link>
-                  </p>
-                ))}
-          </div>
-        </div>
-      </div>
-    );
-  };
+  
 
   const renderCastSection = () => {
     return (

@@ -8,7 +8,6 @@ import ScrollToTop from "../components/ScrollToTop";
 const ViewMoreTrendingMoviePage = () => {
   const dispatch = useDispatch();
   const [isLoading, setIsLoading] = useState(true);
-
   const { trendingMovies } = useSelector((state) => state.movies);
 
   useEffect(() => {

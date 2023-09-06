@@ -34,6 +34,7 @@ const Navbar = () => {
       dispatch(getFavoriteMovieId(user.user_id));
     }
   }, []);
+  
   const renderNavbar = () => {
     return (
       <>

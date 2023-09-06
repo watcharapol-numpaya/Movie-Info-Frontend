@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import CardMovie from "../components/CardMovie";
 import { useDispatch, useSelector } from "react-redux";
 import {
   getAllMovies,
@@ -17,8 +16,7 @@ import OnLoadingScreen from "../components/OnLoadingScreen";
  
 const HomePage =()=> {
   const dispatch = useDispatch();
-  const { movies } = useSelector((state) => state.movies);
-  const { trendingMovies, popularMovies, allMovie, totalPages, genres } =
+  const { trendingMovies, popularMovies, allMovie, totalPages } =
     useSelector((state) => state.movies);
   const { selectedGenres } = useSelector((state) => state.genre);
   const [page, setPage] = useState(1);
@@ -106,12 +104,10 @@ const HomePage =()=> {
             <MovieCarouselCard
               title={"trending"}
               movies={trendingMovies}
-              // link={"#"}
             />
             <MovieCarouselCard
               title={"popular"}
               movies={popularMovies}
-              // link={"#"}
             />
             <div>
               <div className="flex justify-between items-center p-4 bg-gradient-to-r from-red-600 to-black text-white relative ">

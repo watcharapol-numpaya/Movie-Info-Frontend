@@ -1,7 +1,6 @@
 //component result--------------------------------------
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import OnLoadingScreen from "../components/OnLoadingScreen";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import MovieCard from "../components/MovieCard";
 
