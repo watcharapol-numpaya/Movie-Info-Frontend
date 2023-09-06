@@ -1,11 +1,9 @@
-//component result--------------------------------------
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import MovieCard from "../components/MovieCard";
 
 const MovieListCard = ({ movies, title="", notFoundTitle="" }) => {
-  const [isLoading, setIsLoading] = useState(true);
 
   const renderNotFound = () => {
     return (

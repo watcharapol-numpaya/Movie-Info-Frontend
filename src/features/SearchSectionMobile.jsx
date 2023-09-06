@@ -2,7 +2,6 @@ import React, { useState, useRef, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { clearKeyword, getMovieByKeyword } from "../storage/slices/movieSlice";
 import SearchCard from "../components/SearchCard";
-import DoDisturbOnIcon from "@mui/icons-material/DoDisturbOn";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { useMediaQuery } from "@mui/material";
