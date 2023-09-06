@@ -5,7 +5,7 @@ const  ScrollToTop =()=> {
     window.scrollTo(0, 0);
   }, []);
 
-  return null; // This component doesn't render anything, it just triggers the scroll
+  return null; //doesn't render anything, it just triggers the scroll
 }
 
 export default ScrollToTop;

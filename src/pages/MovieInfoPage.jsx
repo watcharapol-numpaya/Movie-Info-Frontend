@@ -23,7 +23,7 @@ const MovieInfoPage = ({}) => {
   const [imageUrl, setImageURL] = useState(
     "https://www.themoviedb.org/t/p/w1280"
   );
-  const isMobileScreen = useMediaQuery("(max-width:560px)");
+  
   const voteAvgInPercentage = Math.round(movieInfo.vote_average * 10);
 
   useEffect(() => {

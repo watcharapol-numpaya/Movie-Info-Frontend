@@ -19,34 +19,7 @@ const CastInfo = () => {
   const { castInfo, movies, moviesHaveContribute } = useSelector(
     (state) => state.cast
   );
-  const responsive = {
-    superLargeDesktop: {
-      // the naming can be any, depends on you.
-      breakpoint: { max: 4000, min: 1280 },
-      items: 5,
-      slidesToSlide: 3,
-    },
-    desktop: {
-      breakpoint: { max: 1280, min: 768 },
-      items: 4,
-      slidesToSlide: 3,
-    },
-    tablet: {
-      breakpoint: { max: 768, min: 572 }, //640
-      items: 3,
-      slidesToSlide: 1,
-    },
-    mobile: {
-      breakpoint: { max: 572, min: 540 },
-      items: 3,
-      slidesToSlide: 1,
-    },
-    xs: {
-      breakpoint: { max: 540, min: 0 },
-      items: 2,
-      slidesToSlide: 1,
-    },
-  };
+   
 
   useEffect(() => {
     Promise.all([dispatch(getCastInfo(id)), dispatch(getMovieRelateToCast(id))])
