@@ -24,7 +24,6 @@ const ViewMorePopularMoviePage = () => {
 
   return (
     <>
- 
       <ScrollToTop /> 
       <div className=" ">
         {isLoading ? (

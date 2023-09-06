@@ -4,7 +4,6 @@ import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import {
   clearIsRegisterPassState,
-  getRefreshToken,
   logout,
   signInUser,
 } from "../storage/slices/authSlice";
