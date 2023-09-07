@@ -4,8 +4,6 @@ import {  useSelector } from "react-redux";
 
 
 const ProtectRouteOnSignIn = ({ redirectPath = "/home", children }) => {
-
-  const location = useLocation();
   const accessToken = useSelector((state) => state.auth.accessToken);
 
   if (accessToken) {
