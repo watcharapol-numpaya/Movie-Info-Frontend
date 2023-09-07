@@ -14,6 +14,7 @@ import ProtectedRoute from "./features/ProtectedRoute";
 import FavoriteMoviePage from "./pages/FavoriteMoviePage";
 import ViewMoreTrendingMoviePage from "./pages/ViewMoreTrendingMoviePage";
 import ViewMorePopularMoviePage from "./pages/ViewMorePopularMoviePage";
+import ProtectRouteOnSignIn from "./features/ProtectRouteOnSignIn";
 
 const App = () => {
   return (
@@ -23,8 +24,14 @@ const App = () => {
         <Route path="/" element={<HomePage />} />
         <Route path="/home" element={<HomePage />} />
         {/* <Route path="/view-more/:title" element={<ViewMoreMoviePage />} /> */}
-        <Route path="/view-more/trending" element={<ViewMoreTrendingMoviePage />} />
-        <Route path="/view-more/popular" element={<ViewMorePopularMoviePage />} />
+        <Route
+          path="/view-more/trending"
+          element={<ViewMoreTrendingMoviePage />}
+        />
+        <Route
+          path="/view-more/popular"
+          element={<ViewMorePopularMoviePage />}
+        />
         <Route path="/mobile-search-page" element={<MobileSearchPage />} />
         <Route path="/movieInfo/:id" element={<MovieInfoPage />} />
         <Route element={<ProtectedRoute />}>
@@ -35,8 +42,11 @@ const App = () => {
           path="/all-result/:keyword"
           element={<ViewAllSearchResultPage />}
         />
-        <Route path="/sign-in" element={<SignInPage />} />
-        <Route path="/sign-up" element={<SignUpPage />} />
+        <Route element={<ProtectRouteOnSignIn />}>
+          <Route path="/sign-in" element={<SignInPage />} />
+          <Route path="/sign-up" element={<SignUpPage />} />
+        </Route>
+
         <Route path="*" element={<ErrorPage />} />
       </Routes>
     </>
